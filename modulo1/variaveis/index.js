@@ -44,6 +44,8 @@ let b = 25
 // console.log("O antigo valor de a era" , a)
 // console.log("O antigo valor de b era" , b)
 
+let c
+
 c = a
 a = b
 b = c
