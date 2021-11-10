@@ -3,7 +3,8 @@
 //
 // 1. Na primeira linha de código do console aparecerá 10 e na segunda 10 5
 //
-// 2. Será impresso no console 10 10 10
+// 2. Será impresso no console 10 10 10, porém como o c não possui um (let, var ou const), ele é visto como uma variável global (window.c), o que pode trazer problemas
+// no fututo do código
 // 
 // 3. Eu usaria horasDia e ganhoDia para substituir as variáveis p e t 
 
