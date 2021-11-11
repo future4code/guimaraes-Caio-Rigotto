@@ -115,7 +115,7 @@ let quiHoras = 280
 const quiCust = quiHoras * quiH
 const quiDesc = quiCust * 0.15
 
-console.log("Com desconto de 15%, você deve pagar: R$" + (quiCust - quiDesc))
+console.log("Com desconto de 15% você deve pagar: R$" + (quiCust - quiDesc))
 }
 // {
 //     let quiH = 0.05
@@ -129,7 +129,64 @@ console.log("Com desconto de 15%, você deve pagar: R$" + (quiCust - quiDesc))
 }
 
 // 3.
-lb = 20
-let kg = (lb / 2.205)
+// a.
+{
+    //let lb = Number(prompt("Quantos lb você gostaria de converter em kg?"))
+    //let kg = Number(lb / 2.205)
+    //console.log(lb + "lb equivalem a" , kg + "kg.")
+    
+    let lb = 20
+    let kg = Number(lb / 2.205)
+    console.log(lb + "lb equivalem aproximadamente a" , kg + "kg.")
+}
+//
+//b.
+{
+    //let oz = Number(prompt("Quantos oz você gostaria de converter em kg?"))
+    //let kg = Number(oz / 35.274)
+    //console.log(oz + "oz equivalem a" , kg + "kg.")
 
-console.log("20lb equivale a" , kg + "kg.")
+    let oz = 10.5
+    let kg = Number(oz / 35.274)
+    console.log(oz + "oz equivalem aproximadamente a" , kg + "kg.")
+}
+// c.
+{
+    //let mi = Number(prompt("Quantos mi você gostaria de converter para m?"))
+    //let m = Number(mi * 1609.344)
+    //console.log(mi + "mi equivalem aproximadamente a" , m + "m.")
+
+    let mi = 100
+    let m = Number(mi * 1609.344)
+    console.log(mi + "mi equivalem aproximadamente a" , m + "m.")
+}
+// d.
+{
+    // let ft = Number(prompt("Quantos ft você gostaria de converter para m?"))
+    // let m = Number(ft / 3.281)
+    // console.log(ft + "ft equivalem aproximadamente a" , m + "m.")
+
+    let ft = 50
+    let m = Number(ft / 3.281)
+    console.log(ft + "ft equivalem aproximadamente a" , m + "m.")
+}
+// e.
+{
+    // let gal = Number(prompt("Quantos gal você gostaria de converter para l?"))
+    // let l = Number(gal * 3.785)
+    // console.log(gal + "gal equivalem aproximadamente a" , l + "l.")
+
+    let gal = 103.56
+    let l = Number(gal * 3.785)
+    console.log(gal + "gal equivalem aproximadamente a" , l + "l.")
+}
+// f.
+{
+    // let xic = Number(prompt("Quantas xic você gostaria de converter para l?"))
+    // let l = Number(xic * 0.24)
+    // console.log(xic + "xic equivalem aproximadamente a" , l + "l.")
+
+    let xic = 450
+    let l = Number(xic * 0.24)
+    console.log(xic + "xic equivalem aproximadamente a" , l + "l.")
+}
