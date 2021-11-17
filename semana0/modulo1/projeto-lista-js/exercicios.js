@@ -68,7 +68,6 @@ function imprimeTresCoresFavoritas() {
 // EXERCÍCIO 06
 function retornaStringEmMaiuscula(string) {
   // implemente sua lógica aqui
-  string = prompt("Grite algo:")
   const upper= string.toUpperCase()
 
   return upper
@@ -77,10 +76,7 @@ function retornaStringEmMaiuscula(string) {
 // EXERCÍCIO 07
 function calculaIngressosEspetaculo(custo, valorIngresso) {
   // implemente sua lógica aqui
-  custo = prompt("Qual o preço do espetáculo?")
-  valorIngresso = prompt("Qual o valor do ingresso?")
-
-  const vendidos = (custo / valorIngresso)
+   const vendidos = (custo / valorIngresso)
 
   return vendidos
 }
@@ -88,9 +84,6 @@ function calculaIngressosEspetaculo(custo, valorIngresso) {
 // EXERCÍCIO 08
 function checaStringsMesmoTamanho(string1, string2) {
   // implemente sua lógica aqui
-  string1= prompt("Digite uma frase:")
-  string2= prompt("Digite outra frase:")
-
   const mesmoTamanho =string1.length === string2.length
 
   return mesmoTamanho
@@ -99,24 +92,21 @@ function checaStringsMesmoTamanho(string1, string2) {
 // EXERCÍCIO 09
 function retornaPrimeiroElemento(array) {
   // implemente sua lógica aqui
-  let item1= prompt("Diga o primeiro item:")
-  let item2= prompt("Diga o segundo item:")
-  let item3= prompt("Diga o terceiro item:")
-
-  array= [item1,item2,item3]
   return array[0]
 }
 
 // EXERCÍCIO 10
 function retornaUltimoElemento(array) {
   // implemente sua lógica aqui
-
+  let ultimoNumero= Number(array.length - 1)
+  return array[ultimoNumero]
 }
 
 // EXERCÍCIO 11
 function trocaPrimeiroEUltimo(array) {
   // implemente sua lógica aqui
-
+  
+  
 }
 
 // EXERCÍCIO 12
