@@ -105,13 +105,23 @@ function retornaUltimoElemento(array) {
 // EXERCÍCIO 11
 function trocaPrimeiroEUltimo(array) {
   // implemente sua lógica aqui
-  
+  arrayPrimeiro= array[0]
+  arrayUltimo= array[array.length-1]
+
+ array[array.length-1]= arrayPrimeiro
+ array[0]= arrayUltimo
+
+ return array
   
 }
 
 // EXERCÍCIO 12
 function checaIgualdadeDesconsiderandoCase(string1, string2) {
   // implemente sua lógica aqui
+  string1= string1.toLowerCase()
+  string2= string2.toLowerCase()
+
+  return (string1 === string2)
 
 }
 
