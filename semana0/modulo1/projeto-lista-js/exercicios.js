@@ -162,15 +162,17 @@ function checaAnoBissexto(ano) {
 // EXERCÍCIO 15
 function checaValidadeInscricaoLabenu() {
   // implemente sua lógica aqui
-  let maior18=prompt("Você tem mais de 18 anos?".toLowerCase())
-  let ensinoMedio=prompt("Você tem ensino médio completo?".toLowerCase())
-  let disponibilidade=prompt("Você tem disponibilidade exclusiva durante os horários do curso?".toLowerCase())
+  function result(texto){
+    texto.toLowerCase()
+    let positivo = texto === "sim"
+    return positivo
+  }
+  
+  let maior18=result(prompt("Você tem mais de 18 anos?"))
+  let ensinoMedio= result(prompt("Você tem ensino médio completo?"))
+  let disponibilidade=result(prompt("Você tem disponibilidade exclusiva durante os horários do curso?"))
 
-  const positivo18= maior18 === "sim"
-  const positivoEnsino= ensinoMedio === "sim"
-  const positivoDisp = disponibilidade === "sim"
-
-  const aprovado = positivo18 && positivoEnsino && positivoDisp
+  const aprovado = maior18 && ensinoMedio && disponibilidade
 
   console.log(aprovado)
 
