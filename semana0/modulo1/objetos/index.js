@@ -87,3 +87,70 @@
 // DESAFIOS
 //
 // 1.
+{
+    const info = (nome, idade, profissao) =>{
+        nome = prompt("Qual seu nome:")
+        idade = Number(prompt("Qual sua idade:"))
+        profissao = prompt("Qual sua profissão:")
+
+        const ob ={
+            nome: nome,
+            idade: idade,
+            profissao: profissao
+        }
+        console.log(ob)
+        console.log(typeof ob)
+    }
+    info()
+}
+// 2.
+{
+    const dino = {
+        nome: "Parque dos Dinossauros",
+        lancamento: 1993
+    }
+
+    const jack = {
+        nome: "O Estranho Mundo de Jack",
+        lancamento: 1993 
+    }
+    const comparar = (filme1,filme2)=>{
+        const antes = filme1.lancamento < filme2.lancamento
+        const mesmo = filme1.lancamento === filme2.lancamento
+        console.log(`O primeiro filme foi lançado antes do segundo? ${antes}`)
+        console.log(`O segundo filme foi lançado no mesmo ano do segundo? ${mesmo}`)
+    }
+    comparar(dino,jack)
+}
+// 3.
+{
+    const carrrinho = []
+
+    const maca= {
+        nome: "Maçã",
+        disponibilidade: true
+    }
+    const pera= {
+        nome: "Pera",
+        disponibilidade: true
+    }
+    const banana= {
+        nome: "Banana",
+        disponibilidade: true
+    }
+
+    const adicionarCarrinho = obje => {
+        carrrinho.push(obje)
+        return carrrinho
+    }
+    adicionarCarrinho(maca)
+    adicionarCarrinho(pera)
+    adicionarCarrinho(banana)
+
+    const tirarDisponibilidade = fruta =>{
+        const dispNeg = !fruta.disponibilidade
+        fruta.disponibilidade = dispNeg
+        return carrrinho
+    }
+    console.log(tirarDisponibilidade(pera))
+}
