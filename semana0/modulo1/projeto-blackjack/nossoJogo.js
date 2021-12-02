@@ -22,6 +22,7 @@
          return comprarJogador.valor}) 
       const cartasJogador = comprarJogador.map((comprarJogador)=>{
          return comprarJogador.texto})
+
          const valorTotalJog = Number(valorJogador[0]+valorJogador[1])
          console.log('Usuário - Cartas:',cartasJogador[0], cartasJogador[1], `Valor: ${valorTotalJog}`)
 
@@ -34,6 +35,7 @@
             return comprarComputador.valor}) 
          const cartasComputador = comprarComputador.map((comprarComputador)=>{
             return comprarComputador.texto})
+            
             const valorTotalComp = Number(valorComputador[0]+valorComputador[1])
             console.log('Computador - Cartas:',cartasComputador[0], cartasComputador[1], `Valor: ${valorTotalComp}`)
          if(valorTotalComp > valorTotalJog){
