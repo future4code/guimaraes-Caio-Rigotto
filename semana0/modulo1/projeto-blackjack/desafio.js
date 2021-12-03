@@ -52,7 +52,7 @@
         return checagemMais21
      }
   }
-   
+   //INICIO
    if(confirm("DESAFIO:\nBoas vindas ao jogo de Blackjack!\nQuer começar a jogar:")){
       
       //FASE DE COMPRAS INICIAL
@@ -138,11 +138,7 @@
                }
             }
       }
-  
-         
-      
    }else{
    alert("O jogo acabou!")
    }
 }  
-
