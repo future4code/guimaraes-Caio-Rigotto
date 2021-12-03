@@ -11,8 +11,27 @@
  * 
  */
 {
+   //SOMA VALORES CARTAS
+   const somarValores= (array)=>{
+      let soma = 0
+      for(let i=0;i<array.length;i++){
+         soma=soma+array[i]
+      }
+      return soma
+   }
+   //TRANSFORMA CARTAS EM STRING
+   const concatenarCartas = (array)=> {
+      let cartas = []
+      for(let i=0;i<array.length;i++){
+      cartas.push(array[i])
+      }
+      let cartasString = cartas.join(" ")
+      return cartasString
+  }
+
+   console.log("Boas vindas ao jogo de Blackjack!")
    if(confirm("Quer começar a jogar:")){
-      console.log("Boas vindas ao jogo de Blackjack!")
+      //JOGADOR
       let comprarJogador = []
       for(let i=0;i<2;i++){
          comprarJogador.push(comprarCarta())
@@ -23,9 +42,10 @@
       const cartasJogador = comprarJogador.map((comprarJogador)=>{
          return comprarJogador.texto})
 
-         const valorTotalJog = Number(valorJogador[0]+valorJogador[1])
-         console.log('Usuário - Cartas:',cartasJogador[0], cartasJogador[1], `Valor: ${valorTotalJog}`)
+         const valorTotalJog = somarValores(valorJogador)
+         console.log('Usuário - Cartas:',concatenarCartas(cartasJogador), `Valor: ${valorTotalJog}`)
 
+         // COMPUTADOR
          let comprarComputador = []
          for(let i=0;i<2;i++){
             comprarComputador.push(comprarCarta())
@@ -35,9 +55,11 @@
             return comprarComputador.valor}) 
          const cartasComputador = comprarComputador.map((comprarComputador)=>{
             return comprarComputador.texto})
-            
-            const valorTotalComp = Number(valorComputador[0]+valorComputador[1])
-            console.log('Computador - Cartas:',cartasComputador[0], cartasComputador[1], `Valor: ${valorTotalComp}`)
+
+         const valorTotalComp = somarValores(valorComputador)
+         console.log('Computador - Cartas:',concatenarCartas(cartasComputador), `Valor: ${valorTotalComp}`)
+         
+         //CHECAGEM VENCEDOR
          if(valorTotalComp > valorTotalJog){
             console.log("O Computador venceu!!")
          }else
