@@ -22,7 +22,11 @@ function retornaArrayInvertido(array) {
 
 // EXERCÍCIO 03
 function retornaArrayOrdenado(array) {
-  
+    // EXERCÍCIO
+    array.sort((a, b) =>{
+        return a - b;
+      })
+    return array
 }
 
 // EXERCÍCIO 04
