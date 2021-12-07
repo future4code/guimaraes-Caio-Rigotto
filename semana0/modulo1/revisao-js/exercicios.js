@@ -11,7 +11,7 @@ function retornaTamanhoArray(array) {
 // EXERCÍCIO 02
 function retornaArrayInvertido(array) {
     // EXERCÍCIO
-    // return array.reverse()
+    return array.reverse()
     // DESAFIO
     // let arrayInv =[]
     //     for(let r=array.length-1;r>-1;r--){
