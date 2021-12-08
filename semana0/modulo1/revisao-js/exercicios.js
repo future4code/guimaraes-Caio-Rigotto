@@ -88,7 +88,32 @@ function retornaMaiorNumero(array) {
 
 // EXERCÍCIO 07
 function retornaObjetoEntreDoisNumeros(num1, num2) {
-
+    let objetoResultado = {}
+    let menorNumero 
+    let maiorNumero
+    if(num1>num2){
+        maiorNumero= num1
+        menorNumero= num2
+        objetoResultado={maiorNumero: maiorNumero}
+    }else{
+        maiorNumero= num2
+        menorNumero= num1
+        objetoResultado={maiorNumero: maiorNumero}
+    }
+    if(Number(objetoResultado.maiorNumero)%Number(menorNumero)===0){
+        objetoResultado={
+            ...objetoResultado,
+            maiorDivisivelPorMenor: true}
+    }else{
+        objetoResultado={
+            ...objetoResultado,
+            maiorDivisivelPorMenor: false}
+    }
+    objetoResultado={
+        ...objetoResultado,
+        diferenca: (maiorNumero-menorNumero)}
+        
+return objetoResultado
 }
 
 // EXERCÍCIO 08
