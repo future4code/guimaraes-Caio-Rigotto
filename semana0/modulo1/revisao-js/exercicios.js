@@ -47,18 +47,43 @@ function retornaArrayOrdenado(array) {
 // EXERCÍCIO 04
 function retornaNumerosPares(array) {
     // EXERCÍCIO
-    const pares = array.filter(item=> item%2===0)
+    // const pares = array.filter(item=> item%2===0)
+    // return pares
+
+    // DESAFIO
+    let pares = []
+    for(let i=0;i<array.length;i++){
+        if(array[i]%2===0){
+            pares.push(array[i])
+        }
+    }
     return pares
 }
 
 // EXERCÍCIO 05
 function retornaNumerosParesElevadosADois(array) {
- 
+    let paresElevados = []
+    for(let i=0;i<array.length;i++){
+        if(array[i]%2===0){
+            paresElevados.push(array[i]*array[i])
+        }
+    }
+    return paresElevados
 }
 
 // EXERCÍCIO 06
 function retornaMaiorNumero(array) {
-  
+    // let checagem = true
+    // let maiorNumero=array[0] // define o maior número como o primeiro item do array
+    // while(checagem){
+    //     checagem=false
+    //     for(let i=1;i<array.length;i++){ 
+    //         if(maiorNumero<array[i]){ // verifica se o número da variável maiorNumero é menor que o item do array
+    //             maiorNumero=array[i] // se for menor, substitui
+    //             checagem=true
+    //         }
+    //     }
+    // }return maiorNumero
 }
 
 // EXERCÍCIO 07
