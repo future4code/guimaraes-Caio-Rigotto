@@ -73,17 +73,17 @@ function retornaNumerosParesElevadosADois(array) {
 
 // EXERCÍCIO 06
 function retornaMaiorNumero(array) {
-    // let checagem = true
-    // let maiorNumero=array[0] // define o maior número como o primeiro item do array
-    // while(checagem){
-    //     checagem=false
-    //     for(let i=1;i<array.length;i++){ 
-    //         if(maiorNumero<array[i]){ // verifica se o número da variável maiorNumero é menor que o item do array
-    //             maiorNumero=array[i] // se for menor, substitui
-    //             checagem=true
-    //         }
-    //     }
-    // }return maiorNumero
+    let checagem = true
+    let maiorNumero=array[0] // define o maior número como o primeiro item do array
+    while(checagem){
+        checagem=false
+        for(let i=1;i<array.length;i++){ 
+            if(maiorNumero<array[i]){ // verifica se o número da variável maiorNumero é menor que o item do array
+                maiorNumero=array[i] // se for menor, substitui
+                checagem=true
+            }
+        }
+    }return maiorNumero
 }
 
 // EXERCÍCIO 07
