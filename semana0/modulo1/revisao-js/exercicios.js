@@ -13,7 +13,7 @@ function retornaArrayInvertido(array) {
     // EXERCÍCIO
     // return array.reverse()
     // DESAFIO
-    let arrayInv =[]
+    let arrayInv =[] //variável para receber os números
         for(let r=array.length-1;r>-1;r--){
             arrayInv.push(array[r])
         }return arrayInv
@@ -23,9 +23,24 @@ function retornaArrayInvertido(array) {
 // EXERCÍCIO 03
 function retornaArrayOrdenado(array) {
     // EXERCÍCIO
-    array.sort((a, b) =>{
-        return a - b;
-      })
+    // array.sort((a, b) =>{
+    //     return a-b;
+    //   })
+    // return array
+
+    // DESAFIO
+    let fim=false
+    while(fim===false){
+        fim=true
+        for(let i=1;i<array.length;i++){
+            if(array[i-1]>array[i]){ //verifica se o número em determinado index é maior que o do próximo index
+                let arrayTemp=array[i-1] //variável temporária que guarda o número maior
+                array[i-1]=array[i] //número menor é duplicado no lugar do maior 
+                array[i]=arrayTemp //número guardado é colocado no index do número menor original
+                fim=false
+            } // se nenhum número é maior que o do próximo index, encerra o loop
+        }
+    }
     return array
 }
 
