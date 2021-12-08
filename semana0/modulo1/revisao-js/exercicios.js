@@ -112,13 +112,18 @@ function retornaObjetoEntreDoisNumeros(num1, num2) {
     objetoResultado={
         ...objetoResultado,
         diferenca: (maiorNumero-menorNumero)}
-        
+
 return objetoResultado
 }
 
 // EXERCÍCIO 08
 function retornaNPrimeirosPares(n) {
-   
+    let pares = [0]
+    for(let i=0;i<n-1;i++){
+        pares.push(pares[i]+2)
+        console.log(pares, i, n)
+    }
+    return pares    
 }
 
 // EXERCÍCIO 09
