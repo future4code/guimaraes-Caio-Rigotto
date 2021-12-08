@@ -34,7 +34,7 @@ function retornaArrayOrdenado(array) {
         fim=true
         for(let i=1;i<array.length;i++){
             if(array[i-1]>array[i]){ //verifica se o número em determinado index é maior que o do próximo index
-                let arrayTemp=array[i-1] //variável temporária que guarda o número maior
+                let arrayTemp=array[i-1] //array temporário que guarda o número maior
                 array[i-1]=array[i] //número menor é duplicado no lugar do maior 
                 array[i]=arrayTemp //número guardado é colocado no index do número menor original
                 fim=false
@@ -46,7 +46,9 @@ function retornaArrayOrdenado(array) {
 
 // EXERCÍCIO 04
 function retornaNumerosPares(array) {
-  
+    // EXERCÍCIO
+    const pares = array.filter(item=> item%2===0)
+    return pares
 }
 
 // EXERCÍCIO 05
