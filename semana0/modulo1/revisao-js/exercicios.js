@@ -93,7 +93,7 @@ function retornaObjetoEntreDoisNumeros(num1, num2) {
     let objetoResultado = {}
     let menorNumero 
     let maiorNumero
-    if(num1>num2){
+    if(num1>num2){ // verifica qual numero é maior
         maiorNumero= num1
         menorNumero= num2
         objetoResultado={maiorNumero: maiorNumero}
@@ -102,7 +102,7 @@ function retornaObjetoEntreDoisNumeros(num1, num2) {
         menorNumero= num1
         objetoResultado={maiorNumero: maiorNumero}
     }
-    if(Number(objetoResultado.maiorNumero)%Number(menorNumero)===0){
+    if(Number(objetoResultado.maiorNumero)%Number(menorNumero)===0){ // verifica se o maior número é divisível pelo menor
         objetoResultado={
             ...objetoResultado,
             maiorDivisivelPorMenor: true}
@@ -113,7 +113,7 @@ function retornaObjetoEntreDoisNumeros(num1, num2) {
     }
     objetoResultado={
         ...objetoResultado,
-        diferenca: (maiorNumero-menorNumero)}
+        diferenca: (maiorNumero-menorNumero)} // adiciona a diferença ao objeto
 
 return objetoResultado
 }
@@ -133,10 +133,10 @@ function classificaTriangulo(ladoA, ladoB, ladoC) {
     const isosceles="Isósceles"
     const equilatero="Equilátero"
 
-    if((ladoA===ladoB)&&(ladoA===ladoC)&&(ladoB===ladoC)){
+    if((ladoA===ladoB)&&(ladoA===ladoC)&&(ladoB===ladoC)){ // checa se os lados são todos iguais
         return equilatero
     }else
-    if((ladoA!==ladoB)&&(ladoA!==ladoC)&&(ladoB!==ladoC)){
+    if((ladoA!==ladoB)&&(ladoA!==ladoC)&&(ladoB!==ladoC)){ // checa se os lados são todos diferentes
         return escaleno
     }else{
         return isosceles
@@ -180,7 +180,11 @@ function retornaPessoasAutorizadas(pessoas) {
 
 // EXERCÍCIO 13B
 function retornaPessoasNaoAutorizadas(pessoas) {
-  
+    let arrayResultado=pessoas.filter((pessoa)=>{
+        return pessoa.altura < 1.5 || pessoa.idade <= 14 || pessoa.idade > 60
+    })
+    console.log(arrayResultado)
+    return arrayResultado
 }
 
 // EXERCÍCIO 14
