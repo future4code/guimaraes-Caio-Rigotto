@@ -16,7 +16,8 @@ function retornaArrayInvertido(array) {
     let arrayInv =[] //variável para receber os números
         for(let r=array.length-1;r>-1;r--){
             arrayInv.push(array[r])
-        }return arrayInv
+        }
+    return arrayInv
 }
 
 
@@ -83,7 +84,8 @@ function retornaMaiorNumero(array) {
                 checagem=true
             }
         }
-    }return maiorNumero
+    }
+    return maiorNumero
 }
 
 // EXERCÍCIO 07
@@ -121,14 +123,24 @@ function retornaNPrimeirosPares(n) {
     let pares = [0]
     for(let i=0;i<n-1;i++){
         pares.push(pares[i]+2)
-        console.log(pares, i, n)
     }
     return pares    
 }
 
 // EXERCÍCIO 09
 function classificaTriangulo(ladoA, ladoB, ladoC) {
+    const escaleno="Escaleno"
+    const isosceles="Isósceles"
+    const equilatero="Equilátero"
 
+    if((ladoA===ladoB)&&(ladoA===ladoC)&&(ladoB===ladoC)){
+        return equilatero
+    }else
+    if((ladoA!==ladoB)&&(ladoA!==ladoC)&&(ladoB!==ladoC)){
+        return escaleno
+    }else{
+        return isosceles
+    }
 }
 
 // EXERCÍCIO 10
