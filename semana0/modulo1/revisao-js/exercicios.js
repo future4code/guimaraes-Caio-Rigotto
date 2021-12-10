@@ -183,13 +183,22 @@ function retornaPessoasNaoAutorizadas(pessoas) {
     let arrayResultado=pessoas.filter((pessoa)=>{
         return pessoa.altura < 1.5 || pessoa.idade <= 14 || pessoa.idade > 60
     })
-    console.log(arrayResultado)
     return arrayResultado
 }
 
 // EXERCÍCIO 14
 function retornaContasComSaldoAtualizado(contas) {
+    let compras = 0
+    for(let compra of contas){
+        compras=compra.compras.reduce((a, b)=>{ // pega cada elemento da chave compras e os soma
+            a= a + b
+            return a
+        })
+        compra.compras=[]
+        compra.saldoTotal -= compras
 
+        return contas
+    }
 }
 
 // EXERCÍCIO 15A
