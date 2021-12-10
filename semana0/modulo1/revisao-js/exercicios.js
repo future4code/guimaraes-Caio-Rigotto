@@ -218,5 +218,29 @@ function retornaArrayOrdenadoAlfabeticamente(consultas) {
 
 // EXERCÍCIO 15B
 function retornaArrayOrdenadoPorData(consultas) {
-   
+    let ordenar=(a,b)=>{ // verifica a chave o mês, depois o dia e retorna um resultado de acordo com os parametros da função .sort()
+        a= a.dataDaConsulta.split("/")
+        b= b.dataDaConsulta.split("/")
+        let checagemMes = true
+        while(checagemMes){
+            checagemMes=false
+            if(a[1]<b[1]){
+                checagemMes=true
+                return -1
+            }
+            if(a[1]>b[1]){
+                checagemMes=true
+                return 1
+            }  
+        }
+        if(a[0]<b[0]){
+            return -1
+        }
+        if(a[0]>b[0]){
+            return 1
+        }
+        return 0
+    }
+    consultas.sort(ordenar)
+    return consultas
 }
