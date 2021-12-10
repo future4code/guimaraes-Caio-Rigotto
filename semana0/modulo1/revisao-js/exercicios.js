@@ -190,7 +190,7 @@ function retornaPessoasNaoAutorizadas(pessoas) {
 function retornaContasComSaldoAtualizado(contas) {
     let compras = 0
     for(let compra of contas){
-        compras=compra.compras.reduce((a, b)=>{ // pega cada elemento da chave compras e os soma
+        compras=compra.compras.reduce((a, b)=>{ // pega cada elemento da chave compras de cada array e os soma
             a= a + b
             return a
         })
@@ -203,7 +203,17 @@ function retornaContasComSaldoAtualizado(contas) {
 
 // EXERCÍCIO 15A
 function retornaArrayOrdenadoAlfabeticamente(consultas) {
-  
+    let ordenar=(a,b)=>{ // verifica a chave nome e retorna um resultado de acordo com os parametros da função .sort()
+        if(a.nome<b.nome){
+            return -1
+        }
+        if(a.nome>b.nome){
+            return 1
+        }
+        return 0
+    }
+    consultas.sort(ordenar)
+    return consultas
 }
 
 // EXERCÍCIO 15B
