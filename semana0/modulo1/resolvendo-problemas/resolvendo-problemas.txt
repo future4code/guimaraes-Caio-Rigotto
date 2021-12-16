@@ -1,0 +1,13 @@
+1. Ter atenção no enunciado - Bastante auto explicativo. O enunciado de qualquer projeto/trabalho/exercício costuma transpor tudo o que deve ser feito.
+
+2. Retirar informações relevantes - Num texto nem sempre vem explícitas as instruções cruciais de um projeto. Em conjunto com o item 1, devemos sempre separar informações relevantes, como o que é esperado que seja feito, qual resultado nosso código deve trazer, como isso podendo já ir criando alguns nomes para variáveis e funções.
+
+3. Pensar entradas e saídas - Dividir em pensamento o que o enunciado nos traz, separando os dados que o projeto nos dá (entradas) e o que o nosso código deve retornar (saídas). Com estas informações já podemos começar a criar algumas funções que separam estes resultados.
+
+4. Fazer um esquema visual - Esquematizar o que deve ser feito visualmente, seja por meio de escrita ou fluxogramas, ajuda no processo de criação do código e permite um entendimento melhor de cada passo.
+
+5. Criar código feio - Esta é a fase de criação bruta do código. Onde chegamos no resultado esperado, mesmo que não seja prático ou tenha uma boa performance. O foco é chegar no resultado esperado.
+
+6. Testar força bruta - Testar tudo o que foi feito no item 5.
+
+7. Refatorar - Após o código bruto funcionando e trazendo os resultados esperados é hora de o polir. Arrumar os nomes das funções/variáveis e buscar dar uma melhorada tanto na performance quanto na estética do código, melhorando o entendimento e simplificando o processo.
