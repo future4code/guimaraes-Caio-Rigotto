@@ -1,8 +1,8 @@
 .logo{
     display: inline;
     width: 260px;
-    margin-top: 25px;
-    margin-bottom: 25px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     background-color: #ADE8F4;
 }
 .coluna{
@@ -17,9 +17,6 @@
   }
 .redes{
     width: 50px;
-    margin-left: 8px;
-    margin-top: -10px;
-    margin-bottom: 2px;
 }
 .texto-redes{
     margin-left: 7px; 
@@ -27,7 +24,15 @@
 }
 footer{
     background-color: #ADE8F4;
+    position: static;
+    bottom: 0;
+    right: 0;
+    left: 0;
 }
 .rodape{
     display: block;
+}
+*{
+    margin: 0;
+    padding: 0;
 }
