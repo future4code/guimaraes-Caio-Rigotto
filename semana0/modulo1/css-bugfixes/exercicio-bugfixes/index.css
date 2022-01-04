@@ -32,8 +32,11 @@ img {
 div>p:first-child {
     display: inline;
 }
+.lupa{
+    width: 15px;
+}
 
-div img {
+td img {
     width: 50px;    
 }
 
