@@ -79,6 +79,10 @@ td img {
     padding-top: 50px;
 }
 
+ol{
+    list-style-position: inside;
+}
+
 #container-de-descricao>ol {
     padding: 15px 0px;
 }
