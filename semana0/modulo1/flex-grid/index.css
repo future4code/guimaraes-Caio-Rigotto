@@ -1,0 +1,51 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+/* HEADER */
+.container-header{
+    display: flex;
+    height: 7vh;
+    background-color: mediumvioletred;
+    justify-content: space-between;
+}
+.icones{
+    width: 1.75vw;
+    height: 3.5vh;
+    margin-top: 1.75vh;
+    margin-left: 1.75vh;
+}
+.descricao{
+    display: inline;
+    margin-top: 1.75vh;
+}
+.login{
+    display: inline;
+    height: 3vh;
+    width: 3vw;
+    margin-right: 1.75vh;
+    margin-top: 1.75vh;       
+}
+
+/* NAV */
+.container-nav{
+    height: 86vh;
+    background-color: #f2d0e0;
+    width: 20vw;
+}
+
+/* MAIN */
+
+
+/* FOOTER */
+
+.container-footer{
+    height: 7vh;
+    background-color: mediumvioletred;
+}
+
+.container-footer>h3{
+    text-align: center;
+    padding-top: 1.75vh;
+}
