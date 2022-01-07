@@ -28,15 +28,57 @@
     margin-top: 1.75vh;       
 }
 
+/* CENTRO */
+.container-centro{
+    display: flex;
+}
+
 /* NAV */
 .container-nav{
+    display: grid;
+    grid-template-rows: 7vh 7vh 7vh 7vh;
     height: 86vh;
     background-color: #f2d0e0;
     width: 20vw;
 }
+.nav{
+    display: flex;
+    justify-content: space-between;
+}
+
+.desc-nav{
+    margin-top: 10px;
+}
 
 /* MAIN */
 
+.container-main{
+    width: 80vw;
+    height: 86vh;
+}
+.imagens{
+    display: inline;
+    width: 15.7vw;
+}
+h2{
+    text-align: center;
+}
+p{
+    text-align: center;
+    font-size: 12px;
+}
+.produto{
+    border: black solid 2px;
+    box-shadow: 10px 10px 10px darkgray;
+}
+.grid-main{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    row-gap: 20px;
+    column-gap: 75px;
+    margin: 1vh 1vh 1vh 1vh;
+}
 
 /* FOOTER */
 
