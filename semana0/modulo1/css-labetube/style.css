@@ -52,12 +52,12 @@ footer p{
     text-align: center;
 }
 
-/* @media screen and (max-device-width : 800px){
+@media screen and (max-device-width : 800px){
     .container-main{
         display: grid;
-        grid-template-columns: repeat(1fr);
+        grid-template-columns: 1fr;
         row-gap: 4vh;
         column-gap: 4vw;
         margin: 4vh 4vw;
     }
-    } */
+    }
