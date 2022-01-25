@@ -1,5 +1,4 @@
 function calculaSalario(qtdeCarrosVendidos, valorTotalVendas) {
- // Escreva seu código aqui
 let valorCarro=Math.round(Number(valorTotalVendas/qtdeCarrosVendidos))
 let comicao=Math.round(((valorCarro*0.05)+100)*qtdeCarrosVendidos)
 if(qtdeCarrosVendidos===0){
