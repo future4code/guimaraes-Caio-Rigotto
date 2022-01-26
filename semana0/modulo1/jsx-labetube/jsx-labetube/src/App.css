@@ -30,7 +30,7 @@ header {
   margin-right: 1vw;
   margin-top: 3vh;
   border-radius: 2vw 2vw;
-  filter: invert(12%) sepia(75%) saturate(5266%) hue-rotate(356deg) brightness(127%) contrast(117%);
+  filter: invert(11%) sepia(96%) saturate(5657%) hue-rotate(353deg) brightness(80%) contrast(109%);
 }
 
 .container-header1 h1{
@@ -136,6 +136,7 @@ footer {
 
 h4 {
   margin-left: 20px;
+  color: white;
 }
 hr{
   color: black;
