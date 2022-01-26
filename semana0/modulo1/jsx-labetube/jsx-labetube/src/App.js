@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+import logo from './img/botao-play-video.png';
 import './App.css';
 
 function App() {
@@ -12,7 +12,10 @@ function App() {
     <div>
     <div className="tela-inteira">
       <header>
+        <div className='container-header1'>
+        <img src={logo}/>
         <h1>Lab Tube</h1>
+        </div>
         <input type="text" placeholder="Busca" id="campoDeBusca" />
       </header>
 
