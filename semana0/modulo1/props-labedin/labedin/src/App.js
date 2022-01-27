@@ -4,6 +4,8 @@ import CardGrande from './components/CardGrande/CardGrande';
 import ImagemButton from './components/ImagemButton/ImagemButton';
 import Logo1NE from './components/img/logo-1ne.jpg'
 import CardPequeno from './components/CardPequeno/CardPequeno';
+import logoEmail from './components/img/logo-email.png'
+import logoEndereco from './components/img/logo-endereco.png'
 
 function App() {
   return (
@@ -24,13 +26,13 @@ function App() {
 
       <div className="page-section-container">
         <CardPequeno
-          img="https://cdn-icons.flaticon.com/png/512/3178/premium/3178158.png?token=exp=1643296079~hmac=00ec3f5efe501c677c6355dec0f24420"
+          img={logoEmail}
           descSmallCard="Email:"
           infoSmallCard="bananinha@gmail.com"
         />
 
         <CardPequeno
-          img="https://cdn-icons.flaticon.com/png/512/1009/premium/1009850.png?token=exp=1643296756~hmac=d94f6af1c6465a08047706cc043cbcc5"
+          img={logoEndereco}
           descSmallCard="Endereço:"
           infoSmallCard="Rua dos Bobos, 0"
         />
