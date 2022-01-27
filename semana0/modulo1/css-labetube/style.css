@@ -4,27 +4,26 @@
 }
 .container-header{
     display: flex; 
-    height: 80px;
+    height: 10vh;
     background-color: blueviolet;
     justify-content: space-between;
 }
 header h1{
-    margin-top: 20px;
-    margin-left: 40px;
+    margin-top: 2.5vh;
+    margin-left: 4vw;
 }
 header input{
-    margin-right: 40px;
-    padding-left: 20px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    width: 125px;
+    margin-right: 4vw;
+    margin-top: 2.5vh;
+    margin-bottom: 2.5vh;
+    width: 25vw;
 }
 .container-main{
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    row-gap: 40px;
-    column-gap: 40px;
-    margin: 30px;
+    grid-template-columns: repeat(4,1fr);
+    row-gap: 4vh;
+    column-gap: 4vw;
+    margin: 4vh 4vw;
 }
 .container-video{
     display: flex;
@@ -43,11 +42,22 @@ div p{
     font-size: 20px;
     font-weight: bolder;
 }
-
 footer{
-    height: 80px;
+    height: 10vh;
+    width: 100vw;
     background-color: gray;
+    bottom: 0;
 }
 footer p{
     text-align: center;
 }
+
+@media screen and (max-device-width : 800px){
+    .container-main{
+        display: grid;
+        grid-template-columns: 1fr;
+        row-gap: 4vh;
+        column-gap: 4vw;
+        margin: 4vh 4vw;
+    }
+    }
