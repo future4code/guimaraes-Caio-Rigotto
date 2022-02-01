@@ -43,13 +43,13 @@ function App() {
         <CardGrande
           imagem={Logo1NE}
           nome="1NE Comunicação"
-          descricao="Redator chefe e gerente de redação."
+          descricao="Redator chefe."
         />
 
         <CardGrande
           imagem="https://pbs.twimg.com/profile_images/1450901581876973568/0bHBmqXe_400x400.png"
           nome="Twitch"
-          descricao="Streamer profissional com anos de experiência."
+          descricao="Streamer profissional."
         />
       </div>
 
@@ -59,7 +59,7 @@ function App() {
           imagem="https://d2v9ipibika81v.cloudfront.net/uploads/sites/261/2017/01/facebook-logo-3.png"
           texto="Facebook"
         />
-
+        
         <ImagemButton
           imagem="https://logodownload.org/wp-content/uploads/2014/09/twitter-logo-1-1.png"
           texto="Twitter"

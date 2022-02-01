@@ -19,7 +19,6 @@ const StyledP = styled.p`
     padding-left: 1vw;
 `
 
-
 const CardPequeno = (props) =>{
     return(
         <StyledSmallContainer>
