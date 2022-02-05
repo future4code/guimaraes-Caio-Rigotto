@@ -4,7 +4,7 @@ import SecaoMensagemLogs from "./components/SecaoMensagemLog/SecaoMensagemLog";
 
 const MainContainer = styled.div`
   border: 2px solid black;
-  background-image: url('https://cdn.pixabay.com/photo/2016/04/11/11/30/watercolour-1321799_960_720.jpg');
+  background-image: url('https://cdn.pixabay.com/photo/2015/02/07/02/17/paper-626781_960_720.jpg');
   background-size: cover;
   display: flex;
   justify-content: center;

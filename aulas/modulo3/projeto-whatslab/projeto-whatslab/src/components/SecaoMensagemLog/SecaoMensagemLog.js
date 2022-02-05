@@ -11,12 +11,15 @@ const ContainerMensagensLog = styled.div`
 
 const ContainerMensagensIndividual = styled.div`
     display: flex;
-    background-color: yellow;
+    /* background-color: darkcyan; */
     justify-content: left;
     align-items: center;
     max-width: 40%;
     min-width: 8%;
     word-wrap: break-word;
+    /* border-radius: 20px 20px; */
+    margin: 10px;
+    /* color: white */
 `
 
 const Usuario = styled.h2`
@@ -38,18 +41,32 @@ const InputUsuario = styled.input`
     height: 2.5vh;
     margin-top: auto;
     margin-bottom: auto;
+    background-color: #F2F3F4;
+    &:hover{
+        background-color: white;
+    }
+    &:focus{
+        background-color: white;
+    }
 `
 
 const InputMensagem = styled.input`
     width: 60vw;
-    height: 5vh;
+    height: 7vh;
     padding-left: 15px;
     margin: 5px;
     border-radius: 25px 25px;
+    background-color: #F2F3F4;
+    &:hover{
+        background-color: white;
+    }
+    &:focus{
+        background-color: white;
+    }
 `
 const IconeBotaoEnviar = styled.img`
-    width: 2.5vw;
-    height: 5vh;
+    width: 5vw;
+    height: 7vh;
     &:hover{
     filter: invert(24%) sepia(5%) saturate(6%) hue-rotate(46deg) brightness(98%) contrast(85%);,
     }
@@ -65,12 +82,10 @@ class SecaoMensagemLogs extends React.Component {
     state = {
         mensagens: [
             {
-                usuario: 'Testonildo',
-                mensagem: 'eu sou um cara muito dos testes',
+                usuario: '',
+                mensagem: '',
             }
         ],
-
-        comentou: true,
         valorInputUsuario: '',
         valorInputMensagem: ''
     }
@@ -99,23 +114,21 @@ class SecaoMensagemLogs extends React.Component {
         this.setState({
             valorInputMensagem: '',
             valorInputUsuario: '',
-            comentou: true,
             mensagens: novaMensagem
         })
     }
 
     render() {
-
         const mensagem = this.state.mensagens.map((indv) => {
             return (
-                <ContainerMensagensIndividual>
+                    <ContainerMensagensIndividual>
                     < Usuario >
-                        {indv.usuario}:
+                        {indv.usuario}
                     </ Usuario>
                     <Mensagem>
                         {indv.mensagem}
                     </Mensagem>
-                </ContainerMensagensIndividual>
+                </ContainerMensagensIndividual>  
             );
         })
 
