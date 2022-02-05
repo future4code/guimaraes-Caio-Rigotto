@@ -1,50 +1,72 @@
 import React from "react";
 import styled from "styled-components";
+import BotaoSend from "../img/send.png"
 
 const ContainerMensagensLog = styled.div`
-    height: 80vh;
+    height: 85vh;
     width: 85vw;
     margin: 15px;
-    background-color: green;
     border: 2px solid black;
 `
 
 const ContainerMensagensIndividual = styled.div`
     display: flex;
+    background-color: yellow;
     justify-content: left;
     align-items: center;
+    max-width: 40%;
+    min-width: 8%;
+    word-wrap: break-word;
 `
 
-const UsuarioMensagem = styled.h2`
+const Usuario = styled.h2`
+     margin: 10px;
+`
 
+const Mensagem = styled.p`
+    
 `
 
 const ContainerInput = styled.div`
     margin: 5px;
+    display: flex;
+    justify-content: space-between;
 `
 
 const InputUsuario = styled.input`
-    
+    width: 10vw;
+    height: 2.5vh;
+    margin-top: auto;
+    margin-bottom: auto;
 `
 
 const InputMensagem = styled.input`
     width: 60vw;
     height: 5vh;
-    margin-left: 5px;
+    padding-left: 15px;
     margin: 5px;
+    border-radius: 25px 25px;
+`
+const IconeBotaoEnviar = styled.img`
+    width: 2.5vw;
+    height: 5vh;
+    &:hover{
+    filter: invert(24%) sepia(5%) saturate(6%) hue-rotate(46deg) brightness(98%) contrast(85%);,
+    }
 `
 
 const BotaoEnviarMensagem = styled.button`
-
+    background-color: transparent;
+    border: transparent;
+    
 `
-
 
 class SecaoMensagemLogs extends React.Component {
     state = {
         mensagens: [
             {
-                usuario: 'gdfgdf',
-                mensagem: 'aasdsdsdasdas',
+                usuario: 'Testonildo',
+                mensagem: 'eu sou um cara muito dos testes',
             }
         ],
 
@@ -64,8 +86,6 @@ class SecaoMensagemLogs extends React.Component {
             valorInputMensagem: event.target.value
         })
     }
-
-
 
     aoEnviar = () => {
 
@@ -89,10 +109,12 @@ class SecaoMensagemLogs extends React.Component {
         const mensagem = this.state.mensagens.map((indv) => {
             return (
                 <ContainerMensagensIndividual>
-                    < UsuarioMensagem >
+                    < Usuario >
                         {indv.usuario}:
-                    </ UsuarioMensagem>
-                    <p>{indv.mensagem}</p>
+                    </ Usuario>
+                    <Mensagem>
+                        {indv.mensagem}
+                    </Mensagem>
                 </ContainerMensagensIndividual>
             );
         })
@@ -115,7 +137,7 @@ class SecaoMensagemLogs extends React.Component {
                     />
                     <BotaoEnviarMensagem
                         onClick={this.aoEnviar}
-                    >Enviar</BotaoEnviarMensagem>
+                    ><IconeBotaoEnviar src={BotaoSend}></IconeBotaoEnviar></BotaoEnviarMensagem>
                 </ContainerInput>
             </div>
         )
