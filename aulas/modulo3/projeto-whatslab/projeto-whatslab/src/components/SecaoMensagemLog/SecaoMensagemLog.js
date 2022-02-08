@@ -82,8 +82,8 @@ class SecaoMensagemLogs extends React.Component {
     state = {
         mensagens: [
             {
-                usuario: '',
-                mensagem: '',
+                usuario: null,
+                mensagem: null,
             }
         ],
         valorInputUsuario: '',
