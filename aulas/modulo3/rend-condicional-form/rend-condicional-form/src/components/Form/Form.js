@@ -35,16 +35,16 @@ function Form(props) {
                         <option value={props.opcaoSelect4}>{props.opcaoSelect4}</option>
                     </SelectForm>
                 )
-            }else
-            if (numDropdown === '3'){
-                return (
-                <SelectForm id={props.selectId} name={props.selectId}>
-                        <option value={props.opcaoSelect1}>{props.opcaoSelect1}</option>
-                        <option value={props.opcaoSelect2}>{props.opcaoSelect2}</option>
-                        <option value={props.opcaoSelect3}>{props.opcaoSelect3}</option>
-                    </SelectForm>
-                )
-            }
+            } else
+                if (numDropdown === '3') {
+                    return (
+                        <SelectForm id={props.selectId} name={props.selectId}>
+                            <option value={props.opcaoSelect1}>{props.opcaoSelect1}</option>
+                            <option value={props.opcaoSelect2}>{props.opcaoSelect2}</option>
+                            <option value={props.opcaoSelect3}>{props.opcaoSelect3}</option>
+                        </SelectForm>
+                    )
+                }
         }
     }
 
