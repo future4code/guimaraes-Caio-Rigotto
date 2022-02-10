@@ -15,24 +15,42 @@ const BotaoShare = styled.button`
 
 `
 
-export class SecaoCompartilhar extends Component{
+export class SecaoCompartilhar extends Component {
+
+    state = {
+        redes: [{
+            icone: iconeFacebook,
+            valorContador: "Facebook"
+        },
+        {
+            icone: iconeTwitter,
+            valorContador: "Twitter"
+        },
+        {
+            icone: iconeInstagram,
+            valorContador: "Instagram"
+        }
+        ]
+    }
+
+    
+
     render() {
-        return <ShareContainer>
-            <BotaoShare onClick={this.props.aoCompartilhar}><IconeComContador
-            icone={iconeFacebook}
-            valorContador={'Facebook'}
-            />
-            </BotaoShare>
-            <BotaoShare onClick={this.props.aoCompartilhar}><IconeComContador
-            icone={iconeTwitter}
-            valorContador={'Twitter'}
-            />
-            </BotaoShare>
-            <BotaoShare onClick={this.props.aoCompartilhar}><IconeComContador
-            icone={iconeInstagram}
-            valorContador={'Instagram'}
-            />
-            </BotaoShare>
-        </ShareContainer>
+
+        const RedesCompartilhamento = this.state.redes.map((rede, index) => {
+            
+            return (
+                <BotaoShare key={index} onClick={this.props.aoCompartilhar}>
+                    <IconeComContador key={index}
+                        icone={rede.icone}
+                        valorContador={rede.valorContador}
+                    />
+                </BotaoShare>
+            )
+        })
+        return (
+            <ShareContainer>
+                {RedesCompartilhamento}
+            </ShareContainer>)
     }
 }
