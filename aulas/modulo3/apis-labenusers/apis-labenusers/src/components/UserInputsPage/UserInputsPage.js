@@ -1,5 +1,13 @@
 import React from "react";
 import axios from "axios";
+import styled from "styled-components";
+
+const LabelInput = styled.label`
+    padding: 5px;
+`
+const ContainerInput = styled.div`
+    padding: 20px;
+`
 
 const urlUsers = "https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users"
 
@@ -48,15 +56,15 @@ class UserInputsPage extends React.Component {
     }
     render() {
         return (
-            <div>
-                <label>Usuário:</label>
+            <ContainerInput>
+                <LabelInput>Usuário:</LabelInput>
                 <input
                     type="text"
                     placeholder="Nome"
                     onChange={this.onChangeNome}
                     value={this.state.inputNome}
                 ></input>
-                <label>E-mail:</label>
+                <LabelInput>E-mail:</LabelInput>
                 <input
                     type="email"
                     placeholder="E-mail"
@@ -64,7 +72,7 @@ class UserInputsPage extends React.Component {
                     value={this.state.inputEmail}
                 ></input>
                 <button onClick={this.criarUsuario}>Enviar</button>
-            </div>
+            </ContainerInput>
         )
     }
 }

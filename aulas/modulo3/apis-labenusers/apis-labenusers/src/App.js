@@ -4,6 +4,15 @@ import styled from 'styled-components';
 import UserInputsPage from './components/UserInputsPage/UserInputsPage';
 import UsersPage from './components/UsersPage/UsersPage';
 
+const ContainerMain = styled.div`
+  border: solid 1px black;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+  padding: 20px;
+`
+
 class App extends React.Component {
   state = {
     telaUsuarios: false
@@ -26,13 +35,13 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <ContainerMain>
         <div>
         {this.renderUsuarios()}
         </div>
         <button onClick={this.onClickUsuarios}>Mostrar usuários</button>
         <UserInputsPage></UserInputsPage>
-      </div>
+      </ContainerMain>
     );
   }
 }
