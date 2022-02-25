@@ -11,6 +11,7 @@ const ContainerMain = styled.div`
   align-items: center;
   margin: 20px;
   padding: 20px;
+  border-radius: 10px 10px;
 `
 
 class App extends React.Component {

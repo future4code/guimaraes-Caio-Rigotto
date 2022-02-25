@@ -9,6 +9,7 @@ const ContainerUsers = styled.div`
     border: solid 1px black;
     padding: 10px;
     margin-bottom: 10px;
+    border-radius: 10px 10px;
 `
 
 class UsersPage extends React.Component {
