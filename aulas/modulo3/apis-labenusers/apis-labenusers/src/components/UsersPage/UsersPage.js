@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import styled from "styled-components";
 
-const urlUsers = "https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users"
+const urlUsers = "https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/"
 const headers = { headers: { Authorization: "caio-rigotto-guimaraes" } }
 
 const ContainerUsers = styled.div`
@@ -11,18 +11,33 @@ const ContainerUsers = styled.div`
     margin-bottom: 10px;
     border-radius: 10px 10px;
 `
+const ContainerUserList = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+`
+const DeleteButton = styled.button`
+    color: red;
+    border-radius: 10px;
+`
 
 class UsersPage extends React.Component {
     state = {
-        users: []
+        users: [],
     }
 
     componentDidMount() {
         this.getAllUsers()
     }
 
-    deleteUser = () => {
-        axios.delete()
+    deleteUser = (userID) => {
+        axios.delete(`${urlUsers}${userID}`, headers)
+        .then((resp)=> {
+            alert("Usuário excluído com sucesso!")
+            console.log(resp.data)
+        }).catch((err) => {
+            console.log(err.message)
+        })
     }
 
     getAllUsers = () => {
@@ -36,8 +51,12 @@ class UsersPage extends React.Component {
 
     render() {
         const renderUsers = this.state.users.map((user) => {
-            return <p key={user.id}>Usuário: {user.name}</p>
-        })
+            return <ContainerUserList>
+                <p key={user.id}>Usuário: {user.name}</p>
+                <DeleteButton key={`${user.id} - del`} onClick={()=>this.deleteUser(user.id)}>X</DeleteButton>    
+                    </ContainerUserList>
+        
+        })  
         return (
             <ContainerUsers>
                 <button onClick={this.getAllUsers}>Recarregar lista de usuários</button>
