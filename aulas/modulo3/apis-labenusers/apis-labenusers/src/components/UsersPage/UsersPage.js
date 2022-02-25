@@ -6,7 +6,7 @@ const urlUsers = "https://us-central1-labenu-apis.cloudfunctions.net/labenusers/
 const headers = { headers: { Authorization: "caio-rigotto-guimaraes" } }
 
 const ContainerUsers = styled.div`
-    border: solid 1px black;
+    border: solid 2px black;
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 10px 10px;
@@ -19,6 +19,10 @@ class UsersPage extends React.Component {
 
     componentDidMount() {
         this.getAllUsers()
+    }
+
+    deleteUser = () => {
+        axios.delete()
     }
 
     getAllUsers = () => {
