@@ -15,12 +15,23 @@ class App extends React.Component {
       this.setState({telaUsuarios: false})
     }
   }
+
+  renderUsuarios = () =>{
+    if(this.state.telaUsuarios){
+      return <UsersPage/>
+    }else{
+      return null
+    }
+  }
+
   render() {
     return (
       <div>
+        <div>
+        {this.renderUsuarios()}
+        </div>
+        <button onClick={this.onClickUsuarios}>Mostrar usuários</button>
         <UserInputsPage></UserInputsPage>
-        <button onClick={this.onClickUsuarios}>Usuários</button>
-        <UsersPage></UsersPage>
       </div>
     );
   }

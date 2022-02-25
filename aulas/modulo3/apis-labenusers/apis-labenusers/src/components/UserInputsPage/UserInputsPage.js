@@ -23,9 +23,10 @@ class UserInputsPage extends React.Component {
             .then((res) => {
                 console.log(res.data)
                 alert(`Usuário ${this.state.inputNome} criado com sucesso!`)
-                this.setState({inputNome:'',inputEmail:''})
+                this.setState({ inputNome: '', inputEmail: '' })
             }).catch((err) => {
                 console.log(err.message)
+                alert(`Falha ao criar o usuário!`)
             })
     }
 
