@@ -37,22 +37,15 @@ class UserInputsPage extends React.Component {
                 alert(`Falha ao criar o usuário!`)
             })
     }
-
     onChangeNome = (e) => {
         this.setState({
             inputNome: e.target.value
         })
     }
-
     onChangeEmail = (e) => {
         this.setState({
             inputEmail: e.target.value
         })
-    }
-
-    onClickEnviar() {
-
-        console.log("Enviou")
     }
     render() {
         return (

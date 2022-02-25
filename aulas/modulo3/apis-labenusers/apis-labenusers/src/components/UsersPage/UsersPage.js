@@ -29,12 +29,16 @@ class UsersPage extends React.Component {
     componentDidMount() {
         this.getAllUsers()
     }
+    componentDidUpdate(){
+        this.getAllUsers()
+    }
 
     deleteUser = (userID) => {
         axios.delete(`${urlUsers}${userID}`, headers)
         .then((resp)=> {
             alert("Usuário excluído com sucesso!")
             console.log(resp.data)
+            this.getAllUsers()
         }).catch((err) => {
             console.log(err.message)
         })
@@ -55,7 +59,6 @@ class UsersPage extends React.Component {
                 <p key={user.id}>Usuário: {user.name}</p>
                 <DeleteButton key={`${user.id} - del`} onClick={()=>this.deleteUser(user.id)}>X</DeleteButton>    
                     </ContainerUserList>
-        
         })  
         return (
             <ContainerUsers>
