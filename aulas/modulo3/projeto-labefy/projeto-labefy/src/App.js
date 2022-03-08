@@ -1,15 +1,19 @@
 import React from 'react';
+import styled from 'styled-components';
 
-import Playlists from './components/Playlist/Playlists';
+import LeftContainer from './components/LeftContainer/LeftContainer';
+import CreatePlaylist from './components/LeftContainer/CreatePlaylist';
 
-class App extends React.Component {
+const MainContainer = styled.div`
+  display: flex;
+`
+
+export default class App extends React.Component {
   render() {
     return (
-      <div>
-        <Playlists />
-      </div>
+      <MainContainer>
+        <LeftContainer />
+      </MainContainer>
     );
   }
 }
-
-export default App;
