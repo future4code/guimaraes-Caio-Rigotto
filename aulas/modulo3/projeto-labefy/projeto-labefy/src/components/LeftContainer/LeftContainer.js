@@ -3,15 +3,17 @@ import styled from 'styled-components';
 
 import Playlists from './Playlists';
 
+export const urlPlaylist = "https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists/"
+export const headers = { headers: { Authorization: "caio-rigotto-guimaraes" } }
+
 const PlaylistContainer = styled.div`
   display: flex;
   border: 2px solid black;
   background-color: lightgrey;
-  height: 80vh;
-  width: 60vw;
+  height: 90vh;
+  width: 80vw;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 5vh;
   border-radius: 10px;
 `
 
