@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import AudioPlayer from './AudioPlayer';
+
 const PlaylistContainer = styled.div`
   display: flex;
   border: 2px solid black;
@@ -15,7 +17,7 @@ export default class RightContainer extends React.Component {
   render() {
     return (
       <PlaylistContainer>
-          
+          <AudioPlayer />
       </PlaylistContainer>
     );
   }

@@ -111,7 +111,7 @@ export default class Songs extends React.Component {
                 .then((resp) => {
                     alert("Música excluída com sucesso!")
                     this.props.getPlaylistTracks()
-                    this.setState({selectPlaylistId: ''})
+                    this.setState({ selectPlaylistId: '' })
                 }).catch((err) => {
                     console.log(err.message)
                 })
@@ -126,10 +126,10 @@ export default class Songs extends React.Component {
         }
     }
     onMouseEnterDelete = (event) => {
-        this.setState({selectSongId: event.target.value})
+        this.setState({ selectSongId: event.target.value })
     }
     onClickDeleteSong = (event) => {
-        this.setState({selectSongId: event.target.value})
+        this.setState({ selectSongId: event.target.value })
         this.removeTrackFromPlaylist()
     }
     onClickSelectSong = (event) => {
@@ -186,11 +186,11 @@ export default class Songs extends React.Component {
                     >
                         {song.name}
                     </ButtonSong>
-                    <ButtonDeleteSong 
-                    title="Deletar música"
-                    value={song.id}
-                    onMouseEnter={this.onMouseEnterDelete}
-                    onClick={this.onClickDeleteSong}
+                    <ButtonDeleteSong
+                        title="Deletar música"
+                        value={song.id}
+                        onMouseEnter={this.onMouseEnterDelete}
+                        onClick={this.onClickDeleteSong}
                     >X
                     </ButtonDeleteSong>
                 </SongContainer>

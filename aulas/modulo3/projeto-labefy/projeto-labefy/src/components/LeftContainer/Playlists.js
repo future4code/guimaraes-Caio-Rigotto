@@ -5,7 +5,7 @@ import axios from "axios";
 import { urlPlaylist } from "./LeftContainer";
 import { headers } from "./LeftContainer";
 
-import Songs from "./Songs";
+import Songs from "./Songs"; 
 
 const SongPlaylistContainer = styled.div`
   display: flex;
