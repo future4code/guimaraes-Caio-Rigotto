@@ -7,6 +7,16 @@ import { headers } from "./LeftContainer";
 
 import Songs from "./Songs";
 
+const SongPlaylistContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+const PlaylistRenderedName = styled.h4`
+    line-break: auto;
+    max-width: fit-content;
+    text-align: center;
+    align-self: center;
+`
 const PlaylistSelector = styled.select`
   margin-top: auto;
   margin-bottom: 1vh;
@@ -15,23 +25,31 @@ const PlaylistSelector = styled.select`
   padding: 5%;
   &:focus{
       outline: none;
-  }
+    }
 `
 const CreatePlaylistContainer = styled.div`
     display: flex;
     flex-direction: column;
-    position: absolute;
     align-items: center;
-    justify-content: space-around;
-    height: 30%;
-    width: 40%;
     background-color: grey;
     border: solid black 2px;
-    border-radius: 10px;
+    border-radius: 10px; 
+    position: absolute;
+    padding: 2%;
+    top: 5vh;
+    left: 0; 
+    right: 0; 
+    margin-left: auto; 
+    margin-right: auto; 
+    width: fit-content;
+    height: fit-content;
 `
 const ClosePlaylistCreatorButton = styled.button`
     color: red;
     border-radius: 10px;
+    position: absolute;
+    right: 0;
+    top: 0;
     background-color: transparent;
     border: 1px lightgrey solid;
     align-self: end;
@@ -40,17 +58,10 @@ const ClosePlaylistCreatorButton = styled.button`
         background-color: lightgrey;
     }
 `
-const SongPlaylistContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  width: 30%;
-  border-right: 2px solid black;
-`
 const PlaylistButtonsContainer = styled.div`
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 2vh;
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 2vh;
 `
 const SelectPlaylistButtons = styled.button`
     
@@ -71,7 +82,10 @@ export default class Playlists extends React.Component {
         playlists: [],
         selectPlaylistName: '',
         selectPlaylistId: '',
+        playlistNameRender: '',
         songsPlaylist: [],
+        renderPlaylistName: '',
+        renderingPlaylistName: false,
         creatingPlaylist: false,
     }
     componentDidMount() {
@@ -83,15 +97,19 @@ export default class Playlists extends React.Component {
                 this.setState({ playlists: resp.data.result.list })
             }).catch((err) => {
                 console.log(err.message)
+                alert("Deu algo de errado!")
             })
     }
     getPlaylistTracks = () => {
         axios.get(`${urlPlaylist}${this.state.selectPlaylistId}/tracks`, headers)
             .then((resp) => {
                 this.setState({ songsPlaylist: resp.data.result.tracks })
+                this.setState({ renderingPlaylistName: true })
+                const renderName = this.state.selectPlaylistName
+                this.setState({ renderPlaylistName: renderName })
             }).catch((err) => {
                 console.log(err.message)
-                alert("Selecione uma playlist!")
+                alert("Deu algo de errado!")
             })
     }
     createPlaylist = () => {
@@ -101,13 +119,14 @@ export default class Playlists extends React.Component {
         axios.post(urlPlaylist, body, headers)
             .then((resp) => {
                 console.log(resp.data)
-                alert(`Playlist criada com sucesso!`)
-                const createPlaylist = !this.state.addingSong
+                alert(`Playlist ${this.state.inputName} criada com sucesso!`)
+                const createPlaylist = !this.state.creatingPlaylist
                 this.setState({ inputName: '' })
                 this.setState({ creatingPlaylist: createPlaylist })
                 this.getAllPlaylists()
             }).catch((err) => {
-                alert(err.message)
+                console.log(err.message)
+                alert("Deu algo de errado!")
             })
     }
     deletePlaylist = () => {
@@ -118,6 +137,8 @@ export default class Playlists extends React.Component {
                 axios.delete(`${urlPlaylist}${this.state.selectPlaylistId}`, headers)
                     .then((resp) => {
                         alert("Playlist excluída com sucesso!")
+                        this.setState({renderPlaylistName: ''})
+                        this.setState({selectPlaylistId: ''})
                         this.getAllPlaylists()
                     }).catch((err) => {
                         console.log(err.message)
@@ -130,20 +151,23 @@ export default class Playlists extends React.Component {
         this.setState({ inputName: event.target.value })
     }
     onChangeSelect = (event) => {
-        const id = event
-        console.log(id)
-        this.setState({ selectPlaylistId: event.target.value })
+        const [id, name] = event.target.value.split("*")
+
+        this.setState({ selectPlaylistId: id })
+        this.setState({ selectPlaylistName: name })
     }
     onClickCreatingPlaylist = () => {
         const createPlaylist = !this.state.creatingPlaylist
         this.setState({ creatingPlaylist: createPlaylist })
     }
     renderPlaylistName = () => {
-        switch (this.state.selectPlaylistId) {
-            case "":
+        switch (this.state.renderingPlaylistName) {
+            case false:
                 return null
+            case true:
+                return <PlaylistRenderedName>{this.state.renderPlaylistName}</PlaylistRenderedName>
             default:
-                return <h4>{this.state.selectPlaylistName}</h4>
+                return null
         }
     }
     renderCreatePlaylist = () => {
@@ -176,19 +200,19 @@ export default class Playlists extends React.Component {
             .map((playlist) => {
                 return <option
                     key={playlist.name}
-                    value={playlist.id}>
+                    value={`${playlist.id}*${playlist.name}`}>
                     {playlist.name}
                 </option>
             })
         return (
             <SongPlaylistContainer>
                 {this.renderPlaylistName()}
-                {this.renderCreatePlaylist()}
                 <Songs
                     songs={this.state.songsPlaylist}
                     selectPlaylistId={this.state.selectPlaylistId}
                     getPlaylistTracks={this.getPlaylistTracks}
                 />
+                {this.renderCreatePlaylist()}
                 <PlaylistSelector onChange={this.onChangeSelect}>
                     {this.renderSelectEmpty()}
                     {renderPlaylists}

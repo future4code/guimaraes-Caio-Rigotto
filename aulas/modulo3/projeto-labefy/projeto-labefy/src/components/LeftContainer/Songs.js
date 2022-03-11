@@ -17,12 +17,14 @@ const SongContainer = styled.div`
     &:hover{
         background-color: grey;
         border-radius: 10px;
+        border: 1px solid black;
     }
 `
 const ButtonSong = styled.button`
     width: 100%;
     border: transparent;
     background-color: transparent;    
+    height: 5vh;
 `
 const ButtonDeleteSong = styled.button`
     color: red;
@@ -32,11 +34,11 @@ const ButtonDeleteSong = styled.button`
     margin-right: 5px;
 `
 const ButtonAddSong = styled.button`
-    display: block;
     align-self: center;
-    margin-top: 1vh;
+    margin-top: auto;
     margin-bottom: 1vh;
-    padding: 20px;
+    padding-left: 10%;
+    padding-right: 10%;
     border-radius: 10px;
     color: green;
     font-size: large;
@@ -44,18 +46,26 @@ const ButtonAddSong = styled.button`
 const AddSongContainer = styled.div`
     display: flex;
     flex-direction: column;
-    position: absolute;
     align-items: center;
-    justify-content: space-around;
-    height: 30%;
-    width: 40%;
     background-color: grey;
     border: solid black 2px;
-    border-radius: 10px;
+    border-radius: 10px; 
+    position: absolute;
+    padding: 2%;
+    top: 5vh;
+    left: 0; 
+    right: 0; 
+    margin-left: auto; 
+    margin-right: auto; 
+    width: fit-content;
+    height: fit-content;
 `
 const CloseAddSongButton = styled.button`
     color: red;
     border-radius: 10px;
+    position: absolute;
+    right: 0;
+    top: 0;
     background-color: transparent;
     border: 1px lightgrey solid;
     align-self: end;
@@ -69,8 +79,11 @@ export default class Songs extends React.Component {
     state = {
         inputSongName: '',
         inputSongArtist: '',
-        inputSongUrl: '',
-        addingSong: false
+        inputSongUrl: 'http://spoti4.future4.com.br/1.mp3',
+        addingSong: false,
+        selectSongId: '',
+        selectSongName: '',
+        selectSongArtist: '',
     }
     addTrackToPlaylist = () => {
         const body = {
@@ -80,17 +93,29 @@ export default class Songs extends React.Component {
         }
         axios.post(`${urlPlaylist}${this.props.selectPlaylistId}/tracks`, body, headers)
             .then((resp) => {
-                console.log(resp.data)
                 alert(`${this.state.inputSongName} adicionada à playlist!`)
                 const addSong = !this.state.addingSong
                 this.setState({ addingSong: addSong })
                 this.setState({ inputSongName: '' })
                 this.setState({ inputSongArtist: '' })
-                this.setState({ inputSongUrl: '' })
+                this.setState({ inputSongUrl: 'http://spoti4.future4.com.br/1.mp3' })
                 this.props.getPlaylistTracks()
             }).catch((err) => {
-                alert(err.message)
+                console.log(err.message)
+                alert("Deu algo de errado!")
             })
+    }
+    removeTrackFromPlaylist = () => {
+        if (window.confirm("Você deseja escluir esta música?")) {
+            axios.delete(`${urlPlaylist}${this.props.selectPlaylistId}/tracks/${this.state.selectSongId}`, headers)
+                .then((resp) => {
+                    alert("Música excluída com sucesso!")
+                    this.props.getPlaylistTracks()
+                    this.setState({selectPlaylistId: ''})
+                }).catch((err) => {
+                    console.log(err.message)
+                })
+        }
     }
     onClickAddingSong = () => {
         if (this.props.selectPlaylistId === '') {
@@ -99,6 +124,20 @@ export default class Songs extends React.Component {
             const addSong = !this.state.addingSong
             this.setState({ addingSong: addSong })
         }
+    }
+    onMouseEnterDelete = (event) => {
+        this.setState({selectSongId: event.target.value})
+    }
+    onClickDeleteSong = (event) => {
+        this.setState({selectSongId: event.target.value})
+        this.removeTrackFromPlaylist()
+    }
+    onClickSelectSong = (event) => {
+        const [id, name, artist] = event.target.value.split("*")
+
+        this.setState({ selectSongId: id })
+        this.setState({ selectSongName: name })
+        this.setState({ selectSongArtist: artist })
     }
     onChangeInputName = (event) => {
         this.setState({ inputSongName: event.target.value })
@@ -127,7 +166,7 @@ export default class Songs extends React.Component {
                         <input placeholder="Link" onChange={this.onChangeInputUrl}
                             value={this.state.inputSongUrl}
                         ></input>
-                        <button onClick={this.addTrackToPlaylist}>Adicionar música</button>
+                        <button title="Adicionar música" onClick={this.addTrackToPlaylist}>Adicionar música</button>
                     </AddSongContainer>
                 case false:
                     return null
@@ -140,12 +179,20 @@ export default class Songs extends React.Component {
             .sort((a, b) => a.name.localeCompare(b.name))
             .map((song) => {
                 return <SongContainer key={song.id}>
-                    <ButtonSong title="Tocar música">
-                        <p value={song.id}>
-                            {song.name}
-                        </p>
+                    <ButtonSong
+                        title="Selecionar música"
+                        onClick={this.onClickSelectSong}
+                        value={`${song.id}*${song.name}*${song.artist}`}
+                    >
+                        {song.name}
                     </ButtonSong>
-                    <ButtonDeleteSong>X</ButtonDeleteSong>
+                    <ButtonDeleteSong 
+                    title="Deletar música"
+                    value={song.id}
+                    onMouseEnter={this.onMouseEnterDelete}
+                    onClick={this.onClickDeleteSong}
+                    >X
+                    </ButtonDeleteSong>
                 </SongContainer>
             })
         return (

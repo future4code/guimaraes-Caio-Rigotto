@@ -11,7 +11,6 @@ const PlaylistContainer = styled.div`
   border: 2px solid black;
   background-color: lightgrey;
   height: 90vh;
-  width: 80vw;
   margin-left: auto;
   margin-right: auto;
   border-radius: 10px;
