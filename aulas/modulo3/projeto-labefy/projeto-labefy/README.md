@@ -1,7 +1,7 @@
 # Projeto Labefy
 
 ### Experimente: 
-<a href="http://unkempt-club.surge.sh"> Labefy </a>
+<a href="http://superb-leg.surge.sh"> Labefy </a>
 
 ### Desenvolvedor: 
 - Caio Sala Rigotto
