@@ -1,7 +1,7 @@
 # Projeto Labefy
 
 ### Experimente: 
-<a href="http://subdued-eggs.surge.sh"> Labefy </a>
+<a href="http://unkempt-club.surge.sh"> Labefy </a>
 
 ### Desenvolvedor: 
 - Caio Sala Rigotto
@@ -13,7 +13,7 @@
 - [x] Deletamento de playlists
 - [x] Adicionar músicas às playlists
 - [x] Remover músicas da playlist
-- [ ] Selecionar e tocar música
+- [x] Selecionar e tocar música
 
 ### 🛠 Tecnologias
 
