@@ -10,8 +10,9 @@ import Songs from "./Songs";
 const SongPlaylistContainer = styled.div`
   display: flex;
   flex-direction: column;
+  width: 60vw;
 `
-const PlaylistRenderedName = styled.h4`
+const PlaylistRenderedName = styled.h2`
     line-break: auto;
     max-width: fit-content;
     text-align: center;
@@ -22,7 +23,8 @@ const PlaylistSelector = styled.select`
   margin-bottom: 1vh;
   background-color: lightgrey;
   border: 1px solid grey;
-  padding: 5%;
+  padding: 2%;
+  font-size: large;
   &:focus{
       outline: none;
     }
@@ -64,7 +66,7 @@ const PlaylistButtonsContainer = styled.div`
         margin-bottom: 2vh;
 `
 const SelectPlaylistButtons = styled.button`
-    
+    font-size: large;
 `
 const DeletePlaylistButton = styled.button`
     color: red;

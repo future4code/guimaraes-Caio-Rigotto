@@ -1,7 +1,7 @@
 # Projeto Labefy
 
 ### Experimente: 
-<a href="http://valuable-tomatoes.surge.sh"> Labefy </a>
+<a href="http://subdued-eggs.surge.sh"> Labefy </a>
 
 ### Desenvolvedor: 
 - Caio Sala Rigotto

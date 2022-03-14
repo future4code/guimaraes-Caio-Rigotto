@@ -5,7 +5,15 @@ import axios from "axios";
 import { urlPlaylist } from "./LeftContainer";
 import { headers } from "./LeftContainer";
 
+import AudioPlayer from "./AudioPlayer";
+
 const SongSelector = styled.div`
+  /* display: flex;
+  flex-direction: column;
+  border-bottom: 2px solid black;
+  height: 90%; */
+`
+const SongsSelectorContainer = styled.div`
   display: flex;
   flex-direction: column;
   border-bottom: 2px solid black;
@@ -25,6 +33,8 @@ const ButtonSong = styled.button`
     border: transparent;
     background-color: transparent;    
     height: 5vh;
+    font-size: large;
+    margin-bottom: 2vh;
 `
 const ButtonDeleteSong = styled.button`
     color: red;
@@ -36,7 +46,7 @@ const ButtonDeleteSong = styled.button`
 const ButtonAddSong = styled.button`
     align-self: center;
     margin-top: auto;
-    margin-bottom: 1vh;
+    margin-bottom: 2vh;
     padding-left: 10%;
     padding-right: 10%;
     border-radius: 10px;
@@ -84,6 +94,8 @@ export default class Songs extends React.Component {
         selectSongId: '',
         selectSongName: '',
         selectSongArtist: '',
+        selectSongUrl: '',
+        songSelected: false
     }
     addTrackToPlaylist = () => {
         const body = {
@@ -133,11 +145,13 @@ export default class Songs extends React.Component {
         this.removeTrackFromPlaylist()
     }
     onClickSelectSong = (event) => {
-        const [id, name, artist] = event.target.value.split("*")
+        const [id, name, artist, url] = event.target.value.split("*")
 
         this.setState({ selectSongId: id })
         this.setState({ selectSongName: name })
         this.setState({ selectSongArtist: artist })
+        this.setState({ selectSongUrl: url })
+        this.setState({ songSelected: true })
     }
     onChangeInputName = (event) => {
         this.setState({ inputSongName: event.target.value })
@@ -182,7 +196,7 @@ export default class Songs extends React.Component {
                     <ButtonSong
                         title="Selecionar música"
                         onClick={this.onClickSelectSong}
-                        value={`${song.id}*${song.name}*${song.artist}`}
+                        value={`${song.id}*${song.name}*${song.artist}*${song.url}`}
                     >
                         {song.name}
                     </ButtonSong>
@@ -197,9 +211,16 @@ export default class Songs extends React.Component {
             })
         return (
             <SongSelector>
+                <SongsSelectorContainer>
                 {this.renderAddSong()}
                 {renderSongs}
                 <ButtonAddSong title="Adicionar música" onClick={this.onClickAddingSong}>+</ButtonAddSong>
+                </SongsSelectorContainer>
+                <AudioPlayer selectSongName={this.state.selectSongName} 
+                selectSongUrl={this.state.selectSongUrl}
+                selectSongArtist={this.state.selectSongArtist}
+                songSelected={this.state.songSelected}
+                />
             </SongSelector>
         )
     }
