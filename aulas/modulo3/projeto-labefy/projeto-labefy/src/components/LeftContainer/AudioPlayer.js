@@ -1,14 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
 
-const AudioPlayerContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: lightgrey;
-  margin-right: 3vw;
-  border-radius: 10px;
-`
+import { AudioPlayerContainer } from './LeftContainerStyles';
 
 export default class AudioPlayer extends React.Component {
     renderSongNameArtist = () => {

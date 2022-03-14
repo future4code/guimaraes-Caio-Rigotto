@@ -1,89 +1,11 @@
 import React from "react";
-import styled from "styled-components";
 import axios from "axios";
 
 import { urlPlaylist } from "./LeftContainer";
 import { headers } from "./LeftContainer";
+import { AddSongContainer, CloseAddSongButton, SongContainer, ButtonSong, ButtonDeleteSong, SongSelector, SongsSelectorContainer, ButtonAddSong } from "./LeftContainerStyles";
 
 import AudioPlayer from "./AudioPlayer";
-
-const SongSelector = styled.div`
-  /* display: flex;
-  flex-direction: column;
-  border-bottom: 2px solid black;
-  height: 90%; */
-`
-const SongsSelectorContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  border-bottom: 2px solid black;
-  height: 90%;
-`
-const SongContainer = styled.div`
-    display: flex;
-    justify-content: space-between;
-    &:hover{
-        background-color: grey;
-        border-radius: 10px;
-        border: 1px solid black;
-    }
-`
-const ButtonSong = styled.button`
-    width: 100%;
-    border: transparent;
-    background-color: transparent;    
-    height: 5vh;
-    font-size: large;
-    margin-bottom: 2vh;
-`
-const ButtonDeleteSong = styled.button`
-    color: red;
-    border-radius: 10px;
-    height: 50%;
-    align-self: center;
-    margin-right: 5px;
-`
-const ButtonAddSong = styled.button`
-    align-self: center;
-    margin-top: auto;
-    margin-bottom: 2vh;
-    padding-left: 10%;
-    padding-right: 10%;
-    border-radius: 10px;
-    color: green;
-    font-size: large;
-`
-const AddSongContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: grey;
-    border: solid black 2px;
-    border-radius: 10px; 
-    position: absolute;
-    padding: 2%;
-    top: 5vh;
-    left: 0; 
-    right: 0; 
-    margin-left: auto; 
-    margin-right: auto; 
-    width: fit-content;
-    height: fit-content;
-`
-const CloseAddSongButton = styled.button`
-    color: red;
-    border-radius: 10px;
-    position: absolute;
-    right: 0;
-    top: 0;
-    background-color: transparent;
-    border: 1px lightgrey solid;
-    align-self: end;
-    margin-right: 10px;
-    &:hover{
-        background-color: lightgrey;
-    }
-`
 
 export default class Songs extends React.Component {
     state = {
@@ -204,7 +126,7 @@ export default class Songs extends React.Component {
                         value={song.id}
                         onMouseEnter={this.onMouseEnterDelete}
                         onClick={this.onClickDeleteSong}
-                    >X
+                    >Deletar
                     </ButtonDeleteSong>
                 </SongContainer>
             })
@@ -213,7 +135,7 @@ export default class Songs extends React.Component {
                 <SongsSelectorContainer>
                 {this.renderAddSong()}
                 {renderSongs}
-                <ButtonAddSong title="Adicionar música" onClick={this.onClickAddingSong}>+</ButtonAddSong>
+                <ButtonAddSong title="Adicionar música" onClick={this.onClickAddingSong}>Adicionar música</ButtonAddSong>
                 </SongsSelectorContainer>
                 <AudioPlayer selectSongName={this.state.selectSongName} 
                 selectSongUrl={this.state.selectSongUrl}

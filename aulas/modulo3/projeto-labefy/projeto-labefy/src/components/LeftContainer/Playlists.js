@@ -1,82 +1,11 @@
 import React from "react";
-import styled from "styled-components";
 import axios from "axios";
 
 import { urlPlaylist } from "./LeftContainer";
 import { headers } from "./LeftContainer";
+import { PlaylistRenderedName, CreatePlaylistContainer, ClosePlaylistCreatorButton, SongPlaylistContainer, PlaylistSelector, PlaylistButtonsContainer, SelectPlaylistButtons, AddPlaylistButton, DeletePlaylistButton } from "./LeftContainerStyles";
 
 import Songs from "./Songs"; 
-
-const SongPlaylistContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 60vw;
-`
-const PlaylistRenderedName = styled.h2`
-    line-break: auto;
-    max-width: fit-content;
-    text-align: center;
-    align-self: center;
-`
-const PlaylistSelector = styled.select`
-  margin-top: auto;
-  margin-bottom: 1vh;
-  background-color: lightgrey;
-  border: 1px solid grey;
-  padding: 2%;
-  font-size: large;
-  &:focus{
-      outline: none;
-    }
-`
-const CreatePlaylistContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: grey;
-    border: solid black 2px;
-    border-radius: 10px; 
-    position: absolute;
-    padding: 2%;
-    top: 5vh;
-    left: 0; 
-    right: 0; 
-    margin-left: auto; 
-    margin-right: auto; 
-    width: fit-content;
-    height: fit-content;
-`
-const ClosePlaylistCreatorButton = styled.button`
-    color: red;
-    border-radius: 10px;
-    position: absolute;
-    right: 0;
-    top: 0;
-    background-color: transparent;
-    border: 1px lightgrey solid;
-    align-self: end;
-    margin-right: 10px;
-    &:hover{
-        background-color: lightgrey;
-    }
-`
-const PlaylistButtonsContainer = styled.div`
-        display: flex;
-        justify-content: space-around;
-        margin-bottom: 2vh;
-`
-const SelectPlaylistButtons = styled.button`
-    font-size: large;
-`
-const DeletePlaylistButton = styled.button`
-    color: red;
-    border-radius: 10px;
-`
-const AddPlaylistButton = styled.button`
-    border-radius: 10px;
-    color: green;
-    font-size: large;
-`
 
 export default class Playlists extends React.Component {
     state = {
@@ -216,8 +145,8 @@ export default class Playlists extends React.Component {
                 </PlaylistSelector>
                 <PlaylistButtonsContainer>
                     <SelectPlaylistButtons title="Selecionar playlist" onClick={this.getPlaylistTracks}>Selecionar playlist</SelectPlaylistButtons>
-                    <AddPlaylistButton title="Adicionar playlist" onClick={this.onClickCreatingPlaylist}>+</AddPlaylistButton>
-                    <DeletePlaylistButton title="Deletar playlist" onClick={this.deletePlaylist}>X</DeletePlaylistButton>
+                    <AddPlaylistButton title="Adicionar playlist" onClick={this.onClickCreatingPlaylist}>Criar playlist</AddPlaylistButton>
+                    <DeletePlaylistButton title="Deletar playlist" onClick={this.deletePlaylist}>Excluir playlist</DeletePlaylistButton>
                 </PlaylistButtonsContainer>
             </SongPlaylistContainer>
         )
