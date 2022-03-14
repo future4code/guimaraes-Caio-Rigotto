@@ -98,8 +98,7 @@ export default class Playlists extends React.Component {
             .then((resp) => {
                 this.setState({ playlists: resp.data.result.list })
             }).catch((err) => {
-                console.log(err.message)
-                alert("Deu algo de errado!")
+                alert(`Deu algo de errado! ${err.message}`)
             })
     }
     getPlaylistTracks = () => {
@@ -110,8 +109,7 @@ export default class Playlists extends React.Component {
                 const renderName = this.state.selectPlaylistName
                 this.setState({ renderPlaylistName: renderName })
             }).catch((err) => {
-                console.log(err.message)
-                alert("Deu algo de errado!")
+                alert(`Deu algo de errado! ${err.message}`)
             })
     }
     createPlaylist = () => {
@@ -120,15 +118,13 @@ export default class Playlists extends React.Component {
         }
         axios.post(urlPlaylist, body, headers)
             .then((resp) => {
-                console.log(resp.data)
                 alert(`Playlist ${this.state.inputName} criada com sucesso!`)
                 const createPlaylist = !this.state.creatingPlaylist
                 this.setState({ inputName: '' })
                 this.setState({ creatingPlaylist: createPlaylist })
                 this.getAllPlaylists()
             }).catch((err) => {
-                console.log(err.message)
-                alert("Deu algo de errado!")
+                alert(`Deu algo de errado! ${err.message}`)
             })
     }
     deletePlaylist = () => {
@@ -143,8 +139,7 @@ export default class Playlists extends React.Component {
                         this.setState({selectPlaylistId: ''})
                         this.getAllPlaylists()
                     }).catch((err) => {
-                        console.log(err.message)
-                        alert("Deu algo de errado!")
+                        alert(`Deu algo de errado! ${err.message}`)
                     })
             }
         }

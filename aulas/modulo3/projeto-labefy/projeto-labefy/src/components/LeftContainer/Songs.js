@@ -113,8 +113,7 @@ export default class Songs extends React.Component {
                 this.setState({ inputSongUrl: 'http://spoti4.future4.com.br/1.mp3' })
                 this.props.getPlaylistTracks()
             }).catch((err) => {
-                console.log(err.message)
-                alert("Deu algo de errado!")
+                alert(`Deu algo de errado! ${err.message}`)
             })
     }
     removeTrackFromPlaylist = () => {
@@ -125,7 +124,7 @@ export default class Songs extends React.Component {
                     this.props.getPlaylistTracks()
                     this.setState({ selectPlaylistId: '' })
                 }).catch((err) => {
-                    console.log(err.message)
+                    alert(`Deu algo de errado! ${err.message}`)
                 })
         }
     }
