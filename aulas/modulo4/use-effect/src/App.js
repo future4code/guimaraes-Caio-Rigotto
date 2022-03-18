@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { MainContainer } from "./styles";
+import { MainContainer, PkmOption, PkmSelect } from "./styles";
 import axios from "axios";
 import PokeCard from "./components/PokeCard/PokeCard";
 
@@ -28,16 +28,17 @@ function App () {
 
   return (
     <MainContainer>
-      <select onChange={changePokeName}>
+      <h2>Selecione um Pokemon:</h2>
+      <PkmSelect onChange={changePokeName}>
         <option value={""}>Nenhum</option>
         {pokeList.map(pokemon => {
           return (
-            <option key={pokemon.name} value={pokemon.name}>
+            <PkmOption key={pokemon.name} value={pokemon.name}>
               {pokemon.name}
-            </option>
+            </PkmOption>
           );
         })}
-      </select>
+      </PkmSelect>
       {pokeName && <PokeCard pokemon={pokeName} />}
     </MainContainer>
   );
