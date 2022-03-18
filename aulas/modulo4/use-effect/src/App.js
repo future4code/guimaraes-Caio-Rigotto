@@ -3,7 +3,7 @@ import { MainContainer } from "./styles";
 import axios from "axios";
 import PokeCard from "./components/PokeCard/PokeCard";
 
-function App (props) {
+function App () {
   const [pokeList, setPokeList] = useState([])
   const [pokeName, setPokeName] = useState("")
   
