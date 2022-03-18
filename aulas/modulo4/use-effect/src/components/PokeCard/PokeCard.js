@@ -4,11 +4,11 @@ import axios from "axios";
 function PokeCard(props) {
     const [pokemon, setPokemon] = useState({})
 
-    useEffect = ((prevProps) => {
+    useEffect((prevProps) => {
         pegaPokemon(props.pokemon);
-        if (prevProps.pokemon !== props.pokemon) {
-            pegaPokemon(props.pokemon);
-        }
+        // if (prevProps.pokemon !== props.pokemon) {
+        //     pegaPokemon(props.pokemon);
+        // }
     },[pokemon])
 
     const pegaPokemon = (pokeName) => {

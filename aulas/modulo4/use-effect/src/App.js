@@ -7,23 +7,21 @@ function App (props) {
   const [pokeList, setPokeList] = useState([])
   const [pokeName, setPokeName] = useState("")
   
-  useEffect = (() => {
+  useEffect(() => {
     getPokemon()
   },[])
   
   const getPokemon = () => {
-    console.log("getting pkm")
-    // axios
-    //   .get("https://pokeapi.co/api/v2/pokemon/?limit=151")
-    //   .then(response => {
-    //     setPokeList(response.data.results);
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
+    axios
+      .get("https://pokeapi.co/api/v2/pokemon/?limit=151")
+      .then(response => {
+        setPokeList(response.data.results);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
   
-
   function changePokeName (event) {
     setPokeName(event.target.value)
   };
