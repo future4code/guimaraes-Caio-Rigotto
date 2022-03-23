@@ -5,3 +5,13 @@ export const CardsContainer = styled.div`
     display: flex;
     flex-direction: column;
 `
+export const NamePerson = styled.h2`
+    color: white;
+    -webkit-text-stroke-width: 0.5px;
+    -webkit-text-stroke-color: black;
+`
+export const BioPerson = styled.h3`
+    color: white;
+    -webkit-text-stroke-width: 0.5px;
+    -webkit-text-stroke-color: black;
+`

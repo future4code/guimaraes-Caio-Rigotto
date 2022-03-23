@@ -4,7 +4,7 @@ import styled from "styled-components"
 
 import { apiUrl, student } from "../../App"
 
-import { CardsContainer } from "./styles"
+import { BioPerson, CardsContainer, NamePerson } from "./styles"
 
 const Card = styled.div`
     background-image: url(${props => props.url});
@@ -18,7 +18,8 @@ const Card = styled.div`
     margin-left: auto;
     margin-right: auto;
     margin-top: 5vh;
-    display: block;
+    display: flex;
+    flex-direction: column-reverse;
 `
 
 export default function Cards (){
@@ -52,11 +53,11 @@ export default function Cards (){
     return(
         <CardsContainer>
             <Card url={personPhoto}>
-            <h2>{personName}, {personAge}</h2>
-            <h4>{personBio}</h4>
-            <button onClick={getProfile}>pegar</button>
+            <BioPerson>{personBio}</BioPerson>
+            <NamePerson>{personName}, {personAge}</NamePerson>
             </Card>
             <div>
+            <button onClick={getProfile}>att</button>
             <button>X</button>
             </div>
         </CardsContainer>
