@@ -2,6 +2,9 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 import styled from "styled-components"
 
+import HeartPic from "./img/heart.svg"
+import RefusePic from "./img/refuse.svg"
+
 import { apiUrl, student } from "../../App"
 
 import { BioPerson, CardsContainer, NamePerson } from "./styles"
@@ -58,7 +61,7 @@ export default function Cards (){
             </Card>
             <div>
             <button onClick={getProfile}>att</button>
-            <button>X</button>
+            {/* <img src={RefusePic}></img> */}
             </div>
         </CardsContainer>
     )
