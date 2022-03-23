@@ -1,16 +1,19 @@
-import styled from "styled-components";
+import { AppContainer, Main } from "./styles";
+import Matches from "./pages/matches/matches";
+import Cards from "./pages/cards/cards";
 
-const AppContainer = styled.div`
-  background-color: lightgray;
-  height: 100vh;
-`
+export const apiUrl = "https://us-central1-missao-newton.cloudfunctions.net/astroMatch/"
+export const student = "caio-guimaraes/"
 
-function App() {
+export default function App() {
   return (
-    <AppContainer>
-      
-    </AppContainer>
+    <Main>
+      <AppContainer>
+        <Matches>
+        </Matches>
+        <Cards>
+        </Cards>
+      </AppContainer>
+    </Main>
   );
 }
-
-export default App;
