@@ -7,20 +7,20 @@ import RefusePic from "./img/refuse.svg"
 
 import { apiUrl, student } from "../../App"
 
-import { BioPerson, CardsContainer, NamePerson } from "./styles"
+import { BioPerson, CardsButtonRefuse, CardsButtonHeart, CardsButtonsContainer, CardsContainer, NamePerson } from "./styles"
 
 const Card = styled.div`
     background-image: url(${props => props.url});
     background-repeat: no-repeat;
     background-size: 100% 100%;
     border: 1px black solid;
-    border-radius: 10px;
+    border-radius: 5px;
     max-height: 60%;
-    height: 50vh;
+    height: 57vh;
     width: 96%;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 5vh;
+    margin-top: 2vh;
     display: flex;
     flex-direction: column-reverse;
 `
@@ -36,6 +36,7 @@ export default function Cards (){
     useEffect(() =>{
     getProfile()
     }, [])
+
     const getProfile = () => {
         axios
         .get(`${apiUrl}${student}person`)
@@ -46,11 +47,32 @@ export default function Cards (){
             setPersonId(res.data.profile.id)
             setPersonName(res.data.profile.name)
             setPersonPhoto(res.data.profile.photo)
+            console.log(personId)
         })
         .catch(err => {
-            console.log("deu bom não")
-            console.log(err.message)
+            alert("Ocorreu algo de errado com sua requisição!")
         })
+    }
+    const choosePerson = (id) =>{
+        const body = {
+            "id": id,
+            "choice": true
+        }
+        axios
+        .post(`${apiUrl}${student}choose-person`, body)
+        .then(res => {
+            console.log(res.data)
+            getProfile()
+        })
+        .catch(err => {
+            alert("Ocorreu algo de errado com sua requisição!")
+        })
+    }
+    const onClickRefuse = () =>{
+        getProfile()
+    }
+    const onClickHeart = () => {
+        choosePerson(personId)
     }
 
     return(
@@ -59,10 +81,11 @@ export default function Cards (){
             <BioPerson>{personBio}</BioPerson>
             <NamePerson>{personName}, {personAge}</NamePerson>
             </Card>
-            <div>
+            <CardsButtonsContainer>
+            <CardsButtonRefuse onClick={onClickRefuse}><img src={RefusePic}></img></CardsButtonRefuse>
+            <CardsButtonHeart onClick={onClickHeart}><img src={HeartPic}></img></CardsButtonHeart>
+            </CardsButtonsContainer>
             <button onClick={getProfile}>att</button>
-            {/* <img src={RefusePic}></img> */}
-            </div>
         </CardsContainer>
     )
 }

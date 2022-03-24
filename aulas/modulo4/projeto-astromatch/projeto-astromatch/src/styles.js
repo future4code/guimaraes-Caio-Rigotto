@@ -6,7 +6,7 @@ export const AppContainer = styled.div`
     border-radius: 10px;
     align-items: center;
     height: 80vh;
-    width: 35vw;
+    width: 30vw;
     transform: translate(-50%, -50%);
     top: 50%;
     left: 50%;
