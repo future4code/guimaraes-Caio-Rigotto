@@ -7,23 +7,7 @@ import RefusePic from "./img/refuse.svg"
 
 import { apiUrl, student } from "../../App"
 
-import { BioPerson, CardsButtonRefuse, CardsButtonHeart, CardsButtonsContainer, CardsContainer, NamePerson } from "./styles"
-
-const Card = styled.div`
-    background-image: url(${props => props.url});
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    border: 1px black solid;
-    border-radius: 5px;
-    max-height: 60%;
-    height: 57vh;
-    width: 96%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 2vh;
-    display: flex;
-    flex-direction: column-reverse;
-`
+import { Card, BioPerson, CardsButtonRefuse, CardsButtonHeart, CardsButtonsContainer, CardsContainer, NamePerson } from "./styles"
 
 export default function Cards (){
     const [person, setPerson] = useState({})
@@ -47,7 +31,6 @@ export default function Cards (){
             setPersonId(res.data.profile.id)
             setPersonName(res.data.profile.name)
             setPersonPhoto(res.data.profile.photo)
-            console.log(personId)
         })
         .catch(err => {
             alert("Ocorreu algo de errado com sua requisição!")
@@ -61,7 +44,6 @@ export default function Cards (){
         axios
         .post(`${apiUrl}${student}choose-person`, body)
         .then(res => {
-            console.log(res.data)
             getProfile()
         })
         .catch(err => {

@@ -7,7 +7,6 @@ export const MatchesMainContainer = styled.div`
 export const MatchesContainer = styled.div`
     display: flex;
     border-bottom: 1px solid grey;
-    
 `
 export const AppName = styled.h2`
     color: red;

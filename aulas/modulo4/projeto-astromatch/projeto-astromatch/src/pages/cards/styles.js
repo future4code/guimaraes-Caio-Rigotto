@@ -39,3 +39,18 @@ export const CardsButtonHeart = styled.button`
         background-color: lightgray;
     }
 `
+export const Card = styled.div`
+    background-image: url(${props => props.url});
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    border: 1px black solid;
+    border-radius: 5px;
+    max-height: 60%;
+    height: 57vh;
+    width: 96%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2vh;
+    display: flex;
+    flex-direction: column-reverse;
+`
