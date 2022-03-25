@@ -1,5 +1,21 @@
 import styled from "styled-components"
 
+export const Card = styled.div`
+    background-image: url(${props => props.url});
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    border: 1px black solid;
+    border-radius: 5px;
+    max-height: 60%;
+    height: 57vh;
+    width: 96%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2vh;
+    display: flex;
+    flex-direction: column-reverse;
+`
+
 export const CardsContainer = styled.div`
     width: 100%;
     display: flex;
@@ -20,6 +36,7 @@ export const CardsButtonsContainer = styled.div`
     display: flex;
     justify-content: space-around;
     margin: 10px;
+    margin-top: 20px;
 `
 export const CardsButtonRefuse = styled.button`
     background-color: transparent;
@@ -38,19 +55,4 @@ export const CardsButtonHeart = styled.button`
     &:hover{
         background-color: lightgray;
     }
-`
-export const Card = styled.div`
-    background-image: url(${props => props.url});
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    border: 1px black solid;
-    border-radius: 5px;
-    max-height: 60%;
-    height: 57vh;
-    width: 96%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 2vh;
-    display: flex;
-    flex-direction: column-reverse;
 `
