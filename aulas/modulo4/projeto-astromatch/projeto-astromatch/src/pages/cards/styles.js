@@ -15,7 +15,6 @@ export const Card = styled.div`
     display: flex;
     flex-direction: column-reverse;
 `
-
 export const CardsContainer = styled.div`
     width: 100%;
     display: flex;
@@ -33,7 +32,6 @@ export const BioPerson = styled.h3`
     -webkit-text-stroke-width: 0.7px;
     -webkit-text-stroke-color: black;
 `
-
 export const CardsButtonsContainer = styled.div`
     display: flex;
     justify-content: space-around;
@@ -57,4 +55,50 @@ export const CardsButtonHeart = styled.button`
     &:hover{
         background-color: lightgray;
     }
+`
+export const LoadingScreen = styled.img`
+    border: 1px black solid;
+    border-radius: 5px;
+    max-height: 60%;
+    height: 57vh;
+    width: 96%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2vh;
+`
+export const MatchSuccessContainer = styled.div`
+    width: 50vw;
+    height: 20vh;
+    position: absolute;
+    background-color: grey;
+    border: 1px solid black;
+    display: flex;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+`
+export const MatchSucessIMG = styled.img`
+    width: 100%;
+    height: 100%;
+    max-width: 30%;
+    max-height: 100%;
+    border-right: 1px solid black;
+    border-radius: 10px;
+`
+export const MatchSuccessText = styled.h2`
+    color: white;
+    text-align: center;
+`
+export const MatchSuccessCloseText = styled.p`
+    color: white;
+    text-align: center;
+    font-size: 15px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+`
+export const MatchSuccessTextContainer = styled.div`
+    display: flex;
+    flex-direction: column;
 `

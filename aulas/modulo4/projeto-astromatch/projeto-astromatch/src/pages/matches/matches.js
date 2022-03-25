@@ -63,7 +63,7 @@ export default function Matches() {
         <MatchesMainContainer>
             <MatchesContainer>
                 <AppName>
-                    AstroMatch
+                    astromatch
                 </AppName>
                 <MatchesButton onClick={onClickShowMatches}>
                     <img src={MatchesPic} alt="ícone perfis de matches"></img>

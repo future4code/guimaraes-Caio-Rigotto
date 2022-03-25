@@ -3,71 +3,102 @@ import axios from "axios"
 
 import HeartPic from "./img/heart.svg"
 import RefusePic from "./img/refuse.svg"
+import Loading from "./img/beating-heart.webp"
 
 import { apiUrl, student } from "../../App"
 
-import { Card, BioPerson, CardsButtonRefuse, CardsButtonHeart, CardsButtonsContainer, CardsContainer, NamePerson } from "./styles"
+import { Card, BioPerson, MatchSuccessContainer, CardsButtonRefuse, CardsButtonHeart, CardsButtonsContainer, CardsContainer, NamePerson, LoadingScreen, MatchSucessIMG, MatchSuccessText, MatchSuccessCloseText, MatchSuccessTextContainer } from "./styles"
 
-export default function Cards (){
+export default function Cards() {
     const [personAge, setPersonAge] = useState("")
     const [personBio, setPersonBio] = useState("")
     const [personId, setPersonId] = useState("")
     const [personName, setPersonName] = useState("")
     const [personPhoto, setPersonPhoto] = useState("")
+    const [match, setMatch] = useState(false)
+    const [matchSuccesName, setSuccessName] = useState("")
+    const [matchSuccessPhoto, setSuccessPhoto] = useState("")
+    const [loading, setLoading] = useState(false)
 
-    useEffect(() =>{
-    getProfile()
+    useEffect(() => {
+        getProfile()
     }, [])
 
-    const getProfile = () => {
-        axios
-        .get(`${apiUrl}${student}person`)
-        .then(res =>{
-            setPersonAge(res.data.profile.age)
-            setPersonBio(res.data.profile.bio)
-            setPersonId(res.data.profile.id)
-            setPersonName(res.data.profile.name)
-            setPersonPhoto(res.data.profile.photo)
-        })
-        .catch(err => {
-            console.log(err.message)
+    const getProfile = async () => {
+        try {
+            await axios
+                .get(`${apiUrl}${student}person`)
+                .then(res => {
+                    setPersonAge(res.data.profile.age)
+                    setPersonBio(res.data.profile.bio)
+                    setPersonId(res.data.profile.id)
+                    setPersonName(res.data.profile.name)
+                    setPersonPhoto(res.data.profile.photo)
+                });
+            setLoading(true);
+        } catch (err) {
             alert("Ocorreu algo de errado com sua requisição!")
-        })
+        }
     }
-    const choosePerson = (id) =>{
+    const choosePerson = (id) => {
         const body = {
             "id": id,
             "choice": true
         }
         axios
-        .post(`${apiUrl}${student}choose-person`, body)
-        .then(res => {
-            switch(res.data.isMatch){
-                case true:
-                    alert(`Você deu um match com ${personName}!`)
-            }
-            getProfile()
-        })
-        .catch(err => {
-            alert("Ocorreu algo de errado com sua requisição!")
-        })
+            .post(`${apiUrl}${student}choose-person`, body)
+            .then(res => {
+                setMatch(res.data.isMatch)
+                switch (res.data.isMatch) {
+                    case true:
+                        setSuccessName(personName)
+                        setSuccessPhoto(personPhoto)
+                }
+                getProfile()
+            })
+            .catch(err => {
+                alert("Ocorreu algo de errado com sua requisição!")
+            })
     }
-    const onClickRefuse = () =>{
+    const onClickRefuse = () => {
         getProfile()
     }
     const onClickHeart = () => {
         choosePerson(personId)
     }
+    const onClickMatchSuccess = () => {
+        setMatch(false)
+    }
+    const renderMatchSucess = () => {
+        switch (match) {
+            case true:
+                return <MatchSuccessContainer onClick={onClickMatchSuccess}>
+                    <MatchSucessIMG src={matchSuccessPhoto}></MatchSucessIMG>
+                    <MatchSuccessTextContainer>
+                    <MatchSuccessText>Você deu um match com {matchSuccesName}!</MatchSuccessText>
+                    <MatchSuccessCloseText>(clique para fechar)</MatchSuccessCloseText>
+                    </MatchSuccessTextContainer>
+                </MatchSuccessContainer>
+            case false:
+                return null
+            default:
+                return null
+        }
+    }
 
-    return(
+    return (
         <CardsContainer>
-            <Card url={personPhoto}>
-            <BioPerson>{personBio}</BioPerson>
-            <NamePerson>{personName}, {personAge}</NamePerson>
+            {loading ? <Card url={personPhoto}>
+                <BioPerson>{personBio}</BioPerson>
+                <NamePerson>{personName}, {personAge}</NamePerson>
             </Card>
+                :
+                <LoadingScreen src={Loading}></LoadingScreen>
+            }
+            {renderMatchSucess()}
             <CardsButtonsContainer>
-            <CardsButtonRefuse onClick={onClickRefuse}><img src={RefusePic}></img></CardsButtonRefuse>
-            <CardsButtonHeart onClick={onClickHeart}><img src={HeartPic}></img></CardsButtonHeart>
+                <CardsButtonRefuse onClick={onClickRefuse}><img src={RefusePic}></img></CardsButtonRefuse>
+                <CardsButtonHeart onClick={onClickHeart}><img src={HeartPic}></img></CardsButtonHeart>
             </CardsButtonsContainer>
         </CardsContainer>
     )

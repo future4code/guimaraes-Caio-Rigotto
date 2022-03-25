@@ -9,9 +9,10 @@ export const MatchesContainer = styled.div`
     display: flex;
     border-bottom: 1px solid grey;
 `
-export const AppName = styled.h2`
+export const AppName = styled.h1`
     color: red;
     margin-left: auto;
+    font-size: 20px;
 `
 export const MatchesButton = styled.button`
     margin-left: auto;
@@ -23,8 +24,8 @@ export const MatchesButton = styled.button`
     }
 `
 export const MatchIMG = styled.img`
-    width: 40px;
-    max-height: 40px;
+    width: 30px;
+    max-height: 30px;
     border-radius: 30px;
     margin-left: 10px;
 `
