@@ -69,7 +69,6 @@ export default function Cards (){
             <CardsButtonRefuse onClick={onClickRefuse}><img src={RefusePic}></img></CardsButtonRefuse>
             <CardsButtonHeart onClick={onClickHeart}><img src={HeartPic}></img></CardsButtonHeart>
             </CardsButtonsContainer>
-            {/* <button onClick={getProfile}>att</button> */}
         </CardsContainer>
     )
 }
