@@ -34,6 +34,10 @@ export const MatchName = styled.p`
 export const ShowMatchesContainer = styled.div`
     display: flex;
     align-items: center;
+    border-radius: 10px;
+    &:hover{
+        background-color: lightgrey;
+    }
 `
 export const ResetMatchesButton = styled.button`
     position: absolute;

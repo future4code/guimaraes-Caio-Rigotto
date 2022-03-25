@@ -30,6 +30,7 @@ export default function Cards (){
             setPersonPhoto(res.data.profile.photo)
         })
         .catch(err => {
+            console.log(err.message)
             alert("Ocorreu algo de errado com sua requisição!")
         })
     }
@@ -41,6 +42,10 @@ export default function Cards (){
         axios
         .post(`${apiUrl}${student}choose-person`, body)
         .then(res => {
+            switch(res.data.isMatch){
+                case true:
+                    alert(`Você deu um match com ${personName}!`)
+            }
             getProfile()
         })
         .catch(err => {

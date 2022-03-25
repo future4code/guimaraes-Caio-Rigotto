@@ -23,11 +23,13 @@ export const CardsContainer = styled.div`
 `
 export const NamePerson = styled.h2`
     color: white;
+    margin: 5px;
     -webkit-text-stroke-width: 0.5px;
     -webkit-text-stroke-color: black;
 `
 export const BioPerson = styled.h3`
     color: white;
+    margin: 5px;
     -webkit-text-stroke-width: 0.7px;
     -webkit-text-stroke-color: black;
 `
