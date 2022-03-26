@@ -75,7 +75,7 @@ export default function Cards() {
                 return <MatchSuccessContainer onClick={onClickMatchSuccess}>
                     <MatchSucessIMG src={matchSuccessPhoto}></MatchSucessIMG>
                     <MatchSuccessTextContainer>
-                    <MatchSuccessText>Você deu um match com {matchSuccesName}!</MatchSuccessText>
+                    <MatchSuccessText>Você deu match com {matchSuccesName}!</MatchSuccessText>
                     <MatchSuccessCloseText>(clique para fechar)</MatchSuccessCloseText>
                     </MatchSuccessTextContainer>
                 </MatchSuccessContainer>

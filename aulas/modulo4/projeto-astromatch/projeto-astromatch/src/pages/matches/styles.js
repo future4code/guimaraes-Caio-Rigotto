@@ -11,6 +11,7 @@ export const MatchesContainer = styled.div`
 `
 export const AppName = styled.h1`
     color: red;
+    font-family: 'Anton', sans-serif;
     margin-left: auto;
     font-size: 20px;
 `

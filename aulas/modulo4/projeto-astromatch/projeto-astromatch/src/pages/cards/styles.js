@@ -11,7 +11,7 @@ export const Card = styled.div`
     width: 96%;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 2vh;
+    margin-top: 1vh;
     display: flex;
     flex-direction: column-reverse;
 `
@@ -68,9 +68,9 @@ export const LoadingScreen = styled.img`
 `
 export const MatchSuccessContainer = styled.div`
     width: 50vw;
-    height: 20vh;
+    height: 25vh;
     position: absolute;
-    background-color: grey;
+    background-color: white;
     border: 1px solid black;
     display: flex;
     left: 50%;
@@ -82,17 +82,16 @@ export const MatchSucessIMG = styled.img`
     width: 100%;
     height: 100%;
     max-width: 30%;
-    max-height: 100%;
+    min-height: 100%;
     border-right: 1px solid black;
     border-radius: 10px;
 `
 export const MatchSuccessText = styled.h2`
-    color: white;
-    text-align: center;
+    color: black;
+    margin-left: 15px;
 `
 export const MatchSuccessCloseText = styled.p`
-    color: white;
-    text-align: center;
+    color: black;
     font-size: 15px;
     position: absolute;
     bottom: 0;
@@ -101,4 +100,5 @@ export const MatchSuccessCloseText = styled.p`
 export const MatchSuccessTextContainer = styled.div`
     display: flex;
     flex-direction: column;
+    text-align: center;
 `

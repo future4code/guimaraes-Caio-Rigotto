@@ -69,8 +69,8 @@ export default function Matches() {
                     <img src={MatchesPic} alt="ícone perfis de matches"></img>
                 </MatchesButton>
             </MatchesContainer>
-            <ResetMatchesButton onClick={onClickResetMatches}>Limpar matches/swipes</ResetMatchesButton>
             {renderMatchs}
+            <ResetMatchesButton onClick={onClickResetMatches}>Limpar matches/swipes</ResetMatchesButton>
         </MatchesMainContainer>
     )
 }
