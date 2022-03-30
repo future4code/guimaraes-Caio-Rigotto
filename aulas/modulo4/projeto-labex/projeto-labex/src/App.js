@@ -1,10 +1,13 @@
+import HomePage from "./pages/home/HomePage";
+import { MainAppContainer } from "./styles";
 
 
 function App() {
   return (
-    <div>
-     
-    </div>
+    <MainAppContainer>
+     <HomePage>
+     </HomePage>
+    </MainAppContainer>
   );
 }
 
