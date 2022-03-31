@@ -33,7 +33,8 @@ export default function ListTripsPage(props) {
     return (
         <div>
             <button onClick={props.onClickReturnHome}>Voltar</button>
-            <button>TRIPS</button>
+            <button>Escolher viagem</button>
+            <h2>Viagens</h2>
             {renderTrips}
         </div>
     )
