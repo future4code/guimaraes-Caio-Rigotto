@@ -1,6 +1,9 @@
 export default function RenderCountriesList(props) {
    return (
-      <select onChange={props.handleUserInput} name='countrySelect'>
+      <select 
+      onChange={props.handleUserInput} 
+      value={props.value}
+      name='countrySelect'>
          <option value="Afganistan">Afghanistan</option>
          <option value="Albania">Albania</option>
          <option value="Algeria">Algeria</option>

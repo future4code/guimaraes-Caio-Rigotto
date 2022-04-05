@@ -1,35 +1,63 @@
+import axios from "axios"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { apiUrl, student } from "../../../App"
+import useVerifyAuth from "../../../components/useVerifyAuth/useVerifyAuth"
 
-export default function LoginPage (){
-    const [ userEmail , setUserEmail ] = useState('')
-    const [ userPassword, setUserPassword ] = useState('')
-
+export default function LoginPage() {
     const navigate = useNavigate()
-    const goBackPage = () =>{
+    const goBackPage = () => {
         navigate(-1)
     }
-    const goToAdminHomePage = () =>{
+
+    const [form, setForm] = useState({
+        email: '',
+        password: ''
+    })
+
+    const goToAdminHomePage = () => {
         navigate('/admin/trips/list')
     }
-    const userEmailHandler = (e) => {
-        setUserEmail(e.target.value)
+    const handleUserInput = (e) => {
+        const value = e.target.value
+
+        setForm({
+            ...form,
+            [e.target.name]: value
+        })
     }
-    const userPasswordHandler = (e) =>{
-        setUserPassword(e.target.value)
+    const login = () => {
+        const body = {
+            "email": form.email,
+            "password": form.password
+        }
+        axios
+        .post(`${apiUrl}${student}login`, body)
+        .then(res =>{
+            window.localStorage.setItem("token", res.data.token)
+            console.log(res.data.token)
+            goToAdminHomePage()
+        })
+        .catch(err=> {
+            console.log(err.message)
+        })
     }
-    
-    return(
+
+    return (
         <div>
             <button onClick={goBackPage}>Voltar</button>
             <h2>Login</h2>
-            <input placeholder="E-mail" 
-            onChange={userEmailHandler}
-            value={userEmail}></input>
-            <input placeholder="Senha" 
-            onChange={userPasswordHandler}
-            value={userPassword}></input>
-            <button onClick={goToAdminHomePage}>Entrar</button>
+            <input placeholder="E-mail"
+                onChange={handleUserInput}
+                name='email'
+                type='email'
+                value={form.email}></input>
+            <input placeholder="Senha"
+                onChange={handleUserInput}
+                name='password'
+                type='password'
+                value={form.password}></input>
+            <button onClick={login}>Entrar</button>
         </div>
     )
 }
