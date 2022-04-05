@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom"
-import useGetTrips from "../../../components/useGetTrips/useGetTrips"
+import useGetTrips from '../../../components/useGetTrips/useGetTrips'
 import useVerifyAuth from "../../../components/useVerifyAuth/useVerifyAuth"
 
 export default function AdminHomePage() {
     const navigate = useNavigate()
-    useVerifyAuth(localStorage.getItem('token'), navigate)
+    useVerifyAuth()
 
     const goBackPage = () => {
         navigate(-1)

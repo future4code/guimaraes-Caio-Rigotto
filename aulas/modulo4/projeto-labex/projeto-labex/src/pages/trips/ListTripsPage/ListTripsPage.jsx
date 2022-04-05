@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import useGetTrips from "../../../components/useGetTrips/useGetTrips"
 
-export default function ListTripsPage(props) {
+export default function ListTripsPage() {
     const navigate = useNavigate()
     const goBackPage = () =>{
         navigate(-1)

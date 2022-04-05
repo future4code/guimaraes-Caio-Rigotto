@@ -12,7 +12,7 @@ const TripDetailsPage = () => {
     const goBackPage = () => {
         navigate(-1)
     }
-    useVerifyAuth(localStorage.getItem('token'), navigate)
+    useVerifyAuth()
 
     const [tripDetails, setTripDetails] = useState({})
     const [ candidateDetails , setCandidateDetails ] = useState([])

@@ -2,7 +2,6 @@ import axios from "axios"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { apiUrl, student } from "../../../App"
-import useVerifyAuth from "../../../components/useVerifyAuth/useVerifyAuth"
 
 export default function LoginPage() {
     const navigate = useNavigate()
