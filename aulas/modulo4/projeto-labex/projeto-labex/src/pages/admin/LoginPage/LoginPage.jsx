@@ -1,13 +1,22 @@
 import axios from "axios"
+import { useEffect } from "react"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { apiUrl, student } from "../../../App"
 
-export default function LoginPage() {
+const LoginPage = ()=> {
     const navigate = useNavigate()
     const goBackPage = () => {
         navigate(-1)
     }
+    useEffect(() => {
+        const token = window.localStorage.getItem('token')
+
+        if(token !== null){
+            navigate('/admin/trips/list')
+        }
+    }, [])
+    
 
     const [form, setForm] = useState({
         email: '',
@@ -31,14 +40,14 @@ export default function LoginPage() {
             "password": form.password
         }
         axios
-        .post(`${apiUrl}${student}login`, body)
-        .then(res =>{
-            window.localStorage.setItem("token", res.data.token)
-            goToAdminHomePage()
-        })
-        .catch(err=> {
-            console.log(err.message)
-        })
+            .post(`${apiUrl}${student}login`, body)
+            .then(res => {
+                window.localStorage.setItem("token", res.data.token)
+                goToAdminHomePage()
+            })
+            .catch(err => {
+                console.log(err.message)
+            })
     }
 
     return (
@@ -51,15 +60,17 @@ export default function LoginPage() {
                 type='email'
                 value={form.email}
                 required
-                />
+            />
             <input placeholder="Senha"
                 onChange={handleUserInput}
                 name='password'
                 type='password'
                 value={form.password}
                 required
-                />
+            />
             <button onClick={login}>Entrar</button>
         </div>
     )
 }
+
+export default LoginPage;

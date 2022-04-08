@@ -10,8 +10,8 @@ export default function AdminHomePage() {
     const trips = useGetTrips()
     const navigate = useNavigate()
 
-    const goBackPage = () => {
-        navigate(-1)
+    const goBackHome = () => {
+        navigate('/')
     }
     const goToCreateTripPage = () => {
         navigate('/admin/trips/create')
@@ -20,6 +20,10 @@ export default function AdminHomePage() {
         const tripId = e.target.value
 
         navigate(`/admin/trips/${tripId}`)
+    }
+    const userLogout = () =>{
+        window.localStorage.removeItem('token')
+        navigate('/')
     }
     const deleteTrip = (e) => {
         const tripId = e.target.value
@@ -54,8 +58,9 @@ export default function AdminHomePage() {
 
     return (
         <div>
-            <button onClick={goBackPage}>Voltar</button>
+            <button onClick={goBackHome}>Voltar</button>
             <button onClick={goToCreateTripPage}>Criar viagem</button>
+            <button onClick={userLogout}>Logout</button>
             {renderTripsButton}
         </div>
     )
