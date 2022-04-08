@@ -3,6 +3,7 @@ import { useEffect } from "react"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { apiUrl, student } from "../../../App"
+import useForm from "../../../hooks/useForm"
 
 const LoginPage = ()=> {
     const navigate = useNavigate()
@@ -18,7 +19,7 @@ const LoginPage = ()=> {
     }, [])
     
 
-    const [form, setForm] = useState({
+    const [form, handleUserInput] = useForm({
         email: '',
         password: ''
     })
@@ -26,15 +27,10 @@ const LoginPage = ()=> {
     const goToAdminHomePage = () => {
         navigate('/admin/trips/list')
     }
-    const handleUserInput = (e) => {
-        const value = e.target.value
+    
+    const login = (e) => {
+        e.preventDefault()
 
-        setForm({
-            ...form,
-            [e.target.name]: value
-        })
-    }
-    const login = () => {
         const body = {
             "email": form.email,
             "password": form.password
@@ -53,6 +49,7 @@ const LoginPage = ()=> {
     return (
         <div>
             <button onClick={goBackPage}>Voltar</button>
+            <form onSubmit={login}>
             <h2>Login</h2>
             <input placeholder="E-mail"
                 onChange={handleUserInput}
@@ -68,7 +65,8 @@ const LoginPage = ()=> {
                 value={form.password}
                 required
             />
-            <button onClick={login}>Entrar</button>
+            <button>Entrar</button>
+            </form>
         </div>
     )
 }

@@ -1,75 +1,92 @@
-import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import useGetTrips from "../../../hooks/useGetTrips"
 import RenderCountriesList from "../../../components/renderCountriesList/renderCountriesList"
+import useForm from "../../../hooks/useForm"
+import axios from "axios"
+import { apiUrl, student } from "../../../App"
 
 export default function AplicationFormPage() {
+    const trips = useGetTrips()
+    const navigate = useNavigate()
 
-    const [form, setForm] = useState({
-        tripSelect: '',
+    const [form, handleUserInput] = useForm({
+        tripId: '',
         name: '',
         age: '',
-        applyDesc: '',
+        applicationText: '',
         profession: '',
-        countrySelect: ''
+        country: ''
     })
 
-    const trips = useGetTrips()
+    const applyToTrip = (e) => {
+        e.preventDefault()
 
-    const navigate = useNavigate()
+        const body = {
+            "name": form.name,
+            "age": form.age,
+            "applicationText": form.applicationText,
+            "profession": form.profession,
+            "country": form.country
+
+        }
+
+        axios
+            .post(`${apiUrl}${student}trips/${form.tripId}/apply`, body)
+            .then((res) => {
+                console.log(res.data)
+            })
+            .catch((err) => {
+                console.log(err.message)
+            })
+    }
     const goBackPage = () => {
         navigate(-1)
-    }
-
-    const handleUserInput = (e) => {
-        const value = e.target.value
-
-        setForm({
-            ...form,
-            [e.target.name]: value
-        })
     }
 
     return (
         <div>
             <button onClick={goBackPage}>Voltar</button>
-            <select onChange={handleUserInput}
-                name='tripSelect'
-                value={form.tripSelect}>
-                {trips.map((trip) => {
-                    return <option key={trip.id} value={trip.name}>{trip.name}</option>
-                })}
-            </select>
-            <input placeholder="Nome"
-                onChange={handleUserInput}
-                value={form.name}
-                name='name' 
-                required
+            <form onSubmit={applyToTrip}>
+                <h2>Cadastro</h2>
+                <select onChange={handleUserInput}
+                    name='tripId'
+                    value={form.tripId}>
+                    <option>Selecionar viagem...</option>
+                    {trips.map((trip) => {
+                        return <option key={trip.id} name='tripId' value={trip.id}>{trip.name}</option>
+                    })}
+                </select>
+                <input placeholder="Nome"
+                    onChange={handleUserInput}
+                    value={form.name}
+                    name='name'
+                    required
                 />
-            <input placeholder="Idade"
-                onChange={handleUserInput}
-                type='number'
-                value={form.age}
-                name='age'
-                required
+                <input placeholder="Idade"
+                    onChange={handleUserInput}
+                    type='number'
+                    value={form.age}
+                    name='age'
+                    required
                 />
-            <input placeholder="Descrição"
-                onChange={handleUserInput}
-                value={form.applyDesc}
-                name='applyDesc'
-                required
+                <input placeholder="Descrição"
+                    onChange={handleUserInput}
+                    value={form.applicationText}
+                    name='applicationText'
+                    required
                 />
-            <input placeholder="Profissão"
-                onChange={handleUserInput}
-                value={form.profession}
-                name='profession'
-                required
+                <input placeholder="Profissão"
+                    onChange={handleUserInput}
+                    value={form.profession}
+                    name='profession'
+                    required
                 />
-            <RenderCountriesList
-            handleUserInput={handleUserInput} 
-            value = {form.countrySelect}
-            />
-            <button>Enviar</button>
+                <RenderCountriesList
+                    handleUserInput={handleUserInput}
+                    value={form.country}
+                />
+                <button>Enviar</button>
+            </form>
         </div>
     )
 }
