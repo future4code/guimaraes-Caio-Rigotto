@@ -34,7 +34,6 @@ export default function LoginPage() {
         .post(`${apiUrl}${student}login`, body)
         .then(res =>{
             window.localStorage.setItem("token", res.data.token)
-            console.log(res.data.token)
             goToAdminHomePage()
         })
         .catch(err=> {
@@ -50,12 +49,16 @@ export default function LoginPage() {
                 onChange={handleUserInput}
                 name='email'
                 type='email'
-                value={form.email}></input>
+                value={form.email}
+                required
+                />
             <input placeholder="Senha"
                 onChange={handleUserInput}
                 name='password'
                 type='password'
-                value={form.password}></input>
+                value={form.password}
+                required
+                />
             <button onClick={login}>Entrar</button>
         </div>
     )

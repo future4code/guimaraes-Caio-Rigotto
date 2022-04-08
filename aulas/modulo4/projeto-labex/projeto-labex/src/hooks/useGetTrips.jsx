@@ -1,5 +1,5 @@
 import axios from "axios"
-import { apiUrl, student } from "../../App"
+import { apiUrl, student } from "../App"
 import { useState, useEffect } from "react"
 
 export default function useGetTrips() {
@@ -14,7 +14,7 @@ export default function useGetTrips() {
             .catch((e) => {
                 console.log(e.message)
             })
-    }, [])
+    }, [trips])
 
         
     return trips

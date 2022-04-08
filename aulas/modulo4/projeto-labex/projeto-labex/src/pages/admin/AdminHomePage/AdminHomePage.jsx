@@ -1,10 +1,14 @@
+import axios from "axios"
 import { useNavigate } from "react-router-dom"
-import useGetTrips from '../../../components/useGetTrips/useGetTrips'
-import useVerifyAuth from "../../../components/useVerifyAuth/useVerifyAuth"
+import { apiUrl, student } from "../../../App"
+import useGetTrips from '../../../hooks/useGetTrips'
+import useVerifyAuth from "../../../hooks/useVerifyAuth"
 
 export default function AdminHomePage() {
-    const navigate = useNavigate()
     useVerifyAuth()
+        
+    const trips = useGetTrips()
+    const navigate = useNavigate()
 
     const goBackPage = () => {
         navigate(-1)
@@ -14,16 +18,37 @@ export default function AdminHomePage() {
     }
     const goToTripDetailsPage = (e) => {
         const tripId = e.target.value
-        
+
         navigate(`/admin/trips/${tripId}`)
     }
+    const deleteTrip = (e) => {
+        const tripId = e.target.value
+        const token = window.localStorage.getItem('token')
 
-    const trips = useGetTrips()
+        const header = {
+            headers: {
+                auth: token
+            }
+        }
+
+        axios
+            .delete(`${apiUrl}${student}trips/${tripId}`, header)
+            .then((res) => {
+                
+            })
+            .catch((err) => {
+                console.log(err.message)
+            })
+    }
 
     const renderTripsButton = trips
         .map((trip) => {
             return <div key={trip.id}>
-                <button value={trip.id} onClick={goToTripDetailsPage}>{trip.name}</button>
+                <button value={trip.id}
+                    onClick={goToTripDetailsPage}
+                >{trip.name}
+                </button>
+                    <button onClick={deleteTrip} value={trip.id}>Deletar</button>
             </div>
         })
 

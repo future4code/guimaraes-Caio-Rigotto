@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import useGetTrips from "../../../components/useGetTrips/useGetTrips"
+import useGetTrips from "../../../hooks/useGetTrips"
 import RenderCountriesList from "../../../components/renderCountriesList/renderCountriesList"
 
 export default function AplicationFormPage() {
@@ -28,7 +28,6 @@ export default function AplicationFormPage() {
             ...form,
             [e.target.name]: value
         })
-        console.log(form)
     }
 
     return (
@@ -44,24 +43,28 @@ export default function AplicationFormPage() {
             <input placeholder="Nome"
                 onChange={handleUserInput}
                 value={form.name}
-                name='name'>
-            </input>
+                name='name' 
+                required
+                />
             <input placeholder="Idade"
                 onChange={handleUserInput}
                 type='number'
                 value={form.age}
-                name='age'>
-            </input>
+                name='age'
+                required
+                />
             <input placeholder="Descrição"
                 onChange={handleUserInput}
                 value={form.applyDesc}
-                name='applyDesc'>
-            </input>
+                name='applyDesc'
+                required
+                />
             <input placeholder="Profissão"
                 onChange={handleUserInput}
                 value={form.profession}
-                name='profession'>
-            </input>
+                name='profession'
+                required
+                />
             <RenderCountriesList
             handleUserInput={handleUserInput} 
             value = {form.countrySelect}

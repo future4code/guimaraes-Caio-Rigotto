@@ -9,8 +9,6 @@ const useVerifyAuth = () => {
         switch (token) {
             case null:
                 navigate('/login')
-            default:
-                console.log("tá show o token")
         }
     }, [])
 }

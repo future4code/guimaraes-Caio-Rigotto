@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom"
-import useGetTrips from "../../../components/useGetTrips/useGetTrips"
+import useGetTrips from "../../../hooks/useGetTrips"
 
 export default function ListTripsPage() {
     const navigate = useNavigate()

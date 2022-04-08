@@ -3,18 +3,18 @@ import { useState } from "react"
 import { useEffect } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { apiUrl, student } from "../../../App"
-import useVerifyAuth from "../../../components/useVerifyAuth/useVerifyAuth"
+import useVerifyAuth from "../../../hooks/useVerifyAuth"
 
 const TripDetailsPage = () => {
+    useVerifyAuth()
     const tripId = useParams().id
 
     const navigate = useNavigate()
     const goBackPage = () => {
         navigate(-1)
     }
-    useVerifyAuth()
 
-    const [tripDetails, setTripDetails] = useState({})
+    const [ tripDetails , setTripDetails ] = useState({})
     const [ candidateDetails , setCandidateDetails ] = useState([])
 
     useEffect(() => {
