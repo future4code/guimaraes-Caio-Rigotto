@@ -3,7 +3,9 @@ const RenderPlanetsList = (props) => {
         <select onChange={props.handleUserInput}
             value={props.value}
             name='planet'
+            required
         >
+            <option value=''>Selecionar planeta...</option>
             <option value='Mercúrio'>Mercúrio</option>
             <option value='Vênus'>Vênus</option>
             <option value='Terra'>Terra</option>

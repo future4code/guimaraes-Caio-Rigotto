@@ -13,31 +13,66 @@ const TripDetailsPage = () => {
     const goBackPage = () => {
         navigate(-1)
     }
+    const token = window.localStorage.getItem('token')
+
+    const header = {
+        headers: {
+            auth: token
+        }
+    }
 
     const [ tripDetails , setTripDetails ] = useState({})
     const [ candidateDetails , setCandidateDetails ] = useState([])
-
+    const [ approvedDetails , setApprovedDetails ] = useState([])
+    const [ update , setUpdate ] = useState(true)
+    
     useEffect(() => {
-        const token = window.localStorage.getItem('token')
-
-        const header = {
-            headers: {
-                auth: token
-            }
-        }
-        axios
+            axios
             .get(`${apiUrl}${student}trip/${tripId}`, header)
             .then(res => {
                 setTripDetails(res.data.trip)
                 setCandidateDetails(res.data.trip.candidates)
+                setApprovedDetails(res.data.trip.approved)
+
+                setUpdate(false)
             })
             .catch(err => {
                 console.log(err.message)
             })
-    }, [])
+        }, [update])
 
-    return (
-        <div>
+        const handleUpdate = () =>{
+            setUpdate(true)
+        }        
+        const approveCandidate = (e)=>{
+            const candidateId = e.target.name
+            handleUpdate()
+
+            decideCandidate(true,candidateId)
+        }
+        const refuseCandidate = (e)=>{
+            const candidateId = e.target.name
+            handleUpdate()
+            
+            decideCandidate(false,candidateId)
+        }
+        
+        const decideCandidate = (approve,id) =>{
+            const body = {
+                "approve": approve
+            }
+            axios
+            .put(`${apiUrl}${student}trips/${tripId}/candidates/${id}/decide`, body, header)
+            .then((res) =>{
+                console.log(res.data)
+            })
+            .catch((err) =>{
+                console.log(err.message)
+            })
+        }
+        
+        return (
+            <div>
             <button onClick={goBackPage}>Voltar</button>
             <h2>Viagem</h2>
             <p>Nome: {tripDetails.name}</p>
@@ -49,12 +84,27 @@ const TripDetailsPage = () => {
             <h2>Candidatos</h2>
             {candidateDetails.map((candidate)=>{
                 return <div key={candidate.id}>
-                    <p>{candidate.name}</p>
-                    <p>{candidate.age}</p>
-                    <p>{candidate.applicationText}</p>
-                    <p>{candidate.profession}</p>
-                    <p>{candidate.id}</p>
+                    <h4>Nome: {candidate.name}</h4>
+                    <p>Idade: {candidate.age}</p>
+                    <p>Descrição: {candidate.applicationText}</p>
+                    <p>Profissão: {candidate.profession}</p>
+                    <p>Id: {candidate.id}</p>
+                    <button value={true} 
+                    name={candidate.id}
+                    onClick={approveCandidate}
+                    >Aprovar</button>
+                    <button
+                    value={false} 
+                    name={candidate.id}
+                    onClick={refuseCandidate}
+                    >Cancelar</button>
                     </div>
+            })}
+            <h2>Aprovados</h2>
+            {approvedDetails.map((approved) =>{
+                return <div key={approved.id}>
+                    <p>{approved.name}</p>
+                </div>
             })}
         </div>
     )

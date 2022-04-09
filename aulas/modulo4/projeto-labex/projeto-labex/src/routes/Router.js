@@ -9,11 +9,13 @@ import TripDetailsPage from "../pages/admin/AdminHomePage/TripDetailsPage";
 import CreateTripPage from "../pages/admin/CreateTripPage/CreateTripPage";
 import AdminHomePage from "../pages/admin/AdminHomePage/AdminHomePage";
 import ErrorPage from "../pages/error/ErrorPage";
+import Header from "../components/header/header";
 
 export default function Router () {
     return (
         <MainAppContainer>
             <BrowserRouter>
+            <Header />
                 <Routes>
                     <Route index element={<HomePage />} />
                     <Route path='/' element={<HomePage />} />

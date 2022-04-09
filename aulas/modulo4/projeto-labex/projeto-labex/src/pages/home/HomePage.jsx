@@ -1,5 +1,5 @@
 
-import { MainHomeButtonsContainer, MainHomePageContainer } from "./styles";
+import { MainHomeButtons, MainHomeButtonsContainer, MainHomePageContainer } from "./styles";
 import { useNavigate } from "react-router-dom";
 
 export default function HomePage() {
@@ -15,8 +15,10 @@ export default function HomePage() {
         <MainHomePageContainer>
             <h2>LabeX</h2>
             <MainHomeButtonsContainer>
-                <button onClick={goToTripsPage}>Ver opções de viagens</button>
-                <button onClick={goToLoginPage}>Área de Admin</button>
+                <MainHomeButtons onClick={goToTripsPage}
+                >Ver opções de viagens</MainHomeButtons>
+                <MainHomeButtons onClick={goToLoginPage}
+                >Área de Admin</MainHomeButtons>
             </MainHomeButtonsContainer>
         </MainHomePageContainer>        
     )

@@ -33,10 +33,10 @@ export default function AplicationFormPage() {
         axios
             .post(`${apiUrl}${student}trips/${form.tripId}/apply`, body)
             .then((res) => {
-                console.log(res.data)
+                navigate(-1)
             })
             .catch((err) => {
-                console.log(err.message)
+                
             })
     }
     const goBackPage = () => {
@@ -50,8 +50,9 @@ export default function AplicationFormPage() {
                 <h2>Cadastro</h2>
                 <select onChange={handleUserInput}
                     name='tripId'
-                    value={form.tripId}>
-                    <option>Selecionar viagem...</option>
+                    value={form.tripId}
+                    required>
+                    <option value=''>Selecionar viagem...</option>
                     {trips.map((trip) => {
                         return <option key={trip.id} name='tripId' value={trip.id}>{trip.name}</option>
                     })}
@@ -60,12 +61,15 @@ export default function AplicationFormPage() {
                     onChange={handleUserInput}
                     value={form.name}
                     name='name'
+                    pattern=".{3,}"
+                    title="Mínimo de 3 caracteres"
                     required
                 />
                 <input placeholder="Idade"
                     onChange={handleUserInput}
                     type='number'
                     value={form.age}
+                    min='18'
                     name='age'
                     required
                 />
@@ -73,12 +77,16 @@ export default function AplicationFormPage() {
                     onChange={handleUserInput}
                     value={form.applicationText}
                     name='applicationText'
+                    pattern=".{30,}"
+                    title="Mínimo de 30 caracteres"
                     required
                 />
                 <input placeholder="Profissão"
                     onChange={handleUserInput}
                     value={form.profession}
                     name='profession'
+                    pattern='.{10,}'
+                    title='Mínimo de 10 caracteres'
                     required
                 />
                 <RenderCountriesList

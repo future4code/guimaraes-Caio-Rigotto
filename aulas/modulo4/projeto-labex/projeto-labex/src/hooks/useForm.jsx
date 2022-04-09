@@ -10,7 +10,6 @@ const useForm = (iniState) => {
             ...form,
             [name]: value
         })
-        console.log(form)
     }
     return [ form , handleUserInput ]
 }

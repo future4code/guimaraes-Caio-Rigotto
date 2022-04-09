@@ -1,15 +1,34 @@
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
 import { apiUrl, student } from "../../../App"
-import useGetTrips from '../../../hooks/useGetTrips'
+import { useState, useEffect } from "react"
 import useVerifyAuth from "../../../hooks/useVerifyAuth"
 
 export default function AdminHomePage() {
     useVerifyAuth()
-        
-    const trips = useGetTrips()
+    
     const navigate = useNavigate()
 
+    const [trips, setTrips] = useState([])
+    const [ update , setUpdate ] = useState(true)
+    
+    useEffect(() => {
+        axios
+            .get(`${apiUrl}${student}trips`)
+            .then((res) => {
+                setTrips(res.data.trips)
+    
+                setUpdate(false)
+            })
+            .catch((e) => {
+                console.log(e.message)
+            })
+    }, [update])
+    
+    const handleUpdate = () =>{
+        setUpdate(true)
+    }        
+    
     const goBackHome = () => {
         navigate('/')
     }
@@ -18,10 +37,10 @@ export default function AdminHomePage() {
     }
     const goToTripDetailsPage = (e) => {
         const tripId = e.target.value
-
+        
         navigate(`/admin/trips/${tripId}`)
     }
-    const userLogout = () =>{
+    const userLogout = () => {
         window.localStorage.removeItem('token')
         navigate('/')
     }
@@ -38,7 +57,7 @@ export default function AdminHomePage() {
         axios
             .delete(`${apiUrl}${student}trips/${tripId}`, header)
             .then((res) => {
-                
+                handleUpdate()
             })
             .catch((err) => {
                 console.log(err.message)
@@ -52,7 +71,7 @@ export default function AdminHomePage() {
                     onClick={goToTripDetailsPage}
                 >{trip.name}
                 </button>
-                    <button onClick={deleteTrip} value={trip.id}>Deletar</button>
+                <button onClick={deleteTrip} value={trip.id}>Deletar</button>
             </div>
         })
 

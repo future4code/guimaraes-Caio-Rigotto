@@ -1,6 +1,5 @@
 import axios from "axios"
 import { useEffect } from "react"
-import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { apiUrl, student } from "../../../App"
 import useForm from "../../../hooks/useForm"
