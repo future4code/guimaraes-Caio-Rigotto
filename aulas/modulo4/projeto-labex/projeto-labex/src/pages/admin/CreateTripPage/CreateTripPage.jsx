@@ -1,12 +1,11 @@
 import axios from "axios"
-// import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { apiUrl, student } from "../../../App"
 import RenderPlanetsList from "../../../components/renderPlanetsList/renderPlanetsList"
 import useForm from "../../../hooks/useForm"
 import useGetDate from "../../../hooks/useGetDate"
 import useVerifyAuth from "../../../hooks/useVerifyAuth"
-import { CreateTripCardContainer } from "./styles"
+import { ApplyButton, ApplyFormContainer, ApplyInput, ApplyText } from "../../trips/AplicationFormPage/styles"
 
 export default function CreateTripPage() {
     useVerifyAuth()
@@ -20,10 +19,7 @@ export default function CreateTripPage() {
     })
 
     const navigate = useNavigate()
-    const goBackPage = () => {
-        navigate(-1)
-    }
-    
+
     const createTrip = (e) => {
         e.preventDefault()
 
@@ -48,18 +44,17 @@ export default function CreateTripPage() {
                 navigate('/admin/trips/list')
             })
             .catch((err) => {
-                console.log(err.message)
+                
             })
     }
 
     const dateToday = useGetDate()
-    
+
     return (
         <div>
-                <button onClick={goBackPage}>Voltar</button>
-            <CreateTripCardContainer onSubmit={createTrip}>
-                <h2>Criar Viagem</h2>
-                <input
+            <ApplyText>Criar Viagem</ApplyText>
+            <ApplyFormContainer onSubmit={createTrip}>
+                <ApplyInput
                     name='name'
                     placeholder="Digite o nome"
                     title='5 caracteres ou mais'
@@ -72,7 +67,7 @@ export default function CreateTripPage() {
                     value={form.planet}
                     handleUserInput={handleUserInput}
                 />
-                <input
+                <ApplyInput
                     name='date'
                     placeholder="Data"
                     type='date'
@@ -81,7 +76,7 @@ export default function CreateTripPage() {
                     value={form.date}
                     required
                 />
-                <input
+                <ApplyInput
                     name='description'
                     placeholder="Descrição"
                     title="30 caracteres ou mais"
@@ -90,17 +85,17 @@ export default function CreateTripPage() {
                     value={form.description}
                     required
                 />
-                <input
+                <ApplyInput
                     name='durationInDays'
                     type='number'
                     placeholder="Duração (em dias)"
-                    min= '50'
+                    min='50'
                     onChange={handleUserInput}
                     value={form.durationInDays}
                     required
                 />
-            <button>Criar</button>
-            </CreateTripCardContainer>
+                <ApplyButton>Criar</ApplyButton>
+            </ApplyFormContainer>
         </div>
     )
 }

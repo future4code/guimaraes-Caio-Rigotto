@@ -3,12 +3,11 @@ import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { apiUrl, student } from "../../../App"
 import useForm from "../../../hooks/useForm"
+import { ApplyButton, ApplyFormContainer, ApplyInput, ApplyText } from "../../trips/AplicationFormPage/styles"
 
 const LoginPage = ()=> {
     const navigate = useNavigate()
-    const goBackPage = () => {
-        navigate(-1)
-    }
+    
     useEffect(() => {
         const token = window.localStorage.getItem('token')
 
@@ -41,31 +40,30 @@ const LoginPage = ()=> {
                 goToAdminHomePage()
             })
             .catch(err => {
-                console.log(err.message)
+                
             })
     }
 
     return (
         <div>
-            <button onClick={goBackPage}>Voltar</button>
-            <form onSubmit={login}>
-            <h2>Login</h2>
-            <input placeholder="E-mail"
+            <ApplyText>Login</ApplyText>
+            <ApplyFormContainer onSubmit={login}>
+            <ApplyInput placeholder="E-mail"
                 onChange={handleUserInput}
                 name='email'
                 type='email'
                 value={form.email}
                 required
             />
-            <input placeholder="Senha"
+            <ApplyInput placeholder="Senha"
                 onChange={handleUserInput}
                 name='password'
                 type='password'
                 value={form.password}
                 required
             />
-            <button>Entrar</button>
-            </form>
+            <ApplyButton>Entrar</ApplyButton>
+            </ApplyFormContainer>
         </div>
     )
 }

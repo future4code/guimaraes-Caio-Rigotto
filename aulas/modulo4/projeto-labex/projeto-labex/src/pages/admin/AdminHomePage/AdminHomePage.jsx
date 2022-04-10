@@ -3,32 +3,34 @@ import { useNavigate } from "react-router-dom"
 import { apiUrl, student } from "../../../App"
 import { useState, useEffect } from "react"
 import useVerifyAuth from "../../../hooks/useVerifyAuth"
+import { TripCardsContainer, TripDesc, TripListHeader, TripsCardFlex, TripTextClick } from "../../trips/ListTripsPage/styles"
+import { ApplyButton } from "../../trips/AplicationFormPage/styles"
 
 export default function AdminHomePage() {
     useVerifyAuth()
-    
+
     const navigate = useNavigate()
 
     const [trips, setTrips] = useState([])
-    const [ update , setUpdate ] = useState(true)
-    
+    const [update, setUpdate] = useState(true)
+
     useEffect(() => {
         axios
             .get(`${apiUrl}${student}trips`)
             .then((res) => {
                 setTrips(res.data.trips)
-    
+
                 setUpdate(false)
             })
             .catch((e) => {
-                console.log(e.message)
+                
             })
     }, [update])
-    
-    const handleUpdate = () =>{
+
+    const handleUpdate = () => {
         setUpdate(true)
-    }        
-    
+    }
+
     const goBackHome = () => {
         navigate('/')
     }
@@ -37,7 +39,7 @@ export default function AdminHomePage() {
     }
     const goToTripDetailsPage = (e) => {
         const tripId = e.target.value
-        
+
         navigate(`/admin/trips/${tripId}`)
     }
     const userLogout = () => {
@@ -60,27 +62,39 @@ export default function AdminHomePage() {
                 handleUpdate()
             })
             .catch((err) => {
-                console.log(err.message)
+                
             })
     }
 
     const renderTripsButton = trips
         .map((trip) => {
-            return <div key={trip.id}>
-                <button value={trip.id}
+            return <TripCardsContainer key={trip.id}>
+                <h3>{trip.name}</h3>
+                <TripDesc>Descrição: {trip.description}</TripDesc>
+                <p>Data: {trip.date}</p>
+                <p>Duração: {trip.durationInDays} dias</p>
+                <p>Planeta: {trip.planet}</p>
+                <ApplyButton value={trip.id}
                     onClick={goToTripDetailsPage}
-                >{trip.name}
-                </button>
-                <button onClick={deleteTrip} value={trip.id}>Deletar</button>
-            </div>
+                >Selecionar
+                </ApplyButton>
+                <ApplyButton onClick={deleteTrip}
+                    value={trip.id}>Deletar</ApplyButton>
+            </TripCardsContainer>
         })
 
     return (
         <div>
-            <button onClick={goBackHome}>Voltar</button>
-            <button onClick={goToCreateTripPage}>Criar viagem</button>
-            <button onClick={userLogout}>Logout</button>
-            {renderTripsButton}
+            <TripListHeader>
+                <TripTextClick onClick={goBackHome}>Voltar</TripTextClick>
+                <TripTextClick onClick={goToCreateTripPage}
+                >Criar viagem</TripTextClick>
+                <TripTextClick onClick={userLogout}
+                >Logout</TripTextClick>
+            </TripListHeader>
+            <TripsCardFlex>
+                {renderTripsButton}
+            </TripsCardFlex>
         </div>
     )
 }

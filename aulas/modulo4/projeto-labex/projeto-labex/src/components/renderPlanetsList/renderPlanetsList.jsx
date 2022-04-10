@@ -1,6 +1,8 @@
+import { ApplySelect } from "../../pages/trips/AplicationFormPage/styles";
+
 const RenderPlanetsList = (props) => {
     return (
-        <select onChange={props.handleUserInput}
+        <ApplySelect onChange={props.handleUserInput}
             value={props.value}
             name='planet'
             required
@@ -19,7 +21,7 @@ const RenderPlanetsList = (props) => {
             <option value='Ceres'>Ceres</option>
             <option value='Haumea'>Haumea</option>
             <option value='Makemake'>Makemake</option>
-        </select>
+        </ApplySelect>
     );
 }
 

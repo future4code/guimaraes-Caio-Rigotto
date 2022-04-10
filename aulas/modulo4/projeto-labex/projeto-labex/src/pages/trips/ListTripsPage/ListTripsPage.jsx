@@ -1,11 +1,10 @@
 import { useNavigate } from "react-router-dom"
 import useGetTrips from "../../../hooks/useGetTrips"
+import { ListTripsContainer, TripCardName, TripCardsContainer, TripDesc, TripListButtons, TripListHeader, TripsCardFlex, TripsCardGrid, TripText, TripTextClick } from "./styles"
 
 export default function ListTripsPage() {
     const navigate = useNavigate()
-    const goBackPage = () =>{
-        navigate(-1)
-    }
+
     const goToApplyPage = () => {
         navigate('/trips/application')
     }
@@ -13,21 +12,24 @@ export default function ListTripsPage() {
     const trips = useGetTrips()
 
     const renderTrips = trips.map((trip) =>{
-        return <div key={trip.id}>
+        return <TripCardsContainer key={trip.id}>
             <h3>{trip.name}</h3>
-            <p>Desc: {trip.description}</p>
+            <TripDesc>Descrição: {trip.description}</TripDesc>
             <p>Data: {trip.date}</p>
-            <p>Duração: {trip.durationInDays}</p>
-            <p>Localização: {trip.planet}</p>
-        </div>
+            <p>Duração: {trip.durationInDays} dias</p>
+            <p>Planeta: {trip.planet}</p>
+        </TripCardsContainer>
     })
-
+    
     return (
         <div>
-            <button onClick={goBackPage}>Voltar</button>
-            <button onClick={goToApplyPage}>Escolher viagem</button>
-            <h2>Viagens</h2>
+            <TripsCardFlex>
             {renderTrips}
+            </TripsCardFlex>
+            <TripListHeader>
+            <TripTextClick onClick={goToApplyPage}
+            >Escolher viagem</TripTextClick>
+            </TripListHeader>  
         </div>
     )
 }

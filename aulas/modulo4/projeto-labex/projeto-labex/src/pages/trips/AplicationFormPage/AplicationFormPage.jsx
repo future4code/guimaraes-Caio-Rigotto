@@ -4,6 +4,7 @@ import RenderCountriesList from "../../../components/renderCountriesList/renderC
 import useForm from "../../../hooks/useForm"
 import axios from "axios"
 import { apiUrl, student } from "../../../App"
+import { ApplyButton, ApplyFormContainer, ApplyInput, ApplyLabel, ApplySelect, ApplyText } from "./styles"
 
 export default function AplicationFormPage() {
     const trips = useGetTrips()
@@ -27,7 +28,6 @@ export default function AplicationFormPage() {
             "applicationText": form.applicationText,
             "profession": form.profession,
             "country": form.country
-
         }
 
         axios
@@ -39,16 +39,12 @@ export default function AplicationFormPage() {
                 
             })
     }
-    const goBackPage = () => {
-        navigate(-1)
-    }
 
     return (
         <div>
-            <button onClick={goBackPage}>Voltar</button>
-            <form onSubmit={applyToTrip}>
-                <h2>Cadastro</h2>
-                <select onChange={handleUserInput}
+                <ApplyText>Cadastro</ApplyText>
+            <ApplyFormContainer onSubmit={applyToTrip}>
+                <ApplySelect onChange={handleUserInput}
                     name='tripId'
                     value={form.tripId}
                     required>
@@ -56,8 +52,8 @@ export default function AplicationFormPage() {
                     {trips.map((trip) => {
                         return <option key={trip.id} name='tripId' value={trip.id}>{trip.name}</option>
                     })}
-                </select>
-                <input placeholder="Nome"
+                </ApplySelect>
+                <ApplyInput placeholder="Nome completo"
                     onChange={handleUserInput}
                     value={form.name}
                     name='name'
@@ -65,7 +61,7 @@ export default function AplicationFormPage() {
                     title="Mínimo de 3 caracteres"
                     required
                 />
-                <input placeholder="Idade"
+                <ApplyInput placeholder="Idade"
                     onChange={handleUserInput}
                     type='number'
                     value={form.age}
@@ -73,7 +69,7 @@ export default function AplicationFormPage() {
                     name='age'
                     required
                 />
-                <input placeholder="Descrição"
+                <ApplyInput placeholder="Descrição"
                     onChange={handleUserInput}
                     value={form.applicationText}
                     name='applicationText'
@@ -81,7 +77,7 @@ export default function AplicationFormPage() {
                     title="Mínimo de 30 caracteres"
                     required
                 />
-                <input placeholder="Profissão"
+                <ApplyInput placeholder="Profissão"
                     onChange={handleUserInput}
                     value={form.profession}
                     name='profession'
@@ -93,8 +89,8 @@ export default function AplicationFormPage() {
                     handleUserInput={handleUserInput}
                     value={form.country}
                 />
-                <button>Enviar</button>
-            </form>
+                <ApplyButton>Enviar</ApplyButton>
+            </ApplyFormContainer>
         </div>
     )
 }

@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom"
-import { HeaderButton, HeaderContainer, HeaderH1, HeaderIMG } from "./styles"
-import rocketPic from '../../img/rocket-header.png'
+import { HeaderContainer, HeaderTextH1, HeaderTripsH1, HeaderLoginH1, HeaderHomeH1 } from "./styles"
 
 const Header = () =>{
     const navigate = useNavigate()
@@ -10,16 +9,25 @@ const Header = () =>{
     const goToHome = () => {
         navigate('/')
     }
+    const goToTrips = () =>{
+        navigate('/trips/list')
+    }
 
     return(
         <HeaderContainer>
-            <HeaderIMG src={rocketPic} 
+            <HeaderTextH1 
             onClick={goToHome} 
-            />
-            <HeaderH1 onClick={goToHome}
-            >LabeX - ao infinito e além</HeaderH1>
-            <HeaderButton onClick={goToLoginPage}
-            >Login</HeaderButton>
+            >LabeX</HeaderTextH1>
+            <HeaderHomeH1
+            onClick={goToHome}
+            >Home
+            </HeaderHomeH1>
+            <HeaderTripsH1
+            onClick={goToTrips}
+            >Viagens
+            </HeaderTripsH1>
+            <HeaderLoginH1 onClick={goToLoginPage}
+            >Login</HeaderLoginH1>
         </HeaderContainer>
     )
 }

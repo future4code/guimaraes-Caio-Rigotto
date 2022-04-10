@@ -1,12 +1,14 @@
+import { ApplySelect } from "../../pages/trips/AplicationFormPage/styles";
+
 export default function RenderCountriesList(props) {
    return (
-      <select 
+      <ApplySelect 
       onChange={props.handleUserInput} 
       value={props.value}
       name='country'
       required
       >
-         <option value=''>Selecionar país...</option>
+         <option value=''>Selecionar nacionalidade...</option>
          <option value="Afganistan">Afghanistan</option>
          <option value="Albania">Albania</option>
          <option value="Algeria">Algeria</option>
@@ -253,6 +255,6 @@ export default function RenderCountriesList(props) {
          <option value="Zaire">Zaire</option>
          <option value="Zambia">Zambia</option>
          <option value="Zimbabwe">Zimbabwe</option>
-      </select>
+      </ApplySelect>
    )
 } 

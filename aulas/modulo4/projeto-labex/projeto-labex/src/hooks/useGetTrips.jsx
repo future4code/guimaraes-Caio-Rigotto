@@ -12,7 +12,7 @@ const useGetTrips = () => {
                     setTrips(res.data.trips)
                 })
                 .catch((e) => {
-                    console.log(e.message)
+                    
                 })
     }, [])
         
