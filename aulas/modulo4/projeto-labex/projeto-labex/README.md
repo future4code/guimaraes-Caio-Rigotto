@@ -3,7 +3,7 @@
 <p align="center"> Projeto que visa a criação e manutenção de um site de agência de viagens espaciais.</p>
 
 ### Experimente: 
-<a href="http://watery-crush.surge.sh"> LabeX - Ao infinito e além </a>
+<a href="http://unused-fold.surge.sh"> LabeX - Ao infinito e além </a>
 
 ### Desenvolvedor: 
 - Caio Sala Rigotto
