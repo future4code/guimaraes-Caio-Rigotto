@@ -1,0 +1,12 @@
+{
+  "name": "ex3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "ex3.js",
+  "scripts": {
+    "start": "clear && node ./ex3.js"
+  },
+  "keywords": ["Node"],
+  "author": "Caio R.",
+  "license": "ISC"
+}

@@ -1,0 +1,1 @@
+console.log("Você provavelmente executou o npm start na pasta errada.", '\n', "Opções:", '\n', "cd Ex1", '\n', "cd Ex2", '\n', "cd Ex3")
