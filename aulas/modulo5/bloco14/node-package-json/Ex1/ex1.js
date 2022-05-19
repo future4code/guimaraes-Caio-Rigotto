@@ -6,7 +6,7 @@ const age = Number(process.argv[3])
 const agePlusSeven = age + 7
 
 if(name === undefined || isNaN(age)){
-    console.log("Favor, inserir informações no formato:", '\n', 'npm start <nome> <idade>')
+    console.log("\x1b[31m","Favor, inserir informações no formato:", '\n', 'npm start <nome> <idade>')
 }else{
     console.log(`Olá, ${name}! Você tem ${age} anos! Em sete anos você terá ${agePlusSeven}.`)
 }

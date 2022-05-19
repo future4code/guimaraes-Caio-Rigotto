@@ -14,13 +14,13 @@ const checkOp = () => {
         case "divided":
             return true
         default:
-            console.log("Tipo de operação inserida incorretamente!" , '\n')
+            console.log("\x1b[31m","Tipo de operação inserida incorretamente!" , '\n')
             return false
     }
 }
 
 if (operation === undefined || operation === '' || checkOp() === false || isNaN(num1) || isNaN(num2)) {
-    console.log("Favor, inserir informações no formato:", '\n', 'npm start <operação(add, min, mult, div)> <num1> <num2>')
+    console.log("\x1b[31m","Favor, inserir informações no formato:", '\n', 'npm start <operação(add, min, mult, div)> <num1> <num2>')
 } else {
     const doMath = () => {
         const result = () => {

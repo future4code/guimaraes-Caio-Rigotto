@@ -9,8 +9,10 @@ const capitalize = (string) => {
 const toDo = process.argv[2]
 const checker = process.argv[3]
 
+
+
 if (checker !== undefined) {
-    console.log("Você deve passar as informações em uma única string:", '\n', 'npm start "<Atividade com espaços>"')
+    console.log("\x1b[31m","Você deve passar as informações em uma única string:", '\n', 'npm start "<Atividade com espaços>"')
 } else {
     const addList= () => {toDoList.push(capitalize(toDo))}
     addList()
