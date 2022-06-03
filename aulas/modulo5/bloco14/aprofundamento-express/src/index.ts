@@ -9,6 +9,7 @@ const app = express();
 app.use(express.json());
 app.use(cors())
 
+// Ping
 app.get('/ping', (req: Request, res: Response) => {
     res.status(200).send("Pong!")
 })
@@ -40,7 +41,7 @@ app.post('/todo/create', (req: Request, res: Response) => {
     }
 })
 
-// Deletar ToDo
+// Deletar ToDo por ID
 app.delete('/todo/:todoid/delete', (req: Request, res: Response) => {
     try {
         const toDoId = Number(req.params.todoid)
@@ -49,7 +50,7 @@ app.delete('/todo/:todoid/delete', (req: Request, res: Response) => {
 
         if (!id) throw new Error("ID não encontrado!")
 
-        toDo.splice((toDoId-1),1)
+        toDo.splice((toDoId - 1), 1)
 
         res.send(toDo)
     }
@@ -66,8 +67,8 @@ app.delete('/users/:userid/delete', (req: Request, res: Response) => {
 
         // const id = toDo.find((user) => user.userId === userId);
 
-        toDo.forEach((todo,i)=>{
-            if(todo.userId === id){
+        toDo.forEach((todo, i) => {
+            if (todo.userId === id) {
                 toDo.splice(i, 1)
             }
         })
@@ -82,7 +83,24 @@ app.delete('/users/:userid/delete', (req: Request, res: Response) => {
     }
 })
 
-// Editar ToDo
+// Mostrar ToDo de Usuário Específico
+app.get('/todos/show/:userid', (req: Request, res: Response) => {
+    try {
+        const id = Number(req.params.userid)
+
+        const toDoById = toDo.filter((toDo) => {
+            if(id === toDo.userId){
+                return toDo
+            }
+        })
+        res.status(200).send(toDoById)
+    }
+    catch (err: any) {
+        res.status(400).end(err.message)
+    }
+})
+
+// Editar Completed de ToDo
 app.put('/todo/:todoid/edit', (req: Request, res: Response) => {
     try {
         const toDoId = Number(req.params.todoid)
@@ -106,7 +124,7 @@ app.put('/todo/:todoid/edit', (req: Request, res: Response) => {
     }
 })
 
-// Mostrar Completo/Incompleto
+// Mostrar ToDo Completo/Incompleto
 app.get('/todo/completed/:completed', (req: Request, res: Response) => {
     try {
         const param = req.params.completed
