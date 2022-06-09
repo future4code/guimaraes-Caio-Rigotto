@@ -2,7 +2,6 @@ import express from 'express'
 import cors from 'cors'
 import { Request, Response } from 'express'
 import { users, USERS } from './data'
-import { v4 as generateId } from 'uuid'
 
 const app = express()
 
@@ -67,38 +66,38 @@ app.get('/user', (req: Request, res: Response) => {
                 return user
             }
         })
-        if(!nameFound.length){
+        if (!nameFound.length) {
             errorCode = 400
             throw new Error('Nome não encontrado.')
         }
 
         res.status(200).send(nameFound)
     }
-    catch(err:any){
+    catch (err: any) {
         res.status(errorCode).end(err.message)
-    }    
+    }
 })
 
-app.post('/users/add', (req:Request, res:Response)=>{
+app.post('/users/add', (req: Request, res: Response) => {
     let errorCode = 500
 
-    try{
+    try {
         const { name, email, type, age } = req.body
 
-        if(type !== "admin" && type !== "normal"){
+        if (type !== "admin" && type !== "normal") {
             errorCode = 422
             throw new Error('Parâmetro "type" deve ser admin ou normal.')
         }
 
         users.forEach((user) => {
             errorCode = 400
-            if(user.email === email){
+            if (user.email === email) {
                 throw new Error("E-mail já cadastrado no sistema.")
             }
         });
 
-        const newUser:USERS = {
-            id: users.length+1,
+        const newUser: USERS = {
+            id: users.length + 1,
             name,
             email,
             type: type.toUpperCase(),
@@ -109,7 +108,31 @@ app.post('/users/add', (req:Request, res:Response)=>{
 
         res.status(200).send(users)
     }
-    catch(err:any){
+    catch (err: any) {
+        res.status(errorCode).end(err.message)
+    }
+})
+
+app.put('/user/edit', (req: Request, res: Response) => {
+    let errorCode = 500
+    try {
+        const userId = Number(req.query.id)
+        const newName = req.body.name as string
+
+        if (!userId || !newName) {
+            errorCode = 422
+            throw new Error('Parâmetro não enviado.')
+        }
+
+        for (const user of users) {
+            if (user.id === userId) {
+                user.name = `${newName} - ALTERADO`
+            }
+        }
+
+        res.status(200).send(users)
+    }
+    catch (err: any) {
         res.status(errorCode).end(err.message)
     }
 })
