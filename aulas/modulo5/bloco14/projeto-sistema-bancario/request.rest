@@ -21,3 +21,14 @@ Content-Type: application/json
     "name": "João Siqueira",
     "cpf": "111.111.111-11"
 }
+
+###
+
+PUT http://localhost:3003/user/transfer
+Content-Type: application/json
+
+{
+    "name": "João Siqueira",
+    "cpf": "111.111.111-11",
+    "value": 23
+}
