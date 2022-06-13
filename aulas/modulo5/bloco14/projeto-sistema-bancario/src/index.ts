@@ -108,7 +108,7 @@ app.get('/user', (req: Request, res: Response)=>{
     }
 
     const userFound = users.find(user => {
-        return (user.cpf === userCPF)
+        return (user.cpf === userCPF) && (user.name === userName)
     });
 
     if(!userFound){
@@ -116,7 +116,7 @@ app.get('/user', (req: Request, res: Response)=>{
       throw new Error("CPF ou nome enviados não encontrados.")
     }
 
-    res.status(200).send(`Saldo: R$${userFound?.balance}`)
+    res.status(200).send(`Nome: ${userFound.name} - Saldo: R$${userFound?.balance}`)
   }
   catch(err:any){
     res.status(errorCode).end(err.message)
