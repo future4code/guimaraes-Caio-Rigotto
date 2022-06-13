@@ -18,7 +18,7 @@ app.post('/users/create', (req: Request, res: Response) => {
     const userBirthDate = String(req.body.birthDate)
 
     users.forEach(user => {
-      if(user.cpf === userCPF){
+      if (user.cpf === userCPF) {
         errorCode = 400
         throw new Error("CPF já está cadastrado no sistema.")
       }
@@ -86,60 +86,72 @@ app.post('/users/create', (req: Request, res: Response) => {
   }
 })
 
-app.get('/users', (req:Request, res:Response)=>{
+app.get('/users', (req: Request, res: Response) => {
   let errorCode = 500
-  try{
+  try {
     res.status(200).send(users)
   }
-  catch(err:any){
+  catch (err: any) {
     res.status(errorCode).end("Houve algo de errado.")
   }
 })
 
-app.get('/user', (req: Request, res: Response)=>{
-    let errorCode = 500
-  try{
+app.get('/user', (req: Request, res: Response) => {
+  let errorCode = 500
+  try {
     const userName = req.body.name
     const userCPF = req.body.cpf
 
-    if(!userCPF || !userName){
+    if (!userCPF || !userName) {
       errorCode = 422
       throw new Error("Parâmetro não enviado.")
     }
 
     const userFound = users.find(user => {
-        return (user.cpf === userCPF) && (user.name === userName)
+      return (user.cpf === userCPF) && (user.name === userName)
     });
 
-    if(!userFound){
+    if (!userFound) {
       errorCode = 400
       throw new Error("CPF ou nome enviados não encontrados.")
     }
 
     res.status(200).send(`Nome: ${userFound.name} - Saldo: R$${userFound?.balance}`)
   }
-  catch(err:any){
+  catch (err: any) {
     res.status(errorCode).end(err.message)
   }
 })
 
-// app.get('user/transfer', (req:Request, res:Response)=>{
-//   let  errorCode = 500
-//   try{
-//     const userName = req.body.name
-//     const userCPF = req.body.cpf
-//     const value = req.body.value
+app.put('/user/transfer', (req: Request, res: Response) => {
+  let errorCode = 500
+  try {
+    const userName = req.body.name
+    const userCPF = req.body.cpf
+    const value = Number(req.body.value)
 
-//     if(!userName || !userCPF || value){
-//       errorCode = 422
-//       throw new Error("Parâmetro não enviado.")
-//     }
+    if (!userName || !userCPF || !value) {
+      errorCode = 422
+      throw new Error("Parâmetro não enviado.")
+    }
 
-//   }
-//   catch(err:any){
+    const userFound = users.find(user => {
+      return (user.cpf === userCPF) && (user.name === userName)
+    });
+    if (!userFound) {
+      errorCode = 400
+      throw new Error("CPF ou nome enviados não encontrados.")
+    }
 
-//   }
-// })
+    const newBalance = {...userFound, balance:userFound.balance + value}
+
+    res.status(200).send(`Nome: ${newBalance.name} - Saldo: ${newBalance.balance}`)
+
+  }
+  catch (err: any) {
+    res.status(errorCode).end(err.message)
+  }
+})
 
 const server = app.listen(process.env.PORT || 3003, () => {
   if (server) {
