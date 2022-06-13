@@ -86,6 +86,16 @@ app.post('/users/create', (req: Request, res: Response) => {
   }
 })
 
+app.get('/users', (req:Request, res:Response)=>{
+  let errorCode = 500
+  try{
+    res.status(200).send(users)
+  }
+  catch(err:any){
+    res.status(errorCode).end("Houve algo de errado.")
+  }
+})
+
 app.get('/user', (req: Request, res: Response)=>{
     let errorCode = 500
   try{
@@ -98,7 +108,7 @@ app.get('/user', (req: Request, res: Response)=>{
     }
 
     const userFound = users.find(user => {
-        return (user.cpf === userCPF) && (user.name === userName)
+        return (user.cpf === userCPF)
     });
 
     if(!userFound){
@@ -112,6 +122,24 @@ app.get('/user', (req: Request, res: Response)=>{
     res.status(errorCode).end(err.message)
   }
 })
+
+// app.get('user/transfer', (req:Request, res:Response)=>{
+//   let  errorCode = 500
+//   try{
+//     const userName = req.body.name
+//     const userCPF = req.body.cpf
+//     const value = req.body.value
+
+//     if(!userName || !userCPF || value){
+//       errorCode = 422
+//       throw new Error("Parâmetro não enviado.")
+//     }
+
+//   }
+//   catch(err:any){
+
+//   }
+// })
 
 const server = app.listen(process.env.PORT || 3003, () => {
   if (server) {

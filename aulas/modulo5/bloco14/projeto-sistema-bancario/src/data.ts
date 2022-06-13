@@ -4,10 +4,10 @@ export type USER = {
     cpf:string,
     birthDate:string,
     balance:number,
-    extract: EXTRACT
+    extract: TRANSACTIONS
 }
 
-type EXTRACT ={
+type TRANSACTIONS ={
     value:number,
     date:string,
     desc:string
