@@ -1,0 +1,33 @@
+GET http://localhost:3003/users/list
+Content-Type: application/json
+
+###
+
+GET http://localhost:3003/users?type=admin
+Content-Type: application/json
+
+###
+
+GET http://localhost:3003/user?name=alice
+Content-Type: application/json
+
+###
+
+POST http://localhost:3003/users/add
+Content-Type: application/json
+
+{
+    "name": "joao",
+    "email": "joao@email.com",
+    "type": "admin",
+    "age": 22
+}
+
+###
+
+PUT http://localhost:3003/user/edit?id=1
+Content-Type: application/json
+
+{
+    "name": "joao"
+}
