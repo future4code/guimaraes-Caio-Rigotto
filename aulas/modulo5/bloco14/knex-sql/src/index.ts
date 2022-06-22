@@ -180,5 +180,24 @@ app.delete('/actor/:id', async (req: Request, res: Response) => {
 })
 
 app.post('/actor', async (req:Request, res:Response)=>{
-    
+    let ErrorCode = 500
+    try{
+        const { name, salary, birthDate, gender } = req.body
+
+        if(!name || !salary || !birthDate || !gender){
+            ErrorCode = 400
+            throw new Error("Parâmetro necessário não foi enviado.")
+        }
+        await connection('actor')
+        .insert({
+            name,
+            salary,
+            birth_date:birthDate,
+            gender
+    })
+    res.status(200).send("Dados cadastrados no banco de dados.")
+    }
+    catch(err:any){
+        res.status(ErrorCode).end(err.message)
+    }
 })
