@@ -1,9 +1,10 @@
 import app from "./app";
 import express, { Response, Request } from "express";
 
-import { CreateUser, EditUser } from "./utils/functions"
+import { CreateTask, CreateUser, EditUser } from "./utils/functions"
 import connection from "./connection";
 
+// TEST CONNECTION
 app.get('/ping', (req: Request, res: Response) => {
     try {
         res.status(200).send("Pong")
@@ -13,6 +14,7 @@ app.get('/ping', (req: Request, res: Response) => {
     }
 })
 
+// CREATE USER
 app.post('/user', async (req: Request, res: Response) => {
     let ErrorCode = 500
     try {
@@ -45,6 +47,7 @@ app.post('/user', async (req: Request, res: Response) => {
     }
 })
 
+// GET USER BY ID
 app.get('/user/:id', async (req: Request, res: Response) => {
     let ErrorCode = 500
     try {
@@ -71,6 +74,7 @@ app.get('/user/:id', async (req: Request, res: Response) => {
     }
 })
 
+// EDIT USER BY ID
 app.put('/user/edit/:id', async (req: Request, res: Response)=>{
     let ErrorCode = 500
     try{
@@ -90,6 +94,43 @@ app.put('/user/edit/:id', async (req: Request, res: Response)=>{
 
         await EditUser(id, name, nickname, email)        
         res.status(200).send(`Usuário de id:${id} editado com sucesso.`)
+    }
+    catch(err:any){
+        res.status(ErrorCode).end(err.message)
+    }
+})
+
+// CREATE TODO TASK
+app.post('/task', async (req: Request, res: Response)=>{
+    let ErrorCode = 500
+    try{
+        const { task, desc, status, limitDate, creatorId } = req.body
+        if(!task || !desc || !status || !limitDate || !creatorId){
+            ErrorCode = 400
+            throw new Error("Parâmetro necessário não enviado.")
+        }
+        if(task === "" || desc === "" || limitDate === "" || creatorId === ""){
+            ErrorCode = 400
+            throw new Error("Parâmetros enviados no body não podem ser vazios")
+        }
+
+        const date_regex = /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/
+        if(!(date_regex.test(limitDate))){
+            ErrorCode = 422
+            throw new Error("Formato de data errado. DD/MM/YYYY")
+        }
+
+        const checkUserId = await connection('toDoListUser')
+        .select()
+        .where({id:creatorId})
+        if(Object.entries(checkUserId).length === 0){
+            ErrorCode = 422
+            throw new Error("Id do criador não encontrado na database.")
+        }
+
+        await CreateTask(task,desc,status,limitDate,creatorId)
+
+        res.status(200).send("Tarefa criada com sucesso.")
     }
     catch(err:any){
         res.status(ErrorCode).end(err.message)
