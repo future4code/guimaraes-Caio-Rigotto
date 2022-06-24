@@ -176,3 +176,24 @@ export const AssignUserTask = async (taskId: number,
         return allOk
     }
 }
+
+export const GetTaskAssignedUser = async (taskId: number): Promise<any> => {
+    const tasks = await connection('toDoListUser')
+        .select()
+        .join('toDoListRespUserTaskRelation', function () {
+            this
+                .on('toDoListUser.id', '=', 'toDoListRespUserTaskRelation.responsible_user_id')
+        })
+
+    let users = [{}]
+
+    tasks.forEach((task) => {
+        if (task.task_id === taskId) {
+            users.push([{id: task.id,
+                name: task.name
+            }])
+        }
+    })
+
+    return users;
+}

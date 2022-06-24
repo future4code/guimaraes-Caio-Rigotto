@@ -1,7 +1,7 @@
 import app from "./app";
 import express, { Response, Request } from "express";
 
-import { CreateTask, CreateUser, EditUser, GetAllUsers, GetTaskById, GetTaskByUserId, SearchForUser, AssignUserTask } from "./utils/functions"
+import { CreateTask, CreateUser, EditUser, GetAllUsers, GetTaskById, GetTaskByUserId, SearchForUser, AssignUserTask, GetTaskAssignedUser } from "./utils/functions"
 import connection from "./connection";
 
 // TEST CONNECTION
@@ -199,7 +199,7 @@ app.get('/task', async (req: Request, res: Response) => {
 app.get('/user', async (req: Request, res: Response) => {
     let ErrorCode = 500
     try {
-        const userQuery = req.query.user as string
+        const userQuery = req.query.query as string
 
         if (!userQuery) {
             ErrorCode = 400
@@ -211,6 +211,26 @@ app.get('/user', async (req: Request, res: Response) => {
         res.status(200).send(userResult)
     }
     catch (err: any) {
+        res.status(ErrorCode).end(err.message)
+    }
+})
+
+// GET USER ASSIGNED TO TASK BY TASK ID
+app.get('/task/:id/responsible', async (req: Request, res: Response) => {
+    let ErrorCode = 500
+    try{
+        const taskId = Number(req.params.id)
+
+        if(!taskId){
+            ErrorCode = 400
+            throw new Error("Parâmetro 'task_id' não enviado.")
+        }
+        
+        const users = await GetTaskAssignedUser(taskId)
+        
+        res.status(200).send(users)
+    }
+    catch(err:any){
         res.status(ErrorCode).end(err.message)
     }
 })
@@ -236,16 +256,5 @@ app.post('/task/responsible', async (req: Request, res: Response) => {
     }
     catch (err: any) {
         res.status(ErrorCode).end(err.message)
-    }
-})
-
-// GET USER ASSIGNED TO TASK BY TASK ID
-app.get('/task/:id/responsible', async (req: Request, res: Response) => {
-    let ErrorCode = 500
-    try{
-        
-    }
-    catch(err:any){
-
     }
 })
