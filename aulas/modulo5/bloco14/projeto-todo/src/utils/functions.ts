@@ -45,32 +45,35 @@ export const CreateTask = async (task: string,
 }
 
 export const GetTaskById = async (id: number): Promise<any> => {
-    const tasks = await connection('toDoList')
+    const tasks = await connection('toDoListUser')
         .select()
-        .where({ id: id })
+        .join('toDoList', function () {
+            this
+                .on('toDoListUser.id', '=', 'toDoList.creator_user_id')
+        })
 
     if (Object.entries(tasks).length === 0) {
         return null
     }
 
-    const task = tasks[0]
+    const task = tasks.filter((task) => {
+        if (task.id === id) {
+            return task
+        }
+    })
 
-    const creatorName = await connection('toDoListUser')
-        .select()
-        .where({ id: task.creator_user_id })
-
-    const dateSplit = task.limit_date.toISOString().split('-')
+    const dateSplit = task[0].limit_date.toISOString().split('-')
 
     const limitDate = `${dateSplit[2].slice(0, 2)}/${dateSplit[1]}/${dateSplit[0]}`
 
     const taskInfo = [{
-        taskId: task.id,
-        title: task.title,
-        description: task.description,
+        taskId: task[0].id,
+        title: task[0].title,
+        description: task[0].description,
         limitDate: limitDate,
-        status: task.status,
-        creatorUserId: task.creator_user_id,
-        creatorUserNickname: creatorName[0].nickname
+        status: task[0].status,
+        creatorUserId: task[0].creator_user_id,
+        creatorUserNickname: task[0].nickname
     }]
 
     return taskInfo
