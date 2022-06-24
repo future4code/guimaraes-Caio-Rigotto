@@ -79,20 +79,20 @@ export const GetTaskById = async (id: number): Promise<any> => {
     return taskInfo
 }
 
-export const GetAllUsers = async (): Promise<any> =>{
+export const GetAllUsers = async (): Promise<any> => {
     const userList = await connection('toDoListUser')
-    .select('id','nickname')
+        .select('id', 'nickname')
 
-    if(!userList){
+    if (!userList) {
         const users = {}
         return users
     }
 
-    const users = {users: [{...userList}]}
+    const users = { users: [{ ...userList }] }
     return users
 }
 
-export const GetTaskByUserId = async (userId:number): Promise<any> =>{
+export const GetTaskByUserId = async (userId: number): Promise<any> => {
     const tasks = await connection('toDoListUser')
         .select()
         .join('toDoList', function () {
@@ -100,34 +100,79 @@ export const GetTaskByUserId = async (userId:number): Promise<any> =>{
                 .on('toDoListUser.id', '=', 'toDoList.creator_user_id')
         })
 
-        if (Object.entries(tasks).length === 0) {
-            return null
-        }
-        
-        const task = tasks.filter((task) => {
-            if (task.creator_user_id === userId) {
-                return task
-            }
-        })
+    if (Object.entries(tasks).length === 0) {
+        return null
+    }
 
-        if(task.length === 0){
-            const task = {}
+    const task = tasks.filter((task) => {
+        if (task.creator_user_id === userId) {
             return task
         }
-        
-        const dateSplit = task[0].limit_date.toISOString().split('-')
-        
-        const limitDate = `${dateSplit[2].slice(0, 2)}/${dateSplit[1]}/${dateSplit[0]}`
-        
-        const taskInfo = [{
-            taskId: task[0].id,
-            title: task[0].title,
-            description: task[0].description,
-            limitDate: limitDate,
-            creatorUserId: task[0].creator_user_id,
-            status: task[0].status,
-            creatorUserNickname: task[0].nickname
-        }]
+    })
+
+    if (task.length === 0) {
+        const task = {}
+        return task
+    }
+
+    const dateSplit = task[0].limit_date.toISOString().split('-')
+
+    const limitDate = `${dateSplit[2].slice(0, 2)}/${dateSplit[1]}/${dateSplit[0]}`
+
+    const taskInfo = [{
+        taskId: task[0].id,
+        title: task[0].title,
+        description: task[0].description,
+        limitDate: limitDate,
+        creatorUserId: task[0].creator_user_id,
+        status: task[0].status,
+        creatorUserNickname: task[0].nickname
+    }]
 
     return taskInfo
-} 
+}
+
+export const SearchForUser = async (userQuery: string): Promise<any> => {
+    const userSearch = await connection('toDoListUser')
+        .select('id', 'name')
+        .where('name', 'like', `%${userQuery}%`)
+        .orWhere('email', 'like', `%${userQuery}%`)
+
+    if (userSearch.length === 0) {
+        const noUser = {}
+        return noUser
+    }
+
+    const users = { users: [{ ...userSearch }] }
+
+    return users
+}
+
+export const AssignUserTask = async (taskId: number,
+    userId: number): Promise<any> => {
+
+    let allOk
+
+    const userIdChecker = await connection('toDoListUser')
+        .select('id')
+        .where({ id: userId })
+
+    const taskIdChecker = await connection('toDoList')
+        .select('id')
+        .where({ id: taskId })
+
+    if (taskIdChecker.length === 0 || userIdChecker.length === 0) {
+        allOk = false
+        return allOk
+    }
+
+    if (taskIdChecker.length > 0 && userIdChecker.length > 0) {
+        await connection('toDoListRespUserTaskRelation')
+            .insert({
+                task_id: taskId,
+                responsible_user_id: userId
+            })
+        allOk = true
+        return allOk
+    }
+}
