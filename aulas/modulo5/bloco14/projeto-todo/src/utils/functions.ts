@@ -83,6 +83,51 @@ export const GetAllUsers = async (): Promise<any> =>{
     const userList = await connection('toDoListUser')
     .select('id','nickname')
 
-    const user = {users: [{...userList}]}
-    return user
+    if(!userList){
+        const users = {}
+        return users
+    }
+
+    const users = {users: [{...userList}]}
+    return users
 }
+
+export const GetTaskByUserId = async (userId:number): Promise<any> =>{
+    const tasks = await connection('toDoListUser')
+        .select()
+        .join('toDoList', function () {
+            this
+                .on('toDoListUser.id', '=', 'toDoList.creator_user_id')
+        })
+
+        if (Object.entries(tasks).length === 0) {
+            return null
+        }
+        
+        const task = tasks.filter((task) => {
+            if (task.creator_user_id === userId) {
+                return task
+            }
+        })
+
+        if(task.length === 0){
+            const task = {}
+            return task
+        }
+        
+        const dateSplit = task[0].limit_date.toISOString().split('-')
+        
+        const limitDate = `${dateSplit[2].slice(0, 2)}/${dateSplit[1]}/${dateSplit[0]}`
+        
+        const taskInfo = [{
+            taskId: task[0].id,
+            title: task[0].title,
+            description: task[0].description,
+            limitDate: limitDate,
+            creatorUserId: task[0].creator_user_id,
+            status: task[0].status,
+            creatorUserNickname: task[0].nickname
+        }]
+
+    return taskInfo
+} 

@@ -1,7 +1,7 @@
 import app from "./app";
 import express, { Response, Request } from "express";
 
-import { CreateTask, CreateUser, EditUser, GetAllUsers, GetTaskById } from "./utils/functions"
+import { CreateTask, CreateUser, EditUser, GetAllUsers, GetTaskById, GetTaskByUserId } from "./utils/functions"
 import connection from "./connection";
 
 // TEST CONNECTION
@@ -172,5 +172,25 @@ app.get('/task/:id', async (req: Request, res: Response) => {
     }
     catch (err: any) {
         res.status(ErrorCode).end(err.message)
+    }
+})
+
+// GET TODO TASK BY CREATOR ID
+app.get('/task', async (req: Request, res: Response)=>{
+    let ErrorCode = 500
+    try{
+        const creatorId = Number(req.query.creatorUserId)
+
+        if(!creatorId){
+            ErrorCode = 400
+            throw new Error("Parâmetro 'creatorUserId' não enviado.")
+        }
+
+        const tasks = await GetTaskByUserId(creatorId)
+
+        res.status(200).send(tasks)
+    }
+    catch(err:any){
+        res.status(200).end(err.message)
     }
 })
