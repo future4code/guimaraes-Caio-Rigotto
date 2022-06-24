@@ -1,7 +1,7 @@
 import app from "./app";
 import express, { Response, Request } from "express";
 
-import { CreateTask, CreateUser, EditUser, GetTaskById } from "./utils/functions"
+import { CreateTask, CreateUser, EditUser, GetAllUsers, GetTaskById } from "./utils/functions"
 import connection from "./connection";
 
 // TEST CONNECTION
@@ -43,6 +43,19 @@ app.post('/user', async (req: Request, res: Response) => {
         res.status(200).send(`Usuário ${nickname} criado com sucesso.`)
     }
     catch (err: any) {
+        res.status(ErrorCode).end(err.message)
+    }
+})
+
+// GET ALL USERS
+app.get('/user/all', async (req: Request, res: Response)=>{
+    let ErrorCode = 500
+    try{
+       const userList = await GetAllUsers()
+
+       res.status(200).send(userList)
+    }
+    catch(err:any){
         res.status(ErrorCode).end(err.message)
     }
 })

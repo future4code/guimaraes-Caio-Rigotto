@@ -78,3 +78,11 @@ export const GetTaskById = async (id: number): Promise<any> => {
 
     return taskInfo
 }
+
+export const GetAllUsers = async (): Promise<any> =>{
+    const userList = await connection('toDoListUser')
+    .select('id','nickname')
+
+    const user = {users: [{...userList}]}
+    return user
+}
