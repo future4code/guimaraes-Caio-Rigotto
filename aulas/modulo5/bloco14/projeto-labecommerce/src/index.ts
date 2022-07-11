@@ -132,7 +132,7 @@ app.post('/purchases', async (req: Request, res: Response) => {
             errorCode = 400
             throw new Error("Parâmetro necessário não enviado!")
         }
-        if (userId === "" || prodId === "" || quantity === "") {
+        if (userId === "" || prodId === "" || quantity === "" || quantity === "0") {
             errorCode = 400
             throw new Error("Parâmetros não podem estar vazios.")
         }
