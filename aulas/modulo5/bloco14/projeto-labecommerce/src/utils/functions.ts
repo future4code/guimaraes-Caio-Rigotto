@@ -22,12 +22,12 @@ export const CreateProduct = async (prod: prod) => {
 }
 
 export const GetProductsByUserId = async (userId: number) => {
-    const products = await connection('labecommerce_users')
-        .join('labecommerce_purchases',
-            'labecommerce_purchases.user_id',
-            connection.raw('?', [`${userId}`])
-        )
-        .select('name', 'user_id', 'product_id', 'quantity', 'total_price')
+    const products = await connection('labecommerce_purchases')
+        .select("user_id",
+            "product_id",
+            "quantity",
+            "total_price")
+        .where({ 'user_id': `${userId}` })
 
     return products
 }
