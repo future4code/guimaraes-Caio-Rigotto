@@ -24,6 +24,8 @@ class UserAccount {
 
 const userTest: UserAccount = new UserAccount("11111111111", "Joaquim", 22)
 
+console.log(userTest)
+
 // 1.c. Precisamos criar métodos dentro da classe que acessam estas informações.
 
 // 2.
@@ -31,7 +33,7 @@ class Transaction {
     private description: string;
     private value: number;
     private date: string
-    
+
     constructor(description: string,
         value: number,
         date: string) {
@@ -39,11 +41,35 @@ class Transaction {
         this.value = value;
         this.date = date;
     }
-    public getDescription = () =>{
-        console.log (this.description)
+    public getDescription = (): string => {
+        return this.description
+    }
+    public getData = (): string => {
+        return `Description: ${this.description} - Value: ${this.value} - Date: ${this.date}`
     }
 }
 
 const transaction1 = new Transaction("descrição", 12, "data")
 
-transaction1.getDescription()
+console.log(transaction1.getDescription())
+console.log(transaction1.getData())
+
+// 3.
+class Bank {
+    private accounts: UserAccount[];
+    constructor(accounts: UserAccount[]) {
+        this.accounts = accounts;
+    }
+    public changeAccount = (newAccount: UserAccount[]) => {
+        this.accounts = newAccount
+
+        console.log(newAccount)
+    }
+    public getAccount = ():UserAccount[] => {
+        return this.accounts
+    }
+}
+
+const bankAccount: Bank = new Bank([userTest])
+
+console.log(bankAccount.getAccount())
