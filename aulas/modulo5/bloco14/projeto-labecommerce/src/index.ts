@@ -50,7 +50,7 @@ app.get('/users/:user_id/purchases', async (req: Request, res: Response) => {
         const purchases = await GetProductsByUserId(userId)
 
         res.status(200).send(purchases)
-    } catch (err:any) {
+    } catch (err: any) {
         res.status(errorCode).end(err.message)
     }
 })
