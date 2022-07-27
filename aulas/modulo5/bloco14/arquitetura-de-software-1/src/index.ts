@@ -1,10 +1,9 @@
-import { app } from "./app"
-import { createUser } from './endpoints/createUser'
-import { createTask } from './endpoints/createTask'
+import {app} from "./app"
 
 
-app.post('/user', createUser)
 
-app.post('/task', createTask)
+app.get("/", async function(){
+   console.log("endpoint teste")
+})
 
 
