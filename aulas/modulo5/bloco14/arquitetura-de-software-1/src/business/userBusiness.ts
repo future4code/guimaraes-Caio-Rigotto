@@ -1,5 +1,6 @@
 import { userDataBase } from '../data/userDatabase';
 import { v4 as generateId } from 'uuid';
+import { user } from '../types/user';
 
 export class userBusiness {
     createUser = async (user: any): Promise<void> => {
@@ -29,9 +30,12 @@ export class userBusiness {
                 email, 
                 password})
 
-
         } catch (error: any) {
             throw new Error(error.message || "Erro criando usuário.");
         }
+    }
+    get = async ():Promise<user[]>=>{
+        const UserDataBase = new userDataBase()
+        return await UserDataBase.get()
     }
 }
