@@ -1,0 +1,30 @@
+GET http://localhost:3003/user
+Content-Type: application/json
+
+###
+
+GET http://localhost:3003/movie
+Content-Type: application/json 
+
+###
+
+POST http://localhost:3003/user/create
+Content-Type: application/json
+
+{
+    "name": "teste2",
+    "email": "email2@email.com",
+    "password": "23432535"
+}
+
+###
+
+POST http://localhost:3003/movie/create
+Content-Type: application/json
+
+{
+    "title": "teste2",
+    "description": "um filme de teste2",
+    "durationInMinutes": "127",
+    "yearOfRelease": "1987"
+}
