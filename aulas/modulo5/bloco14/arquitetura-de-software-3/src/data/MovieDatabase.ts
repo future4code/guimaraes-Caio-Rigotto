@@ -1,4 +1,4 @@
-import { Movie } from "../types/Movie";
+import { Movie } from "../model/Movie";
 import { BaseDatabase } from "./BaseDatabase";
 
 export class MovieDatabase extends BaseDatabase {

@@ -1,25 +1,17 @@
 import { MovieDatabase } from "../data/MovieDatabase"
 import { v4 as generateId } from 'uuid'
-import { Movie } from "../types/Movie"
+import { Movie } from "../model/Movie"
+import { CreateMovieDTO } from "../model/MovieDTO"
 
 export class MovieBusiness {
-  async create({ title,
-    description,
-    durationInMinutes,
-    yearOfRelease }: any): Promise<void> {
-    if (!title || !description || !durationInMinutes || !yearOfRelease) {
-      throw new Error("Dados inválidos (title, description, durationInMinutes, yearOfRelease)")
-    }
+  async create(input: CreateMovieDTO): Promise<void> {
 
     const id = generateId()
 
     const movieDatabase = new MovieDatabase()
     await movieDatabase.create({
       id,
-      title,
-      description,
-      durationInMinutes,
-      yearOfRelease
+      input
     })
   }
   async get(): Promise<Movie[]> {
