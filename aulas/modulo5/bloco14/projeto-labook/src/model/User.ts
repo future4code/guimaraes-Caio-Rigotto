@@ -8,7 +8,6 @@ export class user {
     getId() {
         return this.id
     }
-
     getName() {
         return this.name
     }
