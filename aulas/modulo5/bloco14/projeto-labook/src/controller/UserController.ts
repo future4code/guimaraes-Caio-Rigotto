@@ -7,10 +7,11 @@ export class userController {
     async create(req: Request, res: Response): Promise<void> {
         try {
             let message = "Success!"
-            const { name, email, password } = req.body
 
             const input = {
-                name, email, password
+                name: req.body.name,
+                email: req.body.email,
+                password: req.body.password
             }
 
             const UserBusiness = new userBusiness()
