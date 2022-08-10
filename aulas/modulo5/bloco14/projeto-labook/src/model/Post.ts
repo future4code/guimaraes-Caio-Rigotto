@@ -1,3 +1,5 @@
+import { POST_TYPES } from "./PostTypes"
+
 export class post {
     constructor(
         private id: string,
@@ -8,7 +10,3 @@ export class post {
         private authorId: string) { }
 }
 
-enum POST_TYPES {
-    NORMAL = "normal",
-    EVENT = "event"
- }

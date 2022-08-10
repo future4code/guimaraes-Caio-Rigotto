@@ -1,18 +1,30 @@
-import { UserDatabase } from "../data/UserDatabase";
+import { userDatabase } from "../data/UserDatabase";
 import { CustomError } from "../error/CustomError";
 import { generateId } from "../services/GenerateId";
 
 export class userBusiness {
     async create(input: any) {
-        const {name, email, password} = input
+        try {
+            const { name, email, password } = input
 
-        const id: string = generateId()
+            const id: string = generateId()
 
-        if (!name || !email || !password) {
-            throw new CustomError('"name", "email" and "password" must be provided', 406)
+            if (!name || !email || !password) {
+                throw new CustomError('"name", "email" and "password" must be provided', 406)
+            }
+
+            const newUser = {
+                id,
+                name,
+                email,
+                password
+            }
+
+            const UserDatabase = new userDatabase()
+            await UserDatabase.insert(newUser)
+            
+        } catch (error) {
+            throw new CustomError('Something went wrong', 500)
         }
-
-        const userDatabase = new UserDatabase()
-        await userDatabase.create({id, name, email, password})
     }
 }

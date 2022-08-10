@@ -1,7 +1,5 @@
 import { Request, Response } from "express"
 import { userBusiness } from "../business/UserBusiness"
-import { CreateUserDTO } from "../model/UserDTO"
-import { generateId } from "../services/GenerateId"
 
 export class userController {
     async create(req: Request, res: Response): Promise<void> {
@@ -22,7 +20,7 @@ export class userController {
         } catch (error: any) {
             res.statusCode = 400
             let message = error.sqlMessage || error.message
-            res.send({ message })
+            res.send(message)
         }
     }
 }

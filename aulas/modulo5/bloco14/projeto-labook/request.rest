@@ -10,3 +10,15 @@ Content-Type: application/json
     "email": "email@email.com",
     "password": "23432535"
 }
+
+###
+
+POST http://localhost:3003/post/create
+Content-Type: application/json
+
+{
+    "photo": "https://www.iconspng.com/images/placeholder-graphic-for-temporary-content/placeholder-graphic-for-temporary-content.jpg",
+    "description": "Uma descrição de teste",
+    "type": "normal",
+    "authorId": "a4b59bbc-dcac-4e11-8bbf-832c8706e748"
+}
