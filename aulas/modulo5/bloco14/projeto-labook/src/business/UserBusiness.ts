@@ -1,14 +1,18 @@
 import { UserDatabase } from "../data/UserDatabase";
 import { CustomError } from "../error/CustomError";
-import { CreateUserDTO } from "../model/UserDTO";
-
+import { generateId } from "../services/GenerateId";
 
 export class userBusiness {
-    async create(input:CreateUserDTO) {
-        if (!input.name || !input.email || !input.password) {
-            throw new CustomError('"name", "email" and "password" must be provided',406)
+    async create(input: any) {
+        const {name, email, password} = input
+
+        const id: string = generateId()
+
+        if (!name || !email || !password) {
+            throw new CustomError('"name", "email" and "password" must be provided', 406)
         }
-    const userDatabase = new UserDatabase()
-    await userDatabase.create(input)
+
+        const userDatabase = new UserDatabase()
+        await userDatabase.create({id, name, email, password})
     }
 }

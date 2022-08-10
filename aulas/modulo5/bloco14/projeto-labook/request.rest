@@ -1,0 +1,12 @@
+GET http://localhost:3003/ping
+Content-Type: application/json
+
+###
+
+POST http://localhost:3003/user/create
+Content-Type: application/json
+
+{
+    "email": "email@email.com",
+    "password": "23432535"
+}

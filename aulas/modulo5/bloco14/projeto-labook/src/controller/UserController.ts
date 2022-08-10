@@ -1,7 +1,5 @@
 import { Request, Response } from "express"
-import { app } from "../app"
 import { userBusiness } from "../business/UserBusiness"
-import { CustomError } from "../error/CustomError"
 import { CreateUserDTO } from "../model/UserDTO"
 import { generateId } from "../services/GenerateId"
 
@@ -11,14 +9,12 @@ export class userController {
             let message = "Success!"
             const { name, email, password } = req.body
 
-            const id: string = generateId()
-
-            const input: CreateUserDTO = {
-                id, name, email, password
+            const input = {
+                name, email, password
             }
 
             const UserBusiness = new userBusiness()
-            UserBusiness.create(input)
+            await UserBusiness.create(input);
 
             res.status(201).send({ message })
 
