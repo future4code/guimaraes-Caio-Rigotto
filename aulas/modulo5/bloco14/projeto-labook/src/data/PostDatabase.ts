@@ -1,11 +1,10 @@
 import { CustomError } from "../error/CustomError";
-import { CreatePostDTO } from "../model/PostDTO";
 import { BaseDatabase } from "./BaseDatabase";
 import { post } from "../model/Post";
 
 
 export class postDatabase extends BaseDatabase {
-    async insert(input: CreatePostDTO) {
+    async insertPost(input: any) {
         try {
             await BaseDatabase.connection("labook_posts")
                 .insert({
@@ -16,8 +15,8 @@ export class postDatabase extends BaseDatabase {
                     created_at: input.createdAt,
                     author_id: input.authorId
                 })
-        } catch (error) {
-            throw new CustomError('Something went wrong', 500)
+        } catch (error: any) {
+            throw new CustomError(error.message || error.sqlMessage, error.statusCode)
         }
     }
 
@@ -27,6 +26,10 @@ export class postDatabase extends BaseDatabase {
                 .select("*")
                 .where({ id })
 
+            if (!queryResult[0]) {
+                throw new CustomError('Post not found, invalid Id', 404)
+            }
+
             const result = new post(queryResult[0].id,
                 queryResult[0].photo,
                 queryResult[0].description,
@@ -34,19 +37,21 @@ export class postDatabase extends BaseDatabase {
                 queryResult[0].created_at,
                 queryResult[0].author_id)
 
-            const finishedResult = {
-                id: result.getId(),
-                photo: result.getPhoto(),
-                description: result.getDescription(),
-                type: result.getType(),
-                createdAt: result.getCreatedAt(),
-                authorId: result.getAuthorId(),
+            const finishedResult = (post: post): any => {
+                return {
+                    id: post.getId(),
+                    photo: post.getPhoto(),
+                    description: post.getDescription(),
+                    type: post.getType(),
+                    created_at: post.getCreatedAt(),
+                    author_id: post.getAuthorId(),
+                }
             }
 
-            return finishedResult
+            return finishedResult(result)
         }
         catch (error: any) {
-            throw new CustomError('Something went wrong', 500)
+            throw new CustomError(error.message || error.sqlMessage, error.statusCode)
         }
     }
 }

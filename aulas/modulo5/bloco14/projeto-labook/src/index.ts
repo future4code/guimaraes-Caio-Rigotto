@@ -1,7 +1,7 @@
 import { app } from './app'
 import { Request, Response } from 'express'
-import {userRouter} from './routes/UserRouter'
-import { postRouter } from './routes/PostRouter'
+import {userRouter} from './controller/routes/UserRouter'
+import { postRouter } from './controller/routes/PostRouter'
 
 app.use("/user", userRouter)
 
@@ -18,8 +18,4 @@ app.get('/ping', async (req: Request, res: Response) => {
       res.send({ message })
    }
 })
-
-/**************************** ENDPOINTS ******************************/
-
-
-   
+ 

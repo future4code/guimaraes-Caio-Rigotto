@@ -1,10 +1,11 @@
 import { postDatabase } from "../data/PostDatabase";
 import { CustomError } from "../error/CustomError";
+import { InvalidRequest } from "../error/InvalidRequest";
+import { CreatePostDTO } from "../model/PostDTO";
 import { generateId } from "../services/GenerateId";
-import { post } from "../model/Post";
 
 export class postBusiness {
-    async create(input: any) {
+    async createPost(input: CreatePostDTO) {
         try {
             const { photo,
                 description,
@@ -12,7 +13,7 @@ export class postBusiness {
                 authorId } = input
 
             if (!photo || !description || !type || !authorId) {
-                throw new CustomError('"photo", "description", "type" and "authorId" must be provided', 406)
+                throw new InvalidRequest()
             }
 
             const postId: string = generateId()
@@ -28,26 +29,21 @@ export class postBusiness {
             }
 
             const PostDatabase = new postDatabase()
-            await PostDatabase.insert(newPost)
+            await PostDatabase.insertPost(newPost)
 
-        } catch (error) {
-            throw new CustomError('Something went wrong', 500)
+        } catch (error:any) {
+            throw new CustomError(error.message || error.sqlMessage, error.statusCode)
         }
     }
+
     async getPostById(id: string) {
         try {
             const PostDatabase = new postDatabase()
-            const post =  await PostDatabase.getPostById(id)
-
-            console.log(post)
-
-            if (!post) {
-                throw new CustomError("Id sent don't correspond to any post", 400)
-            }
+            const post = await PostDatabase.getPostById(id)
 
             return post
-        } catch (error) {
-            throw new CustomError('Something went wrong', 500)
+        } catch (error:any) {
+            throw new CustomError(error.message || error.sqlMessage, error.statusCode)
         }
     }
 }

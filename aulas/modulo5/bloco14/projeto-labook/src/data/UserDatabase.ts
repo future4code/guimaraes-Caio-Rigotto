@@ -7,7 +7,7 @@ export class userDatabase extends BaseDatabase {
 
     async insert(input: CreateUserDTO) {
         try {
-            await userDatabase.connection(this.tableName)
+            await BaseDatabase.connection(this.tableName)
                 .insert({
                     id: input.id,
                     name: input.name,

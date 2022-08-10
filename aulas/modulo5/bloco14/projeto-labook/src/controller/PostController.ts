@@ -1,12 +1,13 @@
 import { Request, Response } from "express";
 import { postBusiness } from "../business/PostBusiness";
+import { CreatePostDTO } from "../model/PostDTO";
 
 export class postController {
-    async create(req: Request, res: Response) {
+    async createPost(req: Request, res: Response) {
         try {
             let message = "Success!"
 
-            const input = {
+            const input:CreatePostDTO = {
                 photo: req.body.photo,
                 description: req.body.description,
                 type: req.body.type,
@@ -15,17 +16,16 @@ export class postController {
 
             const PostBusiness = new postBusiness()
 
-            await PostBusiness.create(input)
+            await PostBusiness.createPost(input)
 
             res.status(201).send({ message })
 
         } catch (error: any) {
             let message = error.sqlMessage || error.message
-            res.statusCode = 400
-            res.send({ message })
+            res.status(error.statusCode || 400).send(message)
         }
     }
-    async getAll(req: Request, res: Response) {
+    async getPostById(req: Request, res: Response) {
         try {
             let message = "Success!"
       
@@ -37,9 +37,8 @@ export class postController {
             res.status(200).send({ message, post })
       
          } catch (error: any) {
-            let message = error.sqlMessage || error.message
-            res.statusCode = 400
-            res.send({ message })
+            let message = error.message || error.sqlMessage
+            res.status(error.statusCode || 400).send(message)
          }
     }
 }
