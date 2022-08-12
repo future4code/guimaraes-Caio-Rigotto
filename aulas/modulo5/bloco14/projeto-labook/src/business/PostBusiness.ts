@@ -1,11 +1,11 @@
 import { postDatabase } from "../data/PostDatabase";
 import { CustomError } from "../error/CustomError";
 import { InvalidRequest } from "../error/InvalidRequest";
-import { CreatePostDTO } from "../model/PostDTO";
+import { PostInputDTO } from "../model/Post";
 import { generateId } from "../services/GenerateId";
 
 export class postBusiness {
-    async createPost(input: CreatePostDTO) {
+    async createPost(input: PostInputDTO) {
         try {
             const { photo,
                 description,

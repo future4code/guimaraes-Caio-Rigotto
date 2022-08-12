@@ -1,11 +1,11 @@
 import { CustomError } from "../error/CustomError";
-import { CreateUserDTO } from "../model/UserDTO";
+import { UserInputDTO } from "../model/User";
 import { BaseDatabase } from "./BaseDatabase";
 
 export class userDatabase extends BaseDatabase {
     private tableName = "labook_users";
 
-    async insert(input: CreateUserDTO) {
+    async insert(input: UserInputDTO) {
         try {
             await BaseDatabase.connection(this.tableName)
                 .insert({

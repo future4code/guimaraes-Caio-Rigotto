@@ -1,12 +1,14 @@
 import { CustomError } from "../error/CustomError";
 import { BaseDatabase } from "./BaseDatabase";
-import { post } from "../model/Post";
+import { post, PostOutputDTO } from "../model/Post";
 
 
 export class postDatabase extends BaseDatabase {
-    async insertPost(input: any) {
+    private tableName = "labook_posts";
+
+    async insertPost(input: post) {
         try {
-            await BaseDatabase.connection("labook_posts")
+            await BaseDatabase.connection(this.tableName)
                 .insert({
                     id: input.id,
                     photo: input.photo,
@@ -22,7 +24,7 @@ export class postDatabase extends BaseDatabase {
 
     async getPostById(id: string) {
         try {
-            const queryResult: any = await BaseDatabase.connection("labook_posts")
+            const queryResult: any = await BaseDatabase.connection(this.tableName)
                 .select("*")
                 .where({ id })
 
@@ -30,25 +32,16 @@ export class postDatabase extends BaseDatabase {
                 throw new CustomError('Post not found, invalid Id', 404)
             }
 
-            const result = new post(queryResult[0].id,
-                queryResult[0].photo,
-                queryResult[0].description,
-                queryResult[0].type,
-                queryResult[0].created_at,
-                queryResult[0].author_id)
-
-            const finishedResult = (post: post): any => {
-                return {
-                    id: post.getId(),
-                    photo: post.getPhoto(),
-                    description: post.getDescription(),
-                    type: post.getType(),
-                    created_at: post.getCreatedAt(),
-                    author_id: post.getAuthorId(),
-                }
+            const result: PostOutputDTO = {
+                id,
+                photo: queryResult[0].photo,
+                description: queryResult[0].description,
+                type: queryResult[0].type,
+                created_at: queryResult[0].created_at,
+                author_id: queryResult[0].author_id,
             }
 
-            return finishedResult(result)
+            return result
         }
         catch (error: any) {
             throw new CustomError(error.message || error.sqlMessage, error.statusCode)

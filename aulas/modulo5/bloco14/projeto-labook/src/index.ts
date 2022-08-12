@@ -1,11 +1,14 @@
 import { app } from './app'
 import { Request, Response } from 'express'
-import {userRouter} from './controller/routes/UserRouter'
+import { userRouter } from './controller/routes/UserRouter'
 import { postRouter } from './controller/routes/PostRouter'
+import { relationsRouter } from './controller/routes/RelationsRouter'
 
 app.use("/user", userRouter)
 
 app.use("/post", postRouter)
+
+app.use("/friend", relationsRouter)
 
 
 app.get('/ping', async (req: Request, res: Response) => {
@@ -18,4 +21,4 @@ app.get('/ping', async (req: Request, res: Response) => {
       res.send({ message })
    }
 })
- 
+

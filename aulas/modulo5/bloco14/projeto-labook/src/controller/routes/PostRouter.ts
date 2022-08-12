@@ -5,5 +5,5 @@ export const postRouter = express.Router()
 
 const PostController = new postController()
 
-postRouter.post('/create', PostController.createPost)
 postRouter.get('/:id', PostController.getPostById)
+postRouter.post('/create', PostController.createPost)

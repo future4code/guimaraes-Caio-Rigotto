@@ -7,8 +7,9 @@ POST http://localhost:3003/user/create
 Content-Type: application/json
 
 {
-    "email": "email@email.com",
-    "password": "23432535"
+    "name": "Joaquin",
+    "email": "joaquin@email.com",
+    "password": "23432432"
 }
 
 ###
@@ -26,4 +27,14 @@ Content-Type: application/json
 ###
 GET  http://localhost:3003/post/f146e5ef-ccbb-43f0-8c60-fbb060002c8c
 Content-Type: application/json
+
+###
+
+POST http://localhost:3003/friend/create
+Content-Type: application/json
+
+{
+    "senderId": "a4b59bbc-dcac-4e11-8bbf-832c8706e748",
+    "receiverId": "9fa27833-8daa-4e4e-beea-756e29b0e84d"
+}
 
