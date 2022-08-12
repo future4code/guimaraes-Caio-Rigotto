@@ -38,3 +38,12 @@ Content-Type: application/json
     "receiverId": "9fa27833-8daa-4e4e-beea-756e29b0e84d"
 }
 
+###
+
+DELETE http://localhost:3003/friend/delete
+Content-Type: application/json
+
+{
+    "userId": "a4b59bbc-dcac-4e11-8bbf-832c8706e748",
+    "friendId": "9fa27833-8daa-4e4e-beea-756e29b0e84d"
+}

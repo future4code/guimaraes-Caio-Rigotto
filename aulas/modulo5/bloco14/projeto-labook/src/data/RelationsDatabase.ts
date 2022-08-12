@@ -38,4 +38,14 @@ export class RelationsDatabase extends BaseDatabase {
             throw new CustomError(error.message || error.sqlMessage, error.statusCode)
         }
     }
+    async deleteRelation(id: string) {
+        try {
+            await BaseDatabase.connection(this.tableName)
+                .delete()
+                .where({ id: id })
+
+        } catch (error: any) {
+            throw new CustomError(error.message || error.sqlMessage, error.statusCode)
+        }
+    }
 }
