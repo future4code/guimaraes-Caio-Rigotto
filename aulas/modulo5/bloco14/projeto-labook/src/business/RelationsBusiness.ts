@@ -1,6 +1,7 @@
 import { RelationsDatabase } from "../data/RelationsDatabase";
 import { CustomError } from "../error/CustomError";
 import { InvalidRequest } from "../error/InvalidRequest";
+import { SameUserId } from "../error/SameUserId";
 import { RelationInputDTO } from "../model/Relation";
 import { generateId } from "../services/GenerateId";
 
@@ -14,7 +15,7 @@ export class RelationsBusiness {
                 throw new InvalidRequest()
             }
             if (senderId === receiverId) {
-                throw new CustomError("Sender id and receiver id can't be the same", 402)
+                throw new SameUserId()
             }
 
             const newRelation = {
@@ -28,7 +29,7 @@ export class RelationsBusiness {
             const checkRelations = await relationsDatabase.checkRelations(newRelation)
 
             if (checkRelations.length > 0) {
-                throw new CustomError("Users already have a friendship", 402)
+                throw new CustomError("Users already have a friendship", 400)
             }
 
             await relationsDatabase.insertRelation(newRelation)
@@ -37,6 +38,7 @@ export class RelationsBusiness {
             throw new CustomError(error.message || error.sqlMessage, error.statusCode)
         }
     }
+
     async deleteRelation(input: RelationInputDTO) {
         try {
             const { senderId, receiverId } = input
@@ -45,7 +47,7 @@ export class RelationsBusiness {
                 throw new InvalidRequest()
             }
             if (senderId === receiverId) {
-                throw new CustomError("User id and friend id can't be the same", 402)
+                throw new SameUserId()
             }
 
             const relationsDatabase = new RelationsDatabase()
@@ -53,7 +55,7 @@ export class RelationsBusiness {
             const checkRelations = await relationsDatabase.checkRelations(input)
 
             if (!checkRelations[0]) {
-                throw new CustomError("Users don't have a friendship, check id's", 402)
+                throw new CustomError("Users don't have a friendship, check id's", 400)
             }
 
             await relationsDatabase.deleteRelation(checkRelations[0].id)

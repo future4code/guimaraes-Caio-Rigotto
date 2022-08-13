@@ -1,28 +1,15 @@
 import { CustomError } from "../error/CustomError";
-import { relation, RelationInputDTO } from "../model/Relation";
+import { relation, RelationInputDTO, RelationOutputDTO } from "../model/Relation";
 import { BaseDatabase } from "./BaseDatabase";
 
 export class RelationsDatabase extends BaseDatabase {
     private tableName = "labook_users_relations";
 
-    async insertRelation(input: relation) {
-        try {
-            await BaseDatabase.connection(this.tableName)
-                .insert({
-                    id: input.id,
-                    sender_id: input.senderId,
-                    receiver_id: input.receiverId
-                })
-
-        } catch (error: any) {
-            throw new CustomError(error.message || error.sqlMessage, error.statusCode)
-        }
-    }
     async checkRelations(input: RelationInputDTO) {
         try {
             const { senderId, receiverId } = input
 
-            const check = await BaseDatabase.connection(this.tableName)
+            const check: RelationOutputDTO[] = await BaseDatabase.connection(this.tableName)
                 .select('*')
                 .where({
                     sender_id: senderId,
@@ -38,6 +25,21 @@ export class RelationsDatabase extends BaseDatabase {
             throw new CustomError(error.message || error.sqlMessage, error.statusCode)
         }
     }
+
+    async insertRelation(input: relation) {
+        try {
+            await BaseDatabase.connection(this.tableName)
+                .insert({
+                    id: input.id,
+                    sender_id: input.senderId,
+                    receiver_id: input.receiverId
+                })
+
+        } catch (error: any) {
+            throw new CustomError(error.message || error.sqlMessage, error.statusCode)
+        }
+    }
+
     async deleteRelation(id: string) {
         try {
             await BaseDatabase.connection(this.tableName)

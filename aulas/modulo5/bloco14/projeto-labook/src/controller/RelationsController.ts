@@ -19,6 +19,7 @@ export class RelationsController {
             res.status(error.statusCode || 400).send(message)
         }
     }
+    
     async deleteRelation(req: Request, res: Response) {
         try {
             const input:RelationInputDTO = {
