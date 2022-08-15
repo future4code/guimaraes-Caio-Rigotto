@@ -11,7 +11,7 @@ export class userBusiness {
             const id: string = generateId()
 
             if (!name || !email || !password) {
-                throw new CustomError('"name", "email" and "password" must be provided', 406)
+                throw new InvalidRequest()
             }
 
             const newUser = {
@@ -24,8 +24,8 @@ export class userBusiness {
             const UserDatabase = new userDatabase()
             await UserDatabase.insert(newUser)
             
-        } catch (error) {
-            throw new CustomError('Something went wrong', 500)
+        } catch (error: any) {
+            throw new CustomError(error.message || error.sqlMessage, error.statusCode)
         }
     }
     

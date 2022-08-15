@@ -1,6 +1,7 @@
 import { CustomError } from "../error/CustomError";
 import { UserInputDTO } from "../model/User";
 import { GetFriendsIds } from "../services/GetFriendsIds";
+import { postDate } from "../services/PostDate";
 import { BaseDatabase } from "./BaseDatabase";
 
 export class userDatabase extends BaseDatabase {
@@ -15,9 +16,13 @@ export class userDatabase extends BaseDatabase {
                     email: input.email,
                     password: input.password
                 })
-        } catch (error) {
-            throw new CustomError('Something is wrong', 500)
+        } catch (error: any) {
+            throw new CustomError(error.message || error.sqlMessage, error.statusCode)
         }
+    }
+
+    async checkNewUserAvailability(input: UserInputDTO) {
+
     }
 
     async getUserFriends(id: string) {
@@ -44,15 +49,24 @@ export class userDatabase extends BaseDatabase {
             for (let index = 0; index < timelineIds.length; index++) {
 
                 const friendPost = await BaseDatabase.connection(this.tableName)
-                    .select('labook_posts.id','name', 'photo', 'description', 'type', 'created_at', 'author_id')
+                    .select('labook_posts.id', 'name', 'photo', 'description', 'type', 'created_at', 'author_id')
                     .join('labook_posts', 'labook_users.id', '=', 'labook_posts.author_id')
                     .where({ author_id: timelineIds[index] })
 
                 if (friendPost[0]) {
-                    posts.push(... friendPost)
+                    posts.push(...friendPost)
                 }
             }
 
+            posts.sort((a, b) => {
+                if (postDate(a.created_at) > postDate(b.created_at)) {
+                    return -1
+                }
+                if (postDate(b.created_at) > postDate(a.created_at)) {
+                    return 1
+                }
+                return 0
+            })
             return posts
         } catch (error: any) {
             throw new CustomError(error.message || error.sqlMessage, error.statusCode)

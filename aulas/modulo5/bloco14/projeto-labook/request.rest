@@ -3,7 +3,7 @@ GET http://localhost:3003/ping
 Content-Type: application/json
 
 ### GET POST BY ID 
-GET  http://localhost:3003/post/f146e5ef-ccbb-43f0-8c60-fbb060002c8c
+GET  http://localhost:3003/post/ebc2b3d1-cb9b-43fd-9d29-2ecbef3379b8
 Content-Type: application/json
 
 ### GET POSTS BY USER ID

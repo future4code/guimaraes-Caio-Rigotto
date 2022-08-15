@@ -18,9 +18,8 @@ export class userController {
             res.status(201).send({ message })
 
         } catch (error: any) {
-            res.statusCode = 400
             let message = error.sqlMessage || error.message
-            res.send(message)
+            res.status(error.statusCode || 400).send(message)
         }
     }
 
