@@ -1,5 +1,3 @@
-export class authenticationData {
-    constructor(
-        id: string
-    ) { }
+export type authenticationData = {
+    id: string
 }

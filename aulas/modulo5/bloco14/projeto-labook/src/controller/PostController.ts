@@ -5,7 +5,7 @@ import { PostInputDTO } from "../model/Post";
 export class postController {
     async createPost(req: Request, res: Response) {
         try {
-            let message = "Success!"
+            let message = "Post created!"
 
             const input: PostInputDTO = {
                 photo: req.body.photo,

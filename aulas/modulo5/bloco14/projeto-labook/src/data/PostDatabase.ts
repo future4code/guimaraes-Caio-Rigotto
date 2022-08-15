@@ -1,6 +1,7 @@
 import { CustomError } from "../error/CustomError";
 import { BaseDatabase } from "./BaseDatabase";
 import { post, PostOutputDTO } from "../model/Post";
+import { InvalidID } from "../error/InvalidId";
 
 
 export class postDatabase extends BaseDatabase {
@@ -29,7 +30,7 @@ export class postDatabase extends BaseDatabase {
                 .where({ id })
 
             if (!queryResult[0]) {
-                throw new CustomError('Post not found, invalid Id', 404)
+                throw new InvalidID()
             }
 
             const result: PostOutputDTO = {

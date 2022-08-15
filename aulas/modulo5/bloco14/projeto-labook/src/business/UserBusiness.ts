@@ -1,5 +1,6 @@
 import { userDatabase } from "../data/UserDatabase";
 import { CustomError } from "../error/CustomError";
+import { InvalidRequest } from "../error/InvalidRequest";
 import { generateId } from "../services/GenerateId";
 
 export class userBusiness {
@@ -25,6 +26,24 @@ export class userBusiness {
             
         } catch (error) {
             throw new CustomError('Something went wrong', 500)
+        }
+    }
+    
+    async getUserFriends(id: string) {
+        try {
+            if (!id) {
+                throw new InvalidRequest()
+            }
+
+            const UserDatabase = new userDatabase()
+            const timelineIds = await UserDatabase.getUserFriends(id)
+
+            const timelinePosts = await UserDatabase.getUserTimeline(timelineIds)
+            
+            return timelinePosts
+
+        } catch (error: any) {
+            throw new CustomError(error.message || error.sqlMessage, error.statusCode)
         }
     }
 }

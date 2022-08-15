@@ -23,4 +23,18 @@ export class userController {
             res.send(message)
         }
     }
+
+    async getUserPosts(req: Request, res: Response) {
+        try {
+            const id = req.params.id
+
+            const UserBusiness = new userBusiness()
+            const post = await UserBusiness.getUserFriends(id)
+
+            res.status(200).send(post)
+        } catch (error: any) {
+            let message = error.sqlMessage || error.message
+            res.status(error.statusCode || 400).send(message)
+        }
+    }
 }

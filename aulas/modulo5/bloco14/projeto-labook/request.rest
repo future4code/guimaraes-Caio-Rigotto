@@ -1,44 +1,47 @@
+### PING SERVER
 GET http://localhost:3003/ping
 Content-Type: application/json
 
-###
+### GET POST BY ID 
+GET  http://localhost:3003/post/f146e5ef-ccbb-43f0-8c60-fbb060002c8c
+Content-Type: application/json
 
+### GET POSTS BY USER ID
+GET  http://localhost:3003/user/posts/a4b59bbc-dcac-4e11-8bbf-832c8706e748
+Content-Type: application/json
+
+### CREATE USER
 POST http://localhost:3003/user/create
 Content-Type: application/json
 
 {
-    "name": "Joaquin",
-    "email": "joaquin@email.com",
+    "name": "testonildo2",
+    "email": "testonildo2@email.com",
     "password": "23432432"
 }
 
-###
-
+### CREATE POST
 POST http://localhost:3003/post/create
 Content-Type: application/json
 
 {
     "photo": "https://www.iconspng.com/images/placeholder-graphic-for-temporary-content/placeholder-graphic-for-temporary-content.jpg",
-    "description": "Uma descrição de teste",
+    "description": "Uma descrição de teste 3",
     "type": "normal",
-    "authorId": "a4b59bbc-dcac-4e11-8bbf-832c8706e748"
+    "authorId": "9fa27833-8daa-4e4e-beea-756e29b0e84d"
 }
 
-###
-GET  http://localhost:3003/post/f146e5ef-ccbb-43f0-8c60-fbb060002c8c
-Content-Type: application/json
-
-###
+### CREATE FRIENDSHIP RELATION
 
 POST http://localhost:3003/friend/create
 Content-Type: application/json
 
 {
-    "senderId": "a4b59bbc-dcac-4e11-8bbf-832c8706e748",
-    "receiverId": "9fa27833-8daa-4e4e-beea-756e29b0e84d"
+    "senderId": "9fa27833-8daa-4e4e-beea-756e29b0e84d",
+    "receiverId": "7fa21da4-8e1f-4124-8847-def8d254e4ef"
 }
 
-###
+### DELETE FRIENDSHIP RELATION
 
 DELETE http://localhost:3003/friend/delete
 Content-Type: application/json
@@ -47,3 +50,4 @@ Content-Type: application/json
     "userId": "a4b59bbc-dcac-4e11-8bbf-832c8706e748",
     "friendId": "9fa27833-8daa-4e4e-beea-756e29b0e84d"
 }
+

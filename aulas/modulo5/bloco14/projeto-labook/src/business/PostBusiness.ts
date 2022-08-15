@@ -31,7 +31,7 @@ export class postBusiness {
             const PostDatabase = new postDatabase()
             await PostDatabase.insertPost(newPost)
 
-        } catch (error:any) {
+        } catch (error: any) {
             throw new CustomError(error.message || error.sqlMessage, error.statusCode)
         }
     }
@@ -42,7 +42,7 @@ export class postBusiness {
             const post = await PostDatabase.getPostById(id)
 
             return post
-        } catch (error:any) {
+        } catch (error: any) {
             throw new CustomError(error.message || error.sqlMessage, error.statusCode)
         }
     }
