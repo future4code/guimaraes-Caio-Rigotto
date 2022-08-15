@@ -28,7 +28,7 @@ export class userController {
             const id = req.params.id
 
             const UserBusiness = new userBusiness()
-            const post = await UserBusiness.getUserFriends(id)
+            const post = await UserBusiness.getUserPosts(id)
 
             res.status(200).send(post)
         } catch (error: any) {

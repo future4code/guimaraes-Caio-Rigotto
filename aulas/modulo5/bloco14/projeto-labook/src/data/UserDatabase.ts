@@ -21,8 +21,16 @@ export class userDatabase extends BaseDatabase {
         }
     }
 
-    async checkNewUserAvailability(input: UserInputDTO) {
+    async checkUserAvailability(email: string) {
+        try {
+            const queryResult = await BaseDatabase.connection(this.tableName)
+            .select('*')
+            .where({email:email})
 
+            return queryResult[0]
+        } catch (error: any) {
+            throw new CustomError(error.message || error.sqlMessage, error.statusCode)
+        }
     }
 
     async getUserFriends(id: string) {
@@ -67,6 +75,7 @@ export class userDatabase extends BaseDatabase {
                 }
                 return 0
             })
+
             return posts
         } catch (error: any) {
             throw new CustomError(error.message || error.sqlMessage, error.statusCode)
