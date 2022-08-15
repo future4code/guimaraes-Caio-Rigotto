@@ -5,6 +5,24 @@ import { InvalidRequest } from "../error/InvalidRequest";
 import { generateId } from "../services/GenerateId";
 
 export class userBusiness {
+    async getUserPosts(id: string) {
+        try {
+            if (!id) {
+                throw new InvalidRequest()
+            }
+
+            const UserDatabase = new userDatabase()
+            const timelineIds = await UserDatabase.getUserFriends(id)
+
+            const timelinePosts = await UserDatabase.getUserTimeline(timelineIds)
+            
+            return timelinePosts
+
+        } catch (error: any) {
+            throw new CustomError(error.message || error.sqlMessage, error.statusCode)
+        }
+    }
+
     async create(input: any) {
         try {
             const { name, email, password } = input
@@ -32,24 +50,6 @@ export class userBusiness {
 
             await UserDatabase.insert(newUser)
             
-        } catch (error: any) {
-            throw new CustomError(error.message || error.sqlMessage, error.statusCode)
-        }
-    }
-    
-    async getUserPosts(id: string) {
-        try {
-            if (!id) {
-                throw new InvalidRequest()
-            }
-
-            const UserDatabase = new userDatabase()
-            const timelineIds = await UserDatabase.getUserFriends(id)
-
-            const timelinePosts = await UserDatabase.getUserTimeline(timelineIds)
-            
-            return timelinePosts
-
         } catch (error: any) {
             throw new CustomError(error.message || error.sqlMessage, error.statusCode)
         }
