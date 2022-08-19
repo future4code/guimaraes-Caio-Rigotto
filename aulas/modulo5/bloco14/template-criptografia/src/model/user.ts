@@ -34,3 +34,7 @@ export interface EditUserInput {
 export interface AuthenticationData {
    id: string
 }
+
+export interface ProfileInputDTO {
+   token: string
+} 

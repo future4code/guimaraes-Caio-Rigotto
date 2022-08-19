@@ -6,13 +6,16 @@ import {
   EditUserInputDTO,
   EditUserInput,
   LoginInputDTO,
+  ProfileInputDTO,
 } from "../model/user";
+import { HashManager } from "../services/HashManager";
 import { IdGenerator } from "../services/IdGenerator";
 import { TokenGenerator } from "../services/TokenGenerator";
 
 const idGenerator = new IdGenerator()
 const tokenGenerator = new TokenGenerator()
 const userDatabase = new UserDatabase();
+const hashManager = new HashManager()
 
 export class UserBusiness {
   public createUser = async (input: UserInputDTO): Promise<string> => {
@@ -36,18 +39,40 @@ export class UserBusiness {
 
       const id: string = idGenerator.generateId()
 
+      const hashPassword = await hashManager.generateHash(password)
+
       const user: user = {
         id,
         name,
         nickname,
         email,
-        password,
+        password: hashPassword,
       };
    
       await userDatabase.insertUser(user);
       const token = tokenGenerator.generateToken(id)
 
       return token
+    } catch (error: any) {
+      throw new CustomError(400, error.message);
+    }
+  };
+
+  public userProfile = async (input: ProfileInputDTO) => {
+    try {
+      const { token } = input
+
+      const { id } = tokenGenerator.tokenData(token)
+
+      const userDatabase = new UserDatabase()
+      const userData = userDatabase.getUserById(id)
+
+      if (!userData) {
+        throw new UserNotFound()
+      }
+
+      return userData
+
     } catch (error: any) {
       throw new CustomError(400, error.message);
     }
@@ -74,7 +99,9 @@ export class UserBusiness {
         throw new UserNotFound()
       }
 
-      if(password !== user.password){ 
+      const hashCompare = await hashManager.compareHash(password, user.password)
+
+      if(!hashCompare){ 
         throw new InvalidPassword()
       }
 

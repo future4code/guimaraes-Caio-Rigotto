@@ -17,6 +17,18 @@ export class UserDatabase extends BaseDatabase {
     }
   };
 
+  public getUserById = async (id: string) => {
+    try {
+      const result = await UserDatabase.connection('Auth_users')
+      .select()
+      .where({id})
+
+      return result[0]
+    } catch (error: any) {
+      throw new CustomError(400, error.message);
+    }
+  }; 
+
   public insertUser = async (user: user) => {
     try {
       await UserDatabase.connection
