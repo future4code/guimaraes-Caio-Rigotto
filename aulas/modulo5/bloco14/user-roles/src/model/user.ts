@@ -15,6 +15,10 @@ export interface UserInputDTO {
    role: string
 }
 
+export interface UserProfileDTO {
+   token: string
+}
+
 export interface UserLoginDTO {
    email: string,
    password: string

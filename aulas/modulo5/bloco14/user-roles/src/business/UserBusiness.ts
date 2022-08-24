@@ -7,6 +7,7 @@ import {
   EditUserInputDTO,
   EditUserInput,
   UserLoginDTO,
+  UserProfileDTO,
 } from "../model/user";
 import Authenticator from "../services/Authenticator";
 import HashManager from "../services/HashManager";
@@ -76,9 +77,34 @@ export class UserBusiness {
       const token = Authenticator.generateToken(payload)
 
       return token
-      
+
     } catch (error: any) {
       throw new CustomError(400, error.message);
     }
   }
+
+  public profile = async (input: UserProfileDTO) => {
+    try {
+      const { token } = input
+
+      const authenticationData = Authenticator.getTokenData(token)
+
+      console.log(authenticationData)
+
+      if(authenticationData.role !== "NORMAL"){
+        throw new CustomError(400, "Apenas um usuário de tipo 'NORMAL' pode acessar esta informação")
+      }
+
+      const userData = this.userDB.getUserById(authenticationData)
+
+      if (!userData) {
+        throw new CustomError(400, "Usuário não encontrado")
+      }
+
+      return userData
+
+    } catch (error: any) {
+      throw new CustomError(400, error.message);
+    }
+  };
 }
