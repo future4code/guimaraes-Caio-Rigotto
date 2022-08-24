@@ -92,7 +92,7 @@ export class UserBusiness {
       console.log(authenticationData)
 
       if(authenticationData.role !== "NORMAL"){
-        throw new CustomError(400, "Apenas um usuário de tipo 'NORMAL' pode acessar esta informação")
+        throw new CustomError(401, "Apenas um usuário de tipo 'NORMAL' pode acessar esta informação")
       }
 
       const userData = this.userDB.getUserById(authenticationData)
