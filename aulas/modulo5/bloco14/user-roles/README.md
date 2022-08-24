@@ -145,3 +145,60 @@ public login = async (input: UserLoginDTO) => {
 # EXERCÍCIO 2
 
 ## a.
+
+### ROUTER
+userRouter.get('/profile', userController.profile)
+
+### CONTROLLER
+public profile = async (req: Request, res: Response) => {
+    try {
+      const token: UserProfileDTO = {
+        token: req.headers.authorization as string
+      };
+
+      const userProfile = await this.userBusiness.profile(token);
+
+      res.status(200).send(userProfile);
+    } catch (error: any) {
+      res.status(400).send(error.message);
+    }
+};
+
+### BUSINESS 
+public profile = async (input: UserProfileDTO) => {
+    try {
+      const { token } = input
+
+      const authenticationData = Authenticator.getTokenData(token)
+
+      console.log(authenticationData)
+
+      if(authenticationData.role !== "NORMAL"){
+        throw new CustomError(401, "Apenas um usuário de tipo 'NORMAL' pode acessar esta informação")
+      }
+
+      const userData = this.userDB.getUserById(authenticationData)
+
+      if (!userData) {
+        throw new CustomError(400, "Usuário não encontrado")
+      }
+
+      return userData
+
+    } catch (error: any) {
+      throw new CustomError(400, error.message);
+    }
+};
+
+### DATABASE
+public getUserById = async (authenticationData: AuthenticationData) => {
+    try {
+      const result = await UserDatabase.connection('Auth_users')
+        .select()
+        .where({ id: authenticationData.id })
+
+      return result[0]
+    } catch (error: any) {
+      throw new CustomError(400, error.sqlMessage);
+    }
+};
