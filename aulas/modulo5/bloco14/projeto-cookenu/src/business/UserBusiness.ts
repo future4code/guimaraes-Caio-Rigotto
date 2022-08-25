@@ -1,5 +1,5 @@
 import { UserDatabase } from "../data/UserDatabase";
-import { CustomError, InvalidEmail, InvalidName, InvalidPassword } from "../error/customError";
+import { CustomError, InvalidEmail, InvalidName, InvalidPassword, InvalidPasswordEmail, InvalidToken, MissingInformation } from "../error/customError";
 import { AuthenticationData } from "../model/types";
 import {
   UserInputDTO,
@@ -8,6 +8,8 @@ import {
   EditUserInput,
   UserLoginDTO,
   UserProfileDTO,
+  UserProfileOutputDTO,
+  UserProfileByIdDTO,
 } from "../model/user";
 import Authenticator from "../services/Authenticator";
 import HashManager from "../services/HashManager";
@@ -23,7 +25,7 @@ export class UserBusiness {
     try {
       let { email, password, name } = input
 
-      if (!email || !password || !name ) {
+      if (!email || !password || !name) {
         throw new CustomError(422, "Ausência de parâmetros")
       }
 
@@ -51,10 +53,15 @@ export class UserBusiness {
       const { email, password } = input
 
       if (!email || !password) {
-        throw new CustomError(400, "Ausência de parâmetros")
+        throw new MissingInformation()
       }
 
       const user = await this.userDB.getUserByEmail(email)
+
+      if (!user) {
+        throw new InvalidPasswordEmail()
+      }
+
       const hashCompare = await HashManager.compareHash(
         password,
         user.password
@@ -80,15 +87,49 @@ export class UserBusiness {
     try {
       const { token } = input
 
-      const authenticationData = Authenticator.getTokenData(token)
+      const authenticationData: AuthenticationData = Authenticator.getTokenData(token)
 
-      const userData = this.userDB.getUserById(authenticationData)
+      const userData = await this.userDB.getUserById(authenticationData)
 
       if (!userData) {
-        throw new CustomError(400, "Usuário não encontrado")
+        throw new InvalidToken()
       }
 
-      return userData
+      const userProfile: UserProfileOutputDTO = {
+        id: userData.id,
+        name: userData.name,
+        email: userData.email
+      }
+
+      return userProfile
+
+    } catch (error: any) {
+      throw new CustomError(400, error.message);
+    }
+  };
+  public profileById = async (input: UserProfileByIdDTO) => {
+    try {
+      const { token } = input
+
+      const id: AuthenticationData = {
+        id: input.id
+      }
+
+      const authenticationData = Authenticator.getTokenData(token)
+
+      if (!authenticationData) {
+        throw new InvalidToken()
+      }
+
+      const userData = await this.userDB.getUserById(id)
+
+      const userProfile: UserProfileOutputDTO = {
+        id: userData.id,
+        name: userData.name,
+        email: userData.email
+      }
+
+      return userProfile
 
     } catch (error: any) {
       throw new CustomError(400, error.message);

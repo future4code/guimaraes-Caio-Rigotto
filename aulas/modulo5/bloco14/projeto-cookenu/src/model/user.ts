@@ -15,6 +15,17 @@ export interface UserProfileDTO {
    token: string
 }
 
+export interface UserProfileOutputDTO {
+   id: string,
+   name: string,
+   email: string
+}
+
+export interface UserProfileByIdDTO {
+   token: string
+   id: string
+}
+
 export interface UserLoginDTO {
    email: string,
    password: string

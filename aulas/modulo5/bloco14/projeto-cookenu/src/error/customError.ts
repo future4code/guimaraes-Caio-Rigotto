@@ -6,18 +6,36 @@ export class CustomError extends Error {
 
 export class InvalidName extends CustomError{ 
     constructor(){
-        super(400, "Nome inválido")
+        super(400, "Invalid name")
     }
 }
 
 export class InvalidEmail extends CustomError{ 
     constructor(){
-        super(400, "Email inválido")
+        super(400, "Invalid email")
     }
 }
 
 export class InvalidPassword extends CustomError{ 
     constructor(){
-        super(400, "Senha inválida")
+        super(400, "Invalid password")
+    }
+}
+
+export class InvalidPasswordEmail extends CustomError{ 
+    constructor(){
+        super(400, "Invalid email or password")
+    }
+}
+
+export class InvalidToken extends CustomError{ 
+    constructor(){
+        super(400, "Invalid token, please login again")
+    }
+}
+
+export class MissingInformation extends CustomError{ 
+    constructor(){
+        super(400, "Missing information")
     }
 }

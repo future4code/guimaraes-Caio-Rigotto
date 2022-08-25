@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { UserBusiness } from "../business/UserBusiness";
-import { EditUserInputDTO, UserInputDTO, UserLoginDTO, UserProfileDTO } from "../model/user";
+import { EditUserInputDTO, UserInputDTO, UserLoginDTO, UserProfileByIdDTO, UserProfileDTO } from "../model/user";
 
 export class UserController {
   private userBusiness: UserBusiness
@@ -10,7 +10,6 @@ export class UserController {
 
   public signup = async (req: Request, res: Response) => {
     try {
-
       const input: UserInputDTO = {
         name: req.body.name,
         email: req.body.email,
@@ -19,9 +18,10 @@ export class UserController {
 
       const token = await this.userBusiness.createUser(input)
 
-      res.status(201).send({ message: "Usuário criado!", token });
+      res.status(201).send({ message: "User created", token });
     } catch (error: any) {
-      res.status(400).send(error.message);
+      let message = error.message || error.sqlMessage
+      res.status(error.statusCode || 400).send(message)
     }
   };
 
@@ -34,9 +34,10 @@ export class UserController {
 
       const token = await this.userBusiness.login(input)
 
-      res.status(200).send({message: "Login efetuado com sucesso", token})
+      res.status(200).send({ message: "Login efetuado com sucesso", token })
     } catch (error: any) {
-      res.status(400).send(error.message);
+      let message = error.message || error.sqlMessage
+      res.status(error.statusCode || 400).send(message)
     }
   };
 
@@ -50,7 +51,23 @@ export class UserController {
 
       res.status(200).send(userProfile);
     } catch (error: any) {
-      res.status(400).send(error.message);
+      let message = error.message || error.sqlMessage
+      res.status(error.statusCode || 400).send(message)
     }
   };
+  public profileById = async (req: Request, res: Response) => {
+    try {
+      const input: UserProfileByIdDTO = {
+        token: req.headers.authorization as string,
+        id: req.params.id
+      };
+
+      const userProfileById = await this.userBusiness.profileById(input)
+
+      res.status(200).send(userProfileById);
+    } catch (error: any) {
+      let message = error.message || error.sqlMessage
+      res.status(error.statusCode || 400).send(message)
+    }
+  }
 }
