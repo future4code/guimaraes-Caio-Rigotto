@@ -14,8 +14,13 @@ export class RecipeDatabase extends BaseDatabase {
                     description: recipe.description,
                     created_at: recipe.createdAt,
                     author_id: recipe.authorId
-                }
-                );
+                });
+
+            await RecipeDatabase.connection('Cookenu_assignees')
+                .insert({
+                    recipe_id: recipe.id,
+                    assignee_id: recipe.authorId
+                });
         } catch (error: any) {
             throw new CustomError(400, error.sqlMessage);
         }

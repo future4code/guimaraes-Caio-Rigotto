@@ -5,4 +5,4 @@ export const recipeRouter = express.Router()
 
 const recipeController = new RecipeController()
 
-recipeRouter.post('/recipe', recipeController.create)
+recipeRouter.post('/', recipeController.create)
