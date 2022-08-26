@@ -24,4 +24,20 @@ export class RecipeController {
             res.status(error.statusCode || 400).send(message)
         }
     };
+
+    public getRecipeById = async (req: Request, res: Response) => {
+        try {
+            const input = {
+            token: req.headers.authorization,
+            id: req.params.id
+            }
+
+            const result = await this.recipeBusiness.getRecipeById(input)
+            
+            res.status(200).send(result);
+        } catch (error: any) {
+            let message = error.message || error.sqlMessage
+            res.status(error.statusCode || 400).send(message)
+        }
+    };
 }
