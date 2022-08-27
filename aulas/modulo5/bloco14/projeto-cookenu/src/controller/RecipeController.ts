@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { RecipeBusiness } from "../business/RecipeBusiness";
-import { RecipeInputDTO } from "../model/recipe";
+import { RecipeGetByIdInputDTO, RecipeInputDTO } from "../model/recipe";
 
 export class RecipeController {
     private recipeBusiness: RecipeBusiness
@@ -27,8 +27,8 @@ export class RecipeController {
 
     public getRecipeById = async (req: Request, res: Response) => {
         try {
-            const input = {
-            token: req.headers.authorization,
+            const input : RecipeGetByIdInputDTO = {
+            token: req.headers.authorization as string,
             id: req.params.id
             }
 

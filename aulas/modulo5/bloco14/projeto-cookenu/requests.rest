@@ -17,7 +17,7 @@ Content-Type: application/json
 # GET RECIPE BY ID
 
 GET http://localhost:3003/recipe/5bf7d102-2992-4b41-b06c-b5f3efd24672
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQxOTExYTA0LWZhYjMtNGJlYi05ZTk1LTA0ZjQ1YWYzNGViNCIsImlhdCI6MTY2MTU1NzUxNiwiZXhwIjoxNjYxNTU4MTE2fQ.1ZC35zlc-RXqwGamNfXbcKy8iREcM0gl4I_-3Js1lKE
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQxOTExYTA0LWZhYjMtNGJlYi05ZTk1LTA0ZjQ1YWYzNGViNCIsImlhdCI6MTY2MTU1ODgwNywiZXhwIjoxNjYxNTU5NDA3fQ.unMO8waSlpt8tu815CyifiiDzxGUpWUoREyhtOXFjtY
 Content-Type: application/json
 
 ###

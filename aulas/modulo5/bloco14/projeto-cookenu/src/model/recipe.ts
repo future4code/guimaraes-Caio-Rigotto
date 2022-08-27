@@ -4,10 +4,22 @@ export type recipe = {
     description: string
     createdAt: Date,
     authorId: string
- }
+}
 
- export interface RecipeInputDTO {
+export interface RecipeInputDTO {
     title: string,
     description: string,
-    token: string    
+    token: string
+}
+
+export interface RecipeGetByIdInputDTO {
+    token: string,
+    id: string
+}
+
+export interface RecipeGetByIdOutputDTO {
+    id: string,
+    title: string,
+    description: string,
+    createdAt: string
 }

@@ -1,6 +1,7 @@
 import { RecipeDatabase } from "../data/RecipeDatabase"
 import { CustomError, InvalidToken, MissingInformation } from "../error/customError"
-import { recipe, RecipeInputDTO } from "../model/recipe"
+import { recipe, RecipeGetByIdInputDTO, RecipeGetByIdOutputDTO, RecipeInputDTO } from "../model/recipe"
+import { AuthenticationData } from "../model/types"
 import Authenticator from "../services/Authenticator"
 import { recipeDate } from "../services/DateFormater"
 import IdGenerator from "../services/IdGenerator"
@@ -11,7 +12,7 @@ export class RecipeBusiness {
         this.recipeDB = new RecipeDatabase()
     }
 
-    public create = async (input: RecipeInputDTO) => {
+    public create = async (input: RecipeInputDTO): Promise<void> => {
         try {
             const { title, description, token } = input
 
@@ -43,23 +44,23 @@ export class RecipeBusiness {
         }
     }
 
-    public getRecipeById = async (input: any) => {
+    public getRecipeById = async (input: RecipeGetByIdInputDTO): Promise<RecipeGetByIdOutputDTO> => {
         try {
             const { token, id } = input
 
-            if(!token || !id){
+            if (!token || !id) {
                 throw new MissingInformation()
             }
 
-            const authenticationData = Authenticator.getTokenData(token)
+            const authenticationData: AuthenticationData = Authenticator.getTokenData(token)
 
-            if(!authenticationData){
+            if (!authenticationData) {
                 throw new InvalidToken()
             }
 
             const result = await this.recipeDB.getRecipeById(id)
 
-            const recipe = {
+            const recipe: RecipeGetByIdOutputDTO = {
                 id: result.id,
                 title: result.title,
                 description: result.description,
