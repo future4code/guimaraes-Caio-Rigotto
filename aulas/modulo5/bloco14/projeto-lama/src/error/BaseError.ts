@@ -4,3 +4,8 @@ export abstract class BaseError extends Error {
     }
   }
   
+export class MissingParameters extends BaseError {
+  constructor(){
+    super('Missing parameters', 404)
+  }
+}

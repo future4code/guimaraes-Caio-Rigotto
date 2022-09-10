@@ -3,10 +3,21 @@ import { UserDatabase } from "../data/UserDatabase";
 import { IdGenerator } from "../services/IdGenerator";
 import { HashManager } from "../services/HashManager";
 import { Authenticator } from "../services/Authenticator";
+import { MissingParameters } from "../error/BaseError";
 
 export class UserBusiness {
 
     async createUser(user: UserInputDTO) {
+
+        const { email, name, password } = user
+        let role = user.role.toUpperCase()
+
+        if (!email || !name || !password) {
+            throw new MissingParameters()
+        }
+        if(role !== "NORMAL" && role !== "ADMIN" && !role){
+            role = "NORMAL"
+        }
 
         const idGenerator = new IdGenerator();
         const id = idGenerator.generate();
@@ -15,10 +26,10 @@ export class UserBusiness {
         const hashPassword = await hashManager.hash(user.password);
 
         const userDatabase = new UserDatabase();
-        await userDatabase.createUser(id, user.email, user.name, hashPassword, user.role);
+        await userDatabase.createUser(id, user.email, user.name, hashPassword, role);
 
         const authenticator = new Authenticator();
-        const accessToken = authenticator.generateToken({ id, role: user.role });
+        const accessToken = authenticator.generateToken({ id, role });
 
         return accessToken;
     }
