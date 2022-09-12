@@ -1,4 +1,4 @@
-import { UserInputDTO, LoginInputDTO, User } from "../model/User";
+import { UserInputDTO, LoginInputDTO, User, UserRole } from "../model/User";
 import { UserDatabase } from "../data/UserDatabase";
 import { IdGenerator } from "../services/IdGenerator";
 import { HashManager } from "../services/HashManager";
@@ -10,13 +10,13 @@ export class UserBusiness {
     async createUser(user: UserInputDTO) {
 
         const { email, name, password } = user
-        let role = user.role.toUpperCase()
+        let role = User.stringToUserRole(user.role.toUpperCase())
 
         if (!email || !name || !password || !role) {
             throw new MissingParameters()
         }
         if(role !== "NORMAL" && role !== "ADMIN"){
-            role = "NORMAL"
+            role = UserRole.NORMAL
         }
 
         const idGenerator = new IdGenerator();

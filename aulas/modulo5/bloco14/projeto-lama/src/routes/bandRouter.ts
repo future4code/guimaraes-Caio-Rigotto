@@ -6,4 +6,4 @@ export const userRouter = express.Router();
 
 const bandController = new BandController();
 
-userRouter.post("/create", BandController.create);
+userRouter.post("/create", bandController.create);
