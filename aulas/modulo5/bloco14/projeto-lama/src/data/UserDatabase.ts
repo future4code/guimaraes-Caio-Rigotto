@@ -22,18 +22,22 @@ export class UserDatabase extends BaseDatabase {
           role
         })
         .into(UserDatabase.TABLE_NAME);
-    } catch (error:any) {
+    } catch (error: any) {
       throw new Error(error.sqlMessage || error.message);
     }
   }
 
   public async getUserByEmail(email: string): Promise<User> {
-    const result = await this.getConnection()
-      .select("*")
-      .from(UserDatabase.TABLE_NAME)
-      .where({ email });
+    try {
+      const result = await this.getConnection()
+        .select("*")
+        .from(UserDatabase.TABLE_NAME)
+        .where({ email });
 
-    return User.toUserModel(result[0]);
+      return result[0]
+    } catch (error: any) {
+      throw new Error(error.sqlMessage || error.message);
+    }
   }
 
 }

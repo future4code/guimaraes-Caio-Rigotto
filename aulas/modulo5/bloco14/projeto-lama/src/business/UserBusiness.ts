@@ -1,9 +1,9 @@
-import { UserInputDTO, LoginInputDTO } from "../model/User";
+import { UserInputDTO, LoginInputDTO, User } from "../model/User";
 import { UserDatabase } from "../data/UserDatabase";
 import { IdGenerator } from "../services/IdGenerator";
 import { HashManager } from "../services/HashManager";
 import { Authenticator } from "../services/Authenticator";
-import { MissingParameters } from "../error/BaseError";
+import { InvalidEmail, InvalidPassword, MissingParameters } from "../error/BaseError";
 
 export class UserBusiness {
 
@@ -12,10 +12,10 @@ export class UserBusiness {
         const { email, name, password } = user
         let role = user.role.toUpperCase()
 
-        if (!email || !name || !password) {
+        if (!email || !name || !password || !role) {
             throw new MissingParameters()
         }
-        if(role !== "NORMAL" && role !== "ADMIN" && !role){
+        if(role !== "NORMAL" && role !== "ADMIN"){
             role = "NORMAL"
         }
 
@@ -36,17 +36,29 @@ export class UserBusiness {
 
     async getUserByEmail(user: LoginInputDTO) {
 
+        const {email, password} = user
+
+        if(!email || !password){
+            throw new MissingParameters()
+        }
+
         const userDatabase = new UserDatabase();
         const userFromDB = await userDatabase.getUserByEmail(user.email);
 
+        if(!userFromDB){
+            throw new InvalidEmail()
+        }
+
+        const userData = User.toUserModel(userFromDB)
+
         const hashManager = new HashManager();
-        const hashCompare = await hashManager.compare(user.password, userFromDB.getPassword());
+        const hashCompare = await hashManager.compare(user.password, userData.getPassword());
 
         const authenticator = new Authenticator();
-        const accessToken = authenticator.generateToken({ id: userFromDB.getId(), role: userFromDB.getRole() });
+        const accessToken = authenticator.generateToken({ id: userData.getId(), role: userData.getRole() });
 
         if (!hashCompare) {
-            throw new Error("Invalid Password!");
+            throw new InvalidPassword();
         }
 
         return accessToken;

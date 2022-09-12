@@ -5,5 +5,15 @@ Content-Type: application/json
     "email": "testonildo@email.com",
     "name": "Testonildo",
     "password": "123789",
-    "role": "asdads"
+    "role": "admin"
+}
+
+###
+
+POST http://localhost:3000/user/login 
+Content-Type: application/json
+
+{
+    "email": "testonildo@email.com",
+    "password":"123789"
 }
