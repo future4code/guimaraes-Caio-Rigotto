@@ -8,7 +8,7 @@ export class BandController {
         try {
             const input:BandInputDTO = {
                 name: req.body.name,
-                gender: req.body.gender,
+                genre: req.body.genre,
                 responsible: req.body.responsible,
                 token: req.headers.authorization as string
             }
@@ -16,6 +16,7 @@ export class BandController {
             const bandBusiness = new BandBusiness()
             await bandBusiness.createBand(input)
 
+            res.status(201).send("Success")
         } catch (error: any) {
             res.status(400).send({ error: error.message });
         }

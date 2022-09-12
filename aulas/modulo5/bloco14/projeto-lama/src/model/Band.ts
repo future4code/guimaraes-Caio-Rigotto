@@ -2,7 +2,7 @@ export class Band {
     constructor(
         private id: string,
         private name: string,
-        private gender: string,
+        private genre: string,
         private responsible: string
     ) { }
 
@@ -13,7 +13,7 @@ export class Band {
         return this.name
     }
     getGender(){
-        return this.gender
+        return this.genre
     }
     getResponsible(){
         return this.responsible
@@ -22,7 +22,7 @@ export class Band {
 
 export interface BandInputDTO {
     name: string,
-    gender: string,
+    genre: string,
     responsible:string,
     token: string
 }
