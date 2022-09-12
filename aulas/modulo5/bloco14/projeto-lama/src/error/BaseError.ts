@@ -27,3 +27,9 @@ export class Unauthorized extends BaseError {
     super('Unauthorized, user must be admin', 401)
   }
 }
+
+export class InvalidParameters extends BaseError {
+  constructor(){
+    super('Invalid parameters', 400)
+  }
+}

@@ -10,14 +10,17 @@ export class Band {
         return this.id;
     }
     getName(){
-        return this.name
+        return this.name;
     }
     getGender(){
-        return this.genre
+        return this.genre;
     }
     getResponsible(){
-        return this.responsible
+        return this.responsible;
     }
+    static toBandModel(band: any): Band {
+        return new Band(band.id, band.name, band.genre, band.responsible);
+      }
 }
 
 export interface BandInputDTO {
