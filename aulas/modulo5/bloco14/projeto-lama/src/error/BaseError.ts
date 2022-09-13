@@ -28,8 +28,8 @@ export class Unauthorized extends BaseError {
   }
 }
 
-export class InvalidParameters extends BaseError {
+export class InformationNotFound extends BaseError {
   constructor(){
-    super('Invalid parameters', 400)
+    super('Information not found, check parameters', 404)
   }
 }

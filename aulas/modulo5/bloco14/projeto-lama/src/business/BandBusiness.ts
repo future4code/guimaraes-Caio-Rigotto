@@ -1,5 +1,5 @@
 import { BandDatabase } from "../data/BandDatabase";
-import { InvalidParameters, MissingParameters, Unauthorized } from "../error/BaseError";
+import { InformationNotFound, MissingParameters, Unauthorized } from "../error/BaseError";
 import { Band, BandInputDTO } from "../model/Band";
 import { Authenticator } from "../services/Authenticator";
 import { IdGenerator } from "../services/IdGenerator";
@@ -47,13 +47,12 @@ export class BandBusiness {
             }
 
             if(!result){
-                throw new InvalidParameters()
+                throw new InformationNotFound()
             }
 
             const bandInfo = Band.toBandModel(result)
 
             return bandInfo
-
         } catch (error: any) {
             throw new Error(error.message);
         }

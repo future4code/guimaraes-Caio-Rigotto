@@ -45,7 +45,7 @@ export class BandDatabase extends BaseDatabase {
   ): Promise<Band> {
     try {
       const result = await this.getConnection()
-        .select('*')
+        .select("*")
         .from(BandDatabase.TABLE_NAME)
         .where({ name })
 
