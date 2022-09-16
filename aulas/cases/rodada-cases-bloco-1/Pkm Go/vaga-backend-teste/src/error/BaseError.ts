@@ -15,3 +15,9 @@ export class NameNotFound extends BaseError {
         super('Name not found', 404)
     }
 }
+
+export class TypeNotFound extends BaseError {
+    constructor(){
+        super('Type not found', 404)
+    }
+}

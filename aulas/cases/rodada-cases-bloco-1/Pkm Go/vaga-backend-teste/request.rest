@@ -4,5 +4,14 @@ GET http://localhost:3306/pkm/data
 Content-Type: application/json
 
 {
-    "name": "Raichu"
+    "name": "bu"
+}
+
+### GET PKM BY TYPE
+
+GET http://localhost:3306/pkm/type
+Content-Type: application/json
+
+{
+    "type": "fi"
 }
