@@ -10,7 +10,7 @@ export class PkmDatabase extends Basedatabase {
 
             return pkmData
         } catch (error: any) {
-            throw new Error(error.message)
+            throw new Error(error.sqlMessage || error.message);
         }
     }
 
@@ -23,7 +23,7 @@ export class PkmDatabase extends Basedatabase {
 
             return pkmData
         } catch (error: any) {
-            throw new Error(error.message)
+            throw new Error(error.sqlMessage || error.message);
         }
     }
 }
