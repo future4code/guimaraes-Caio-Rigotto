@@ -1,0 +1,8 @@
+### GET PKM BY NAME
+
+GET http://localhost:3306/pkm/data
+Content-Type: application/json
+
+{
+    "name": "Raichu"
+}
