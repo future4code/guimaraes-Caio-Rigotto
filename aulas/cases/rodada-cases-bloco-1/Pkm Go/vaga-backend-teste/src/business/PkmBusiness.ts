@@ -1,5 +1,7 @@
 import { PkmDatabase } from "../data/PkmDatabase"
-import { MissingParams, NameNotFound, TypeNotFound } from "../error/BaseError"
+import { InputMustBeNumber, MissingParams, NameNotFound, NumberNotFound, TypeNotFound } from "../error/BaseError"
+import { pkmDataOutputDTO, pkmInputDexNumberDTO, pkmInputNameDTO, pkmInputTypeDTO } from "../model/pkm"
+import { pkmDataConverter } from "../services/pkmDataConverter"
 
 export class PkmBusiness {
     constructor(
@@ -8,7 +10,7 @@ export class PkmBusiness {
         pkmDatabase = this.pkmDatabase
     }
 
-    public getPkmByName = async (input: string) => {
+    public getPkmByName = async (input: pkmInputNameDTO) => {
         try {
             const name = input
 
@@ -18,17 +20,19 @@ export class PkmBusiness {
 
             const pkmData = await this.pkmDatabase.getPkmByName(name)
 
-            if (pkmData.length === 0) {
+            if (!pkmData || pkmData.length === 0) {
                 throw new NameNotFound()
             }
 
-            return pkmData
+            const result = pkmDataConverter(pkmData)
+
+            return result
         } catch (error: any) {
             throw new Error(error.message)
         }
     }
 
-    public getPkmByType = async (input: string) => {
+    public getPkmByType = async (input: pkmInputTypeDTO) => {
         try {
             const type = input
 
@@ -38,11 +42,38 @@ export class PkmBusiness {
 
             const pkmData = await this.pkmDatabase.getPkmByType(type)
 
-            if (pkmData.length === 0) {
+            if (!pkmData || pkmData.length === 0) {
                 throw new TypeNotFound()
             }
 
-            return pkmData
+            const result = pkmDataConverter(pkmData)
+
+            return result
+        } catch (error: any) {
+            throw new Error(error.message)
+        }
+    }
+
+    public getPkmByPokedexNumber = async (input: pkmInputDexNumberDTO) => {
+        try {
+            const number = input
+
+            if (!number) {
+                throw new MissingParams()
+            }
+            if (isNaN(number as unknown as number)) {
+                throw new InputMustBeNumber()
+            }
+
+            const pkmData = await this.pkmDatabase.getPkmByPokedexNumber(number)
+
+            if (!pkmData || pkmData.length === 0) {
+                throw new NumberNotFound()
+            }
+
+            const result = pkmDataConverter(pkmData)
+
+            return result
         } catch (error: any) {
             throw new Error(error.message)
         }

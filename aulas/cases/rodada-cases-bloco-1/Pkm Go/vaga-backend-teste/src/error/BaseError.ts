@@ -5,19 +5,31 @@ export abstract class BaseError extends Error {
 }
 
 export class MissingParams extends BaseError {
-    constructor(){
+    constructor() {
         super('Missing parameters', 400)
     }
 }
 
 export class NameNotFound extends BaseError {
-    constructor(){
+    constructor() {
         super('Name not found', 404)
     }
 }
 
 export class TypeNotFound extends BaseError {
-    constructor(){
+    constructor() {
         super('Type not found', 404)
+    }
+}
+
+export class NumberNotFound extends BaseError {
+    constructor() {
+        super('Number not found', 404)
+    }
+}
+
+export class InputMustBeNumber extends BaseError {
+    constructor() {
+        super('Input must be a number', 400)
     }
 }

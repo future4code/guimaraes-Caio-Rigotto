@@ -15,3 +15,12 @@ Content-Type: application/json
 {
     "type": "fi"
 }
+
+### GET PKM BY POKEDEX NUMBER
+
+GET http://localhost:3306/pkm/pokedex
+Content-Type: application/json
+
+{
+    "pokedexNumber": "3"
+}

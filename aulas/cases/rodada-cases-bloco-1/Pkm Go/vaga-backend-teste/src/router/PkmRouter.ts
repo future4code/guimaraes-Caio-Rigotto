@@ -7,3 +7,4 @@ const pkmController = new PkmController()
 
 PkmRouter.get('/data', pkmController.getPkmByName)
 PkmRouter.get('/type', pkmController.getPkmByType)
+PkmRouter.get('/pokedex', pkmController.getPkmByPokedexNumber)

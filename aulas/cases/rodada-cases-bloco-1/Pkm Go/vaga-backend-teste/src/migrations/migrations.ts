@@ -31,14 +31,14 @@ const turnIntoObjectAndPopulate = async (objectData: any[]) => {
         const pkm: PkmTable = {
             id: element.Row,
             name: element.Name,
-            pokedexNumber: element.Pokedex_number,
-            generation: element.Generation,
+            pokedexNumber: element.Pokedex_number as number,
+            generation: element.Generation as number,
             type1: element.Type_1,
             type2: element.Type_2,
-            statTotal: element.Stat_total,
-            atk: element.ATK,
-            def: element.DEF,
-            sta: element.STA
+            statTotal: element.Stat_total as number,
+            atk: element.ATK as number,
+            def: element.DEF as number,
+            sta: element.STA as number
         }
         try {
             await Migrations.populateTable(pkm)
