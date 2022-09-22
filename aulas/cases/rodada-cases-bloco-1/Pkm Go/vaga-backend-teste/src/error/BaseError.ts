@@ -33,3 +33,9 @@ export class InputMustBeNumber extends BaseError {
         super('Input must be a number', 400)
     }
 }
+
+export class PkmHasNoEvolution extends BaseError {
+    constructor() {
+        super('Pokemon have no evolution', 400)
+    }
+}

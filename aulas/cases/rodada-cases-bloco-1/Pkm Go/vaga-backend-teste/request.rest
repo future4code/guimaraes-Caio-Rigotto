@@ -24,3 +24,12 @@ Content-Type: application/json
 {
     "pokedexNumber": "3"
 }
+
+### GET PKM EVOLUTIONS BY NAME
+
+GET http://localhost:3306/pkm/evolutions
+Content-Type: application/json
+
+{
+    "name": "Smoochum"
+}

@@ -1,4 +1,4 @@
-import { pkmInputDexNumberDTO, pkmInputNameDTO, pkmInputTypeDTO } from "../model/pkm";
+import { pkmInputDexNumberDTO, pkmInputFamilyDTO, pkmInputNameDTO, pkmInputTypeDTO } from "../model/pkm";
 import { Basedatabase } from "./BaseDatabase";
 
 export class PkmDatabase extends Basedatabase {
@@ -31,8 +31,32 @@ export class PkmDatabase extends Basedatabase {
     public getPkmByPokedexNumber = async (pokedexNumber: pkmInputDexNumberDTO) => {
         try {
             const pkmData = await PkmDatabase.connection(this.TABLE_NAME)
+                .select('*')
+                .where('pokedex_number', 'like', pokedexNumber)
+
+            return pkmData
+        } catch (error: any) {
+            throw new Error(error.sqlMessage || error.message);
+        }
+    }
+
+    public getPkmNameForEvolutions = async (name: pkmInputNameDTO) => {
+        try {
+            const pkmData = await PkmDatabase.connection(this.TABLE_NAME)
+                .select('*')
+                .where({name})
+
+            return pkmData[0]
+        } catch (error: any) {
+            throw new Error(error.sqlMessage || error.message);
+        }
+    }
+
+    public getPkmEvolutions = async (family_id: pkmInputFamilyDTO) => {
+        try {
+            const pkmData = await PkmDatabase.connection(this.TABLE_NAME)
             .select('*')
-            .where('pokedex_number', 'like', pokedexNumber)
+            .where({family_id})
 
             return pkmData
         } catch (error: any) {

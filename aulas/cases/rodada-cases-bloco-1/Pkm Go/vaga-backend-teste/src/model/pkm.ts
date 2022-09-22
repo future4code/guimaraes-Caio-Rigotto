@@ -3,6 +3,7 @@ export interface PkmTable {
     name: string,
     pokedexNumber: number,
     generation: number,
+    family_id: number,
     type1: string,
     type2: string,
     statTotal: number,
@@ -23,10 +24,15 @@ export interface pkmInputDexNumberDTO {
     pokedexNumber: number
 }
 
+export interface pkmInputFamilyDTO {
+    family_id: number
+}
+
 export interface pkmDataOutputDTO {
     id: string,
     name: string,
     pokedex_number: number,
+    family_id: number,
     generation: number,
     type_1: string,
     type_2: string,
