@@ -22,7 +22,7 @@ GET http://localhost:3306/pkm/pokedex
 Content-Type: application/json
 
 {
-    "pokedexNumber": "3"
+    "pokedexNumber": "276"
 }
 
 ### GET PKM EVOLUTIONS BY NAME
@@ -31,5 +31,5 @@ GET http://localhost:3306/pkm/evolutions
 Content-Type: application/json
 
 {
-    "name": "Smoochum"
+    "name": "Pikachu"
 }

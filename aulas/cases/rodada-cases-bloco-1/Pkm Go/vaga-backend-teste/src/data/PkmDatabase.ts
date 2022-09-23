@@ -44,7 +44,7 @@ export class PkmDatabase extends Basedatabase {
         try {
             const pkmData = await PkmDatabase.connection(this.TABLE_NAME)
                 .select('*')
-                .where({name})
+                .where({ name })
 
             return pkmData[0]
         } catch (error: any) {
@@ -55,8 +55,8 @@ export class PkmDatabase extends Basedatabase {
     public getPkmEvolutions = async (family_id: pkmInputFamilyDTO) => {
         try {
             const pkmData = await PkmDatabase.connection(this.TABLE_NAME)
-            .select('*')
-            .where({family_id})
+                .select('*')
+                .where({ family_id })
 
             return pkmData
         } catch (error: any) {
