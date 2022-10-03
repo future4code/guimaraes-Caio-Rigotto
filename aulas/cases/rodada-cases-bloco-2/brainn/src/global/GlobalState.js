@@ -4,13 +4,26 @@ import GlobalContext from "./GlobalContext"
 
 const GlobalState = (props) => {
     const [gameName, isLoadingName] = useRequestData(`${BASE_URL}/loterias`)
-    const [constestId, isLoadingId] = useRequestData()
+    // const [constestId, isLoadingId] = useRequestData(`${BASE_URL}/`)
 
-    console.log(gameName)
+    // console.log(gameName, isLoadingName)
 
+    // {
+    //     let constestList = []
+    //     !isLoadingName &&
+    //         gameName.forEach(constest => {
+    //             constestList.push({ constest })
+    //         });
+    //     console.log(constestList)
+    // }
+
+    let globalData = {
+        gameName,
+        isLoadingName
+    }
 
     return (
-        <GlobalContext.Provider value= {gameName}>
+        <GlobalContext.Provider value={globalData}>
             {props.children}
         </GlobalContext.Provider>
     )
