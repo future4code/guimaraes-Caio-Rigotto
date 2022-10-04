@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import GameSelector from '../components/GameSelector';
 
-export default function SimpleContainer() {
+export default function Home() {
     return (
         <React.Fragment>
             <CssBaseline />
