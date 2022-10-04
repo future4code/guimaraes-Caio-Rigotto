@@ -12,16 +12,16 @@ export default function GameSelector() {
     const data = React.useContext(GlobalContext);
     const [gameSelected, setSelected] = React.useState("")
 
-    console.log(data)
-
     const renderLogo = () => {
         if (!data.isLoadingName && gameSelected !== "") {
             return (
                 <Box sx={{
                     display: 'flex',
-                    filter: 'brightness(0) invert(1)'
+                    filter: 'brightness(0) invert(1)',
+                    alignItems: 'center'
                 }}>
                     <img src={logo}
+                    alt = 'Logo das Loterias Caixa'
                         style={{ width: '20%', }}
                     />
                     <Typography
@@ -48,8 +48,9 @@ export default function GameSelector() {
                 <Box sx={{
                     display: 'flex',
                     filter: 'brightness(0) invert(1)',
-                    flexDirection: 'column', 
-                    alignItems: 'center'
+                    flexDirection: 'column',
+                    alignSelf: 'flex-start',
+                    marginLeft: '3vw'
                 }}>
                     <Typography
                         style={{
@@ -61,7 +62,7 @@ export default function GameSelector() {
                             textTransform: "uppercase"
                         }}
                     >
-                        Concurso: <br/>
+                        Concurso <br />
                         {data.constestData[gameSelected].concursoId}
                     </Typography>
                 </Box>
@@ -76,8 +77,9 @@ export default function GameSelector() {
     return (
         <Box
             sx={{
-                minWidth: '15vw',
+                minWidth: '30vw',
                 maxWidth: '30vw',
+                width: 'fit-content',
                 bgcolor: '#6BEFA3',
                 height: '100vh',
                 display: 'flex',
@@ -86,8 +88,8 @@ export default function GameSelector() {
                 justifyContent: 'space-between'
             }}>
             <FormControl sx={{
-                minWidth: '70%',
-                maxWidth: '80%',
+                minWidth: '60%',
+                maxWidth: '70%',
                 bgcolor: '#FFFFFF',
                 borderRadius: '5px'
             }}
