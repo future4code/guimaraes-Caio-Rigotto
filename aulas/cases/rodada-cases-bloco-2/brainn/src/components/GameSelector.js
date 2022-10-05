@@ -7,10 +7,13 @@ import Select from '@mui/material/Select';
 import GlobalContext from '../global/GlobalContext';
 import logo from "../img/logo.png"
 import { Typography } from '@mui/material';
+import useRequestData from '../hooks/useRequestData';
+import BASE_URL from '../constants/BASE_URL';
 
-export default function GameSelector() {
+export default function GameSelector(props) {
+    const gameSelected = props.gameSelected
     const data = React.useContext(GlobalContext);
-    const [gameSelected, setSelected] = React.useState("")
+
 
     const renderLogo = () => {
         if (!data.isLoadingName && gameSelected !== "") {
@@ -21,7 +24,7 @@ export default function GameSelector() {
                     alignItems: 'center'
                 }}>
                     <img src={logo}
-                    alt = 'Logo das Loterias Caixa'
+                        alt='Logo das Loterias Caixa'
                         style={{ width: '20%', }}
                     />
                     <Typography
@@ -63,16 +66,12 @@ export default function GameSelector() {
                         }}
                     >
                         Concurso <br />
-                        {data.constestData[gameSelected].concursoId}
+                        {data.contestData[gameSelected].concursoId}
                     </Typography>
                 </Box>
             )
         }
     }
-
-    const handleChange = (event) => {
-        setSelected(event.target.value);
-    };
 
     return (
         <Box
@@ -105,7 +104,7 @@ export default function GameSelector() {
                     value={gameSelected}
                     defaultValue="0"
                     label="Game"
-                    onChange={handleChange}
+                    onChange={props.handleSelectChange}
                 >
                     {data.isLoadingName
                         ? <MenuItem>Carregando jogos...</MenuItem>

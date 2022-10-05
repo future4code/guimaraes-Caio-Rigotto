@@ -4,14 +4,15 @@ import GlobalContext from "./GlobalContext"
 
 const GlobalState = (props) => {
     const [gameName, isLoadingName] = useRequestData(`${BASE_URL}/loterias`)
-    const [constestData, isLoadingContest] = useRequestData(`${BASE_URL}/loterias-concursos`)
+    const [contestData, isLoadingContest] = useRequestData(`${BASE_URL}/loterias-concursos`)
 
     let globalData = {
         gameName,
         isLoadingName,
-        constestData,
+        contestData,
         isLoadingContest
     }
+
 
     return (
         <GlobalContext.Provider value={globalData}>
