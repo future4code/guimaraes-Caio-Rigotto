@@ -1,16 +1,19 @@
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
+import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 
 export default function BallCards(props) {
-    const gameSelected = props.gameSelected
-    const ballNumbers = props.ballNumbers
-    const isLoadingNumbers = props.isLoadingNumbers
-    console.log(ballNumbers)
+    const ballNumbers = props.ballNumbers,
+        isLoadingNumbers = props.isLoadingNumbers;
 
     return (
-        <Stack direction="row"
-            spacing={1}>
+        <Grid2
+            container
+            disableEqualOverflow
+            alignItems={'center'}
+            overflow={'auto'}
+        >
             {
                 isLoadingNumbers
                     ?
@@ -18,14 +21,18 @@ export default function BallCards(props) {
                     :
                     ballNumbers.numeros.map((number) => {
                         return (
-                            <Avatar sx={{
-                                bgcolor: '#FFFFFF',
-                                color: '#000000'
-                            }}>{number}</Avatar>
+                            <Grid2>
+                                <Avatar sx={{
+                                    bgcolor: '#FFFFFF',
+                                    color: '#000000'
+                                }}
+                                    key={number}
+                                >{number}</Avatar>
+                            </Grid2>
                         )
                     })
 
             }
-        </Stack>
+        </Grid2>
     );
 }

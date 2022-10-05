@@ -14,8 +14,6 @@ export default function Home() {
     const [contestId, setContestId] = React.useState(2359)
     const [ballNumbers, isLoadingNumbers] = useRequestData(`${BASE_URL}/concursos/${contestId}`)
 
-    console.log(ballNumbers)
-
     React.useEffect(() => {
         gameSelected &&
             setContestId(data.contestData[gameSelected].concursoId)
@@ -36,7 +34,10 @@ export default function Home() {
                     display: 'flex'
                 }}>
                     <GameSelector handleSelectChange={handleSelectChange}
-                        gameSelected={gameSelected} />
+                        gameSelected={gameSelected}
+                        contestDate={ballNumbers}
+                        isLoadingNumbers={isLoadingNumbers}
+                    />
                     {
 
                     }

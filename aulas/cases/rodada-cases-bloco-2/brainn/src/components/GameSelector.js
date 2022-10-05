@@ -7,16 +7,17 @@ import Select from '@mui/material/Select';
 import GlobalContext from '../global/GlobalContext';
 import logo from "../img/logo.png"
 import { Typography } from '@mui/material';
-import useRequestData from '../hooks/useRequestData';
-import BASE_URL from '../constants/BASE_URL';
 
 export default function GameSelector(props) {
-    const gameSelected = props.gameSelected
     const data = React.useContext(GlobalContext);
-
+    const gameSelected = props.gameSelected,
+        contestDate = props.contestDate,
+        isLoadingNumbers = props.isLoadingNumbers;
 
     const renderLogo = () => {
         if (!data.isLoadingName && gameSelected !== "") {
+            let name = data.gameName[gameSelected].nome
+
             return (
                 <Box sx={{
                     display: 'flex',
@@ -38,7 +39,7 @@ export default function GameSelector(props) {
                             textTransform: "uppercase"
                         }}
                     >
-                        {data.gameName[gameSelected].nome}
+                        {name}
                     </Typography>
                 </Box>
             )
@@ -46,7 +47,11 @@ export default function GameSelector(props) {
     }
 
     const renderContest = () => {
-        if (!data.isLoadingContest && gameSelected !== "") {
+        if (!data.isLoadingContest && gameSelected !== "" && isLoadingNumbers === false) {
+            let date = contestDate.data,
+                contestId = data.contestData[gameSelected].concursoId;
+
+
             return (
                 <Box sx={{
                     display: 'flex',
@@ -66,7 +71,7 @@ export default function GameSelector(props) {
                         }}
                     >
                         Concurso <br />
-                        {data.contestData[gameSelected].concursoId}
+                        {contestId} - {date}
                     </Typography>
                 </Box>
             )
@@ -123,7 +128,22 @@ export default function GameSelector(props) {
                 </Select>
             </FormControl>
             {renderLogo()}
-            {renderContest()}
+            {isLoadingNumbers
+                ?
+                <Typography
+                    style={{
+                        fontFamily: 'Montserrat',
+                        fontStyle: 'normal',
+                        fontWeight: '500',
+                        fontSize: '2vh',
+                        color: '#FFFFFF',
+                        textTransform: "uppercase"
+                    }}
+                >
+                    Carregando concurso
+                </Typography>
+                :
+                renderContest()}
         </Box>
     );
 }
