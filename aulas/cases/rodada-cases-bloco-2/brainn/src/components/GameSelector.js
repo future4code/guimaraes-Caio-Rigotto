@@ -48,7 +48,7 @@ export default function GameSelector(props) {
 
     const renderContest = () => {
         if (!data.isLoadingContest && gameSelected !== "" && isLoadingNumbers === false) {
-            let date = contestDate.data,
+            let date = new Date(contestDate.data).toLocaleDateString('pt-br'),
                 contestId = data.contestData[gameSelected].concursoId;
 
 

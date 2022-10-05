@@ -16,7 +16,7 @@ export default function Home() {
 
     React.useEffect(() => {
         gameSelected &&
-            setContestId(data.contestData[gameSelected].concursoId)
+        setContestId(data.contestData[gameSelected].concursoId)
     }, [gameSelected])
 
     const handleSelectChange = (event) => {

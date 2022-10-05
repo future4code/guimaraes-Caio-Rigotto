@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
-import Stack from '@mui/material/Stack';
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 
 export default function BallCards(props) {
@@ -11,8 +10,13 @@ export default function BallCards(props) {
         <Grid2
             container
             disableEqualOverflow
+            justifyContent={'center'}
             alignItems={'center'}
             overflow={'auto'}
+            md={5}
+            spacing={1}
+            rowGap={2}
+
         >
             {
                 isLoadingNumbers
@@ -21,13 +25,17 @@ export default function BallCards(props) {
                     :
                     ballNumbers.numeros.map((number) => {
                         return (
-                            <Grid2>
+                            <Grid2
+                                key={number}
+                            >
                                 <Avatar sx={{
                                     bgcolor: '#FFFFFF',
                                     color: '#000000'
                                 }}
                                     key={number}
-                                >{number}</Avatar>
+                                >
+                                    {number}
+                                </Avatar>
                             </Grid2>
                         )
                     })
