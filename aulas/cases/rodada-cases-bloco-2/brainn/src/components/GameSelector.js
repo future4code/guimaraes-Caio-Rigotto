@@ -7,6 +7,7 @@ import Select from '@mui/material/Select';
 import GlobalContext from '../global/GlobalContext';
 import logo from "../img/logo.png"
 import { Typography } from '@mui/material';
+import CircularProgress from '@mui/material/CircularProgress';
 
 export default function GameSelector(props) {
     const data = React.useContext(GlobalContext);
@@ -50,7 +51,6 @@ export default function GameSelector(props) {
         if (!data.isLoadingContest && gameSelected !== "" && isLoadingNumbers === false) {
             let date = new Date(contestDate.data).toLocaleDateString('pt-br'),
                 contestId = data.contestData[gameSelected].concursoId;
-
 
             return (
                 <Box sx={{
@@ -112,7 +112,7 @@ export default function GameSelector(props) {
                     onChange={props.handleSelectChange}
                 >
                     {data.isLoadingName
-                        ? <MenuItem>Carregando jogos...</MenuItem>
+                        ? <CircularProgress color="success" />
                         :
                         data.gameName.map((game) => {
                             return (
@@ -127,21 +127,13 @@ export default function GameSelector(props) {
                         })}
                 </Select>
             </FormControl>
-            {renderLogo()}
+            {data.isLoadingName && gameSelected !== ""
+            ? <CircularProgress color="success" />
+            :            
+            renderLogo()}
             {isLoadingNumbers
                 ?
-                <Typography
-                    style={{
-                        fontFamily: 'Montserrat',
-                        fontStyle: 'normal',
-                        fontWeight: '500',
-                        fontSize: '2vh',
-                        color: '#FFFFFF',
-                        textTransform: "uppercase"
-                    }}
-                >
-                    Carregando concurso
-                </Typography>
+                <CircularProgress color="success" />
                 :
                 renderContest()}
         </Box>

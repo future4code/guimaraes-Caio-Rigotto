@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
+import CircularProgress from '@mui/material/CircularProgress';
 
 export default function BallCards(props) {
     const ballNumbers = props.ballNumbers,
@@ -10,18 +11,19 @@ export default function BallCards(props) {
         <Grid2
             container
             disableEqualOverflow
+            marginLeft={'auto'}
+            marginRight={'auto'}
             justifyContent={'center'}
             alignItems={'center'}
             overflow={'auto'}
             md={5}
             spacing={1}
             rowGap={2}
-
         >
             {
                 isLoadingNumbers
                     ?
-                    <p>Selecione um jogo</p>
+                    <CircularProgress color="success" />
                     :
                     ballNumbers.numeros.map((number) => {
                         return (
