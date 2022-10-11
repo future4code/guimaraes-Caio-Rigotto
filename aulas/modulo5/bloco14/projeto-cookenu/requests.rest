@@ -1,0 +1,61 @@
+# GET USER BY ID
+
+GET http://localhost:3003/user/2b0eefb7-d558-4c32-afb3-2ff5668c81bc
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQxOTExYTA0LWZhYjMtNGJlYi05ZTk1LTA0ZjQ1YWYzNGViNCIsImlhdCI6MTY2MTQ1MzQ0NSwiZXhwIjoxNjYxNDU0MDQ1fQ.faxBIQ-ApXLodhHjs0UUX9dUpPrRP3REldCdxIx8EuU
+Content-Type: application/json
+
+###
+
+# GET USER PROFILE
+
+GET http://localhost:3003/user/profile
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQxOTExYTA0LWZhYjMtNGJlYi05ZTk1LTA0ZjQ1YWYzNGViNCIsImlhdCI6MTY2MTQ1Nzc3MywiZXhwIjoxNjYxNDU4MzczfQ.IjPPvxZ1fQP7oZ7_llX0KhjqS9pI6drYRYxWzrhEpV8
+Content-Type: application/json
+
+###
+
+# GET RECIPE BY ID
+
+GET http://localhost:3003/recipe/5bf7d102-2992-4b41-b06c-b5f3efd24672
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQxOTExYTA0LWZhYjMtNGJlYi05ZTk1LTA0ZjQ1YWYzNGViNCIsImlhdCI6MTY2MTU1ODgwNywiZXhwIjoxNjYxNTU5NDA3fQ.unMO8waSlpt8tu815CyifiiDzxGUpWUoREyhtOXFjtY
+Content-Type: application/json
+
+###
+
+# USER LOGIN
+
+POST http://localhost:3003/user/login
+Content-Type: application/json
+
+{
+   "email": "testonildo@lbn.com" ,
+   "password": "123789"
+}
+
+###
+
+# CREATE USER
+
+POST http://localhost:3003/user/signup
+Content-Type: application/json
+
+{
+   "name": "Testonildo",
+	"email": "testonildo@lbn.com",
+	"password": "123789"
+}
+
+###
+
+# CREATE RECIPE
+
+POST http://localhost:3003/recipe/
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQxOTExYTA0LWZhYjMtNGJlYi05ZTk1LTA0ZjQ1YWYzNGViNCIsImlhdCI6MTY2MTQ1Nzk5NiwiZXhwIjoxNjYxNDU4NTk2fQ.8MoRl_o0-G_w2AdFtfzHRSOk30Yb_qkpaXLp88nP0hg
+Content-Type: application/json
+
+{
+   "title": "Pão de Teste" ,
+   "description": "Você adiciona uma pitada de teste, mexe bastante e coloca no microondas"
+}
+
+###
