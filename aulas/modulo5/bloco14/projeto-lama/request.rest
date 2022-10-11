@@ -1,0 +1,41 @@
+GET http://localhost:3000/band/info
+Content-Type: application/json
+
+{
+    "name": "asidjidsa"
+}
+
+###
+
+POST  http://localhost:3000/user/signup
+Content-Type: application/json
+
+{
+    "email": "testonildo@email.com",
+    "name": "Testonildo",
+    "password": "123789",
+    "role": "admin"
+}
+
+###
+
+POST http://localhost:3000/band/create
+Authorization: 
+Content-Type: application/json
+
+{
+    "name": "Testanda",
+    "genre":"Musical",
+    "responsible":"Testonildo"
+}
+
+###
+
+POST http://localhost:3000/user/login 
+Content-Type: application/json
+
+{
+    "email": "testonildo@email.com",
+    "password":"123789"
+}
+
