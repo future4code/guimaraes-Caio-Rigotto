@@ -1,0 +1,7 @@
+-- Active: 1660620348611@@35.226.146.116@3306@guimaraes-4211162-caio-rigotto
+CREATE TABLE IF NOT EXISTS shopper_products(
+    id VARCHAR(50) PRIMARY KEY NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    price FLOAT(20, 2) NOT NULL,
+    qty_stock INT DEFAULT 0 NOT NULL
+);
