@@ -1,8 +1,10 @@
-import express from 'express'
-import { ProductsController } from '../Controller/ProductsController'
+import express from 'express';
+import { ProductsController } from '../controller/ProductsController';
 
 export const ProductsRouter = express.Router()
 
-const productsController = new ProductsController()
+const productsController = new ProductsController();
 
-ProductsRouter.get('/:id', productsController.getProductById)
+ProductsRouter.get('/id', productsController.getProductById)
+ProductsRouter.get('/name', productsController.getProductByName)
+ProductsRouter.get('/price', productsController.getProductByPrice)

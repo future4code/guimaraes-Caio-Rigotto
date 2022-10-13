@@ -1,4 +1,4 @@
 import app from "./app";
-import { ProductsRouter } from "./Router/ProductsRouter";
+import { ProductsRouter } from "./router/ProductsRouter";
 
 app.use('/products', ProductsRouter)

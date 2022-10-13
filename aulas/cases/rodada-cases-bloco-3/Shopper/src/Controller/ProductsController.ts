@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { ProductsBusiness } from "../Business/ProductsBusiness";
+import { ProductsBusiness } from "../business/ProductsBusiness";
 
 export class ProductsController {
     constructor(
@@ -7,16 +7,33 @@ export class ProductsController {
     ) {
         productsBusiness = this.productsBusiness
     }
-
-    async getProductById(req: Request, res: Response) {
+    public getProductById = async (req: Request, res: Response) => {
         try {
-            const productId = req.params.id
+            const productId = req.body.id
 
             const result = await this.productsBusiness.getProductById(productId)
 
             res.status(200).send(result)
         } catch (error: any) {
-            throw new Error(error.message)
+            res.status(400).end(error.message)
+        }
+    }
+    public getProductByName = async (req: Request, res: Response) => {
+        try {
+            const productName = req.body.name
+            const result = await this.productsBusiness.getProductByName(productName)
+            res.status(200).send(result)
+        } catch (error: any) {
+            res.status(400).end(error.message)
+        }
+    }
+    public getProductByPrice = async (req: Request, res: Response) => {
+        try {
+            const { price, orderBy } = req.body
+            const result = await this.productsBusiness.getProductByPrice(price, orderBy)
+            res.status(200).send(result)
+        } catch (error: any) {
+            res.status(400).end(error.message)
         }
     }
 }

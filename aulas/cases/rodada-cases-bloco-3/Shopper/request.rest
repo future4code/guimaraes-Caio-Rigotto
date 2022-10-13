@@ -1,3 +1,24 @@
 ### GET PRODUCT BY ID
-GET http://localhost:3000/products/1
+GET http://localhost:3306/products/id
 Content-Type: application/json
+
+{
+    "id": "1" 
+}
+
+### GET PRODUCT BY NAME
+GET http://localhost:3306/products/name
+Content-Type: application/json
+
+{
+    "name": "agua"
+}
+
+### GET PRODUCT BY PRICE
+GET http://localhost:3306/products/price    
+Content-Type: application/json
+
+{
+    "price": 2.59,
+    "orderBy": ""
+}

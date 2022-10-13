@@ -1,8 +1,8 @@
-import BaseDatabase from "../Database/Basedatabase";
+import { Basedatabase } from "../data/Basedatabase";
 import productsDTO from "../model/products";
 import Products from './products.json'
 
-class Migrations extends BaseDatabase {
+class Migrations extends Basedatabase {
     async migrateData(input: productsDTO) {
         const TABLE_NAME = 'shopper_products'
 
@@ -14,7 +14,7 @@ class Migrations extends BaseDatabase {
                     price: input.price,
                     qty_stock: input.qtyStock
                 })
-                console.log(`Product ${input.name} added to table`)
+            console.log(`Product ${input.name} added to table`)
         } catch (error: any) {
             throw new Error(error.message)
         }
