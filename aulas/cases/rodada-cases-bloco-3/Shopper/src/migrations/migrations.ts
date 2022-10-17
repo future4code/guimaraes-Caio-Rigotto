@@ -1,8 +1,8 @@
-import { Basedatabase } from "../data/Basedatabase";
+import { BaseDatabase } from "../data/BaseDatabase";
 import productsDTO from "../model/products";
 import Products from './products.json'
 
-class Migrations extends Basedatabase {
+class Migrations extends BaseDatabase {
     async migrateData(input: productsDTO) {
         const TABLE_NAME = 'shopper_products'
 

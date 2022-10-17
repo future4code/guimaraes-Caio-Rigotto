@@ -36,4 +36,13 @@ export class ProductsController {
             res.status(400).end(error.message)
         }
     }
+    public getProductByQty = async (req: Request, res: Response) => {
+        try {
+            const { qty, orderBy } = req.body
+            const result = await this.productsBusiness.getProductByQty(qty, orderBy)
+            res.status(200).send(result)
+        } catch (error: any) {
+            res.status(400).end(error.message)
+        }
+    }
 }

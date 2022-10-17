@@ -1,7 +1,7 @@
-import { Basedatabase } from "./Basedatabase";
+import { BaseDatabase } from "./BaseDatabase"
 
-export class ProductsDatabase extends Basedatabase {
-    private TABLE_NAME = 'shopper_products'
+export class ProductsDatabase extends BaseDatabase {
+    private TABLE_NAME = 'Shopper_products'
 
     public getProductById = async (id: string) => {
         try {
@@ -29,8 +29,20 @@ export class ProductsDatabase extends Basedatabase {
         try {
             const result = await ProductsDatabase.connection(this.TABLE_NAME)
             .select('*')
-            .where('price', '>=', `%${productPrice}`)
+            .where('price', '<=', `${productPrice}%`)
             .orderBy('price', `${orderProductBy}`)
+
+            return result
+        } catch (error:any) {
+            throw new Error(error.sqlMessage || error.message)
+        }
+    }
+    public getProductByQty =async (qytInStock: number, orderProductBy:string) => {
+        try {
+            const result = await ProductsDatabase.connection(this.TABLE_NAME)
+            .select('*')
+            .where('qty_stock', '<=', `${qytInStock}%`)
+            .orderBy('qty_stock', `${orderProductBy}`)
 
             return result
         } catch (error:any) {

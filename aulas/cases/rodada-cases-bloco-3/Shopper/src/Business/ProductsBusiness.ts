@@ -46,10 +46,28 @@ export class ProductsBusiness {
             if(!productPrice){
                 throw new MissingParams()
             }
-            if(!orderProductBy){
-                orderProductBy === 'desc'
+            if(!orderProductBy || orderProductBy === ''){
+                orderProductBy === 'asc'
             }
             const result = await this.productsDatabase.getProductByPrice(productPrice, orderProductBy)
+            if (result.length === 0) {
+                throw new NoProductFound()
+            }
+            return result
+        } catch (error:any) {
+            throw new Error(error.message)
+        }
+    }
+    public getProductByQty =async (qty: number, orderBy: string) => {
+        try {
+            const qytInStock = qty, orderProductBy = orderBy;
+            if(!qytInStock){
+                throw new MissingParams()
+            }
+            if(!orderProductBy || orderProductBy === ''){
+                orderProductBy === 'asc'
+            }
+            const result = await this.productsDatabase.getProductByQty(qytInStock, orderProductBy)
             if (result.length === 0) {
                 throw new NoProductFound()
             }
