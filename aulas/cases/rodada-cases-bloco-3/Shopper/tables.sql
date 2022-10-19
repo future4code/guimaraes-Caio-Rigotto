@@ -7,21 +7,22 @@ CREATE TABLE IF NOT EXISTS Shopper_products(
 );
 
 CREATE TABLE IF NOT EXISTS Shopper_users(
-    user_id VARCHAR(64) PRIMARY KEY NOT NULL,
-    user_name VARCHAR(64) NOT NULL,
+    id VARCHAR(64) PRIMARY KEY,
+    name VARCHAR(64) NOT NULL,
     email VARCHAR(64) NOT NULL UNIQUE,
     nickname VARCHAR(64) NOT NULL UNIQUE,
     password VARCHAR(64) NOT NULL,
     role ENUM('NORMAL', 'ADMIN') NOT NULL DEFAULT 'NORMAL'
 );
-CREATE TABLE IF NOT EXISTS Shopper_deliveries(
-    id VARCHAR(64) PRIMARY KEY NOT NULL,
+CREATE TABLE IF NOT EXISTS Shopper_delivery(
+    id VARCHAR(64) PRIMARY KEY,
     delivery_date DATE NOT NULL,
-    user_id VARCHAR(64) NOT NULL,
-    user_name VARCHAR(64) NOT NULL,
-    total_price FLOAT(20, 2) NOT NULL DEFAULT 0
+    total_price FLOAT(20, 2) NOT NULL DEFAULT 0,
+    user_id VARCHAR(64),
+    FOREIGN KEY (user_id) REFERENCES Shopper_users(id)
 );
-CREATE TABLE IF NOT EXISTS Shopper_sale(
+
+CREATE TABLE IF NOT EXISTS Shopper_order(
     id VARCHAR(64) NOT NULL PRIMARY KEY,
     delivery_id VARCHAR(64) NOT NULL,
     product_id VARCHAR(64) NOT NULL,
